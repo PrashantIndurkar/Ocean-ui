@@ -11,6 +11,7 @@
   "dependencies": {
     "@ark-ui/react": "^5.28.0",
     "@radix-ui/react-slot": "^1.2.4",
+    "@types/mdx": "^2.0.13",
     "@types/three": "^0.181.0",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",

@@ -107,14 +107,13 @@ export function SaveButton({
         animate={status}
         variants={buttonVariants}
         className={cn(
-          "group relative grid overflow-hidden rounded-full px-6 py-3 transition-all duration-200",
+          "group relative grid overflow-hidden rounded-full px-6 py-3 transition-all duration-200 min-w-[150px]",
           status === "idle"
             ? "shadow-[0_1000px_0_0_hsl(0_0%_85%)_inset] dark:shadow-[0_1000px_0_0_hsl(0_0%_20%)_inset]"
             : "",
           "hover:shadow-lg",
           className
         )}
-        style={{ minWidth: "150px" }}
         whileHover={status === "idle" ? { scale: 1.05 } : {}}
         whileTap={status === "idle" ? { scale: 0.95 } : {}}
         onMouseEnter={() => {

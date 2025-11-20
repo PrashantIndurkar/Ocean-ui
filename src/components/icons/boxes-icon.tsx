@@ -63,7 +63,7 @@ const BoxesIcon = forwardRef<BoxesIconHandle, BoxesIconProps>(
           xmlns="http://www.w3.org/2000/svg"
           width={size}
           height={size}
-          style={{ overflow: "visible" }}
+          className="overflow-visible"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -104,4 +104,3 @@ const BoxesIcon = forwardRef<BoxesIconHandle, BoxesIconProps>(
 BoxesIcon.displayName = "BoxesIcon";
 
 export { BoxesIcon };
-

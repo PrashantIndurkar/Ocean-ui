@@ -1,6 +1,6 @@
-import "./globals.css";
+import "./styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar1 } from "@/components/layout/navbar-1";
+import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -53,14 +53,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar1 />
+          <ConditionalNavbar />
           {children}
         </ThemeProvider>
       </body>

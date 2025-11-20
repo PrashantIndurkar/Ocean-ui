@@ -5,6 +5,7 @@ import * as React from "react";
 import { useState } from "react";
 
 import { motion, AnimatePresence } from "motion/react";
+import Link from "next/link";
 
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -45,22 +46,45 @@ const Navbar1 = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {["Home", "Docs", "Components"].map((item) => (
-            <motion.div
-              key={item}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              whileHover={{ scale: 1.05 }}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Link
+              href="/"
+              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
             >
-              <a
-                href="#"
-                className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
-              >
-                {item}
-              </a>
-            </motion.div>
-          ))}
+              Home
+            </Link>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.05 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Link
+              href="/docs"
+              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
+            >
+              Docs
+            </Link>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <a
+              href="#"
+              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
+            >
+              Components
+            </a>
+          </motion.div>
         </nav>
         {/* Desktop CTA Button, GitHub Icon and Theme Toggle */}
         <div className="hidden md:flex items-center gap-4">
@@ -135,23 +159,48 @@ const Navbar1 = () => {
               <X className="h-6 w-6 text-foreground" />
             </motion.button>
             <div className="flex flex-col space-y-6">
-              {["Home", "Pricing", "Docs", "Projects"].map((item, i) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 + 0.1 }}
-                  exit={{ opacity: 0, x: 20 }}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+                exit={{ opacity: 0, x: 20 }}
+              >
+                <Link
+                  href="/"
+                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
+                  onClick={toggleMenu}
                 >
-                  <a
-                    href="#"
-                    className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
-                    onClick={toggleMenu}
-                  >
-                    {item}
-                  </a>
-                </motion.div>
-              ))}
+                  Home
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                exit={{ opacity: 0, x: 20 }}
+              >
+                <Link
+                  href="/docs"
+                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
+                  onClick={toggleMenu}
+                >
+                  Docs
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                exit={{ opacity: 0, x: 20 }}
+              >
+                <a
+                  href="#"
+                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
+                  onClick={toggleMenu}
+                >
+                  Components
+                </a>
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
