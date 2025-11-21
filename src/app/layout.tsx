@@ -1,6 +1,7 @@
 import "./styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
+import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -54,15 +55,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ConditionalNavbar />
-          {children}
-        </ThemeProvider>
+        <RootProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ConditionalNavbar />
+            {children}
+          </ThemeProvider>
+        </RootProvider>
       </body>
     </html>
   );
