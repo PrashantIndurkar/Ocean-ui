@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 import { motion, AnimatePresence } from "motion/react";
 
@@ -12,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 import { BoxesIcon, type BoxesIconHandle } from "@/components/icons/boxes-icon";
 
-interface SaveButtonProps {
+interface LoadComponentButtonProps {
   text?: {
     idle?: string;
     saving?: string;
@@ -22,7 +23,7 @@ interface SaveButtonProps {
   onSave?: () => Promise<void> | void;
 }
 
-export function SaveButton({
+export function LoadComponentButton({
   text = {
     idle: "Save",
     saving: "Saving...",
@@ -30,10 +31,11 @@ export function SaveButton({
   },
   className,
   onSave,
-}: SaveButtonProps) {
+}: LoadComponentButtonProps) {
   const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [bounce, setBounce] = useState(false);
   const boxesIconRef = useRef<BoxesIconHandle>(null);
+  const router = useRouter();
 
   const handleSave = async () => {
     if (status === "idle") {
@@ -62,8 +64,7 @@ export function SaveButton({
           shapes: ["star", "circle"],
         });
         setTimeout(() => {
-          setStatus("idle");
-          setBounce(false);
+          router.push("/docs/components");
         }, 2000);
       } catch (error) {
         setStatus("idle");
@@ -74,18 +75,18 @@ export function SaveButton({
 
   const buttonVariants = {
     idle: {
-      backgroundColor: "var(--secondary)",
-      color: "var(--secondary-foreground)",
+      backgroundColor: "var(--color-bg-secondary)",
+      color: "var(--color-text-secondary)",
       scale: 1,
     },
     saving: {
-      backgroundColor: "var(--primary)",
-      color: "var(--primary-foreground)",
+      backgroundColor: "var(--color-bg-brand-solid)",
+      color: "var(--color-text-primary_on-brand)",
       scale: 1,
     },
     saved: {
-      backgroundColor: "var(--accent)",
-      color: "var(--accent-foreground)",
+      backgroundColor: "var(--color-bg-brand-primary)",
+      color: "var(--color-text-brand-primary)",
       scale: [1, 1.1, 1],
       transition: {
         duration: 0.2,
@@ -143,7 +144,9 @@ export function SaveButton({
         <span
           className={cn(
             "backdrop absolute inset-px rounded-[22px] transition-colors duration-200",
-            status === "idle" ? "bg-secondary group-hover:bg-secondary/80" : ""
+            status === "idle"
+              ? "bg-bg-secondary group-hover:bg-bg-secondary"
+              : ""
           )}
         />
 
@@ -151,10 +154,10 @@ export function SaveButton({
           className={cn(
             "relative z-20 flex items-center justify-center gap-2 text-sm font-medium",
             status === "idle"
-              ? "text-secondary-foreground"
+              ? "text-text-secondary"
               : status === "saving"
-                ? "text-primary-foreground"
-                : "text-accent-foreground"
+                ? "text-text-primary_on-brand"
+                : "text-text-brand-primary"
           )}
         >
           <AnimatePresence mode="wait">

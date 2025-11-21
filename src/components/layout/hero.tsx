@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 
 import { GLSLHills } from "@/components/graphics/glsl-hills";
-import { SaveButton } from "@/components/ui/save-button";
+import { LoadComponentButton } from "@/components/ui/load-component-button";
 import { ReactJsIcon } from "@/components/icons/react-icon";
 import { VueJsIcon } from "@/components/icons/vue-icon";
 import { SolidJsIcon } from "@/components/icons/solidjs-icon";
@@ -43,16 +43,16 @@ export default function Hero() {
     <div className="relative flex h-screen w-full flex-col items-center justify-start overflow-hidden">
       <GLSLHills />
       <motion.div
-        className="pointer-events-none z-10 text-center absolute top-[25%] left-1/2 -translate-x-1/2 w-full max-w-4xl px-4"
+        className="pointer-events-none z-10 text-center absolute top-[20%] sm:top-[22%] md:top-[25%] left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 sm:px-6"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.h1
-          className="font-semibold text-7xl leading-[1.1] tracking-tight whitespace-pre-wrap bg-clip-text text-transparent mb-10"
+          className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight whitespace-pre-wrap bg-clip-text text-transparent mb-6 sm:mb-8 md:mb-10"
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, var(--foreground) 0%, var(--foreground) 50%, var(--muted-foreground) 70%, var(--muted-foreground) 100%)",
+              "linear-gradient(to bottom, var(--color-fg-primary) 0%, var(--color-fg-primary) 50%, var(--color-text-tertiary) 70%, var(--color-text-tertiary) 100%)",
           }}
           variants={itemVariants}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -60,7 +60,7 @@ export default function Hero() {
           Beautiful Components for Design Engineers
         </motion.h1>
         <motion.p
-          className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10"
+          className="text-sm sm:text-base md:text-lg text-text-tertiary leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10"
           variants={itemVariants}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -70,11 +70,11 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="pointer-events-auto mb-16 flex justify-center"
+          className="pointer-events-auto mb-8 sm:mb-12 md:mb-16 flex justify-center"
           variants={itemVariants}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <SaveButton
+          <LoadComponentButton
             text={{
               idle: "Browse Component",
               saving: "Loading Components...",
@@ -86,7 +86,7 @@ export default function Hero() {
         <motion.div className="space-y-8" variants={containerVariants}>
           {/* Use "uppercase" for all caps in Tailwind CSS */}
           <motion.p
-            className="text-sm font-medium text-muted-foreground uppercase tracking-wider"
+            className="text-sm font-medium text-text-tertiary uppercase tracking-wider"
             variants={itemVariants}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
@@ -106,14 +106,14 @@ export default function Hero() {
                     id: 1,
                     name: "React Js Framework",
                     icon: (
-                      <ReactJsIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
+                      <ReactJsIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
                     ),
                   },
                   {
                     id: 2,
                     name: "SolidJs Framework",
                     icon: (
-                      <SolidJsIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
+                      <SolidJsIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
                     ),
                   },
                   {
@@ -121,7 +121,7 @@ export default function Hero() {
                     name: "Vue Js Framework",
                     designation: "Support is coming soon!",
                     icon: (
-                      <VueJsIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
+                      <VueJsIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
                     ),
                   },
 
@@ -130,7 +130,7 @@ export default function Hero() {
                     name: "Svelte Js Framework",
                     designation: "Support is coming soon!",
                     icon: (
-                      <SvelteJSIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
+                      <SvelteJSIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
                     ),
                   },
                 ]}

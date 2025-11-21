@@ -10,9 +10,10 @@ export async function generateStaticParams() {
 export default async function Page({
   params,
 }: {
-  params: { slug?: string[] };
+  params: Promise<{ slug?: string[] }>;
 }) {
-  const page = source.getPage(params.slug);
+  const { slug } = await params;
+  const page = source.getPage(slug);
   if (!page) notFound();
 
   const MDXContent = page.data.body;

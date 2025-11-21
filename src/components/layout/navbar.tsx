@@ -28,7 +28,7 @@ const Navbar1 = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-center w-full py-6 px-4 z-50">
-      <div className="flex items-center justify-between px-6 py-3 bg-card rounded-full shadow-lg w-full max-w-3xl relative z-10 border border-border">
+      <div className="flex items-center justify-between px-6 py-3 bg-bg-primary rounded-full shadow-lg w-full max-w-3xl relative z-10 border border-border-primary">
         <div className="flex items-center">
           <motion.div
             className="mr-4"
@@ -37,9 +37,9 @@ const Navbar1 = () => {
             whileHover={{ rotate: 10 }}
             transition={{ duration: 0.3 }}
           >
-            <WavesIcon size={25} className="text-foreground" />
+            <WavesIcon size={25} className="text-fg-primary" />
           </motion.div>
-          <span className="text-lg font-bold text-foreground tracking-tight">
+          <span className="text-lg font-bold text-fg-primary tracking-tight">
             Ocean UI
           </span>
         </div>
@@ -54,7 +54,7 @@ const Navbar1 = () => {
           >
             <Link
               href="/"
-              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
+              className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
             >
               Home
             </Link>
@@ -67,7 +67,7 @@ const Navbar1 = () => {
           >
             <Link
               href="/docs"
-              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
+              className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
             >
               Docs
             </Link>
@@ -80,7 +80,7 @@ const Navbar1 = () => {
           >
             <a
               href="#"
-              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
+              className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
             >
               Components
             </a>
@@ -88,19 +88,6 @@ const Navbar1 = () => {
         </nav>
         {/* Desktop CTA Button, GitHub Icon and Theme Toggle */}
         <div className="hidden md:flex items-center gap-4">
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <a
-              href="#"
-              className="inline-flex items-center justify-center px-5 py-2 text-sm text-primary-foreground bg-primary rounded-full hover:bg-primary/90 transition-colors"
-            >
-              Get Started
-            </a>
-          </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -112,11 +99,11 @@ const Navbar1 = () => {
               href="https://github.com/PrashantIndurkar/Ocean-ui"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
+              className="inline-flex items-center gap-2 text-fg-primary hover:text-text-tertiary transition-colors"
               aria-label="View on GitHub"
             >
               <GithubIcon size={20} />
-              <span className="text-sm font-medium text-muted-foreground">
+              <span className="text-sm font-medium text-text-tertiary">
                 {formatStarCount(starCount)}
               </span>
             </a>
@@ -135,14 +122,14 @@ const Navbar1 = () => {
           onClick={toggleMenu}
           whileTap={{ scale: 0.9 }}
         >
-          <Menu className="h-6 w-6 text-foreground" />
+          <Menu className="h-6 w-6 text-fg-primary" />
         </motion.button>
       </div>
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-background z-50 pt-24 px-6 md:hidden"
+            className="fixed inset-0 bg-bg-primary z-50 pt-24 px-6 md:hidden"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -156,7 +143,7 @@ const Navbar1 = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <X className="h-6 w-6 text-foreground" />
+              <X className="h-6 w-6 text-fg-primary" />
             </motion.button>
             <div className="flex flex-col space-y-6">
               <motion.div
@@ -167,7 +154,7 @@ const Navbar1 = () => {
               >
                 <Link
                   href="/"
-                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
+                  className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
                   onClick={toggleMenu}
                 >
                   Home
@@ -181,7 +168,7 @@ const Navbar1 = () => {
               >
                 <Link
                   href="/docs"
-                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
+                  className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
                   onClick={toggleMenu}
                 >
                   Docs
@@ -195,7 +182,7 @@ const Navbar1 = () => {
               >
                 <a
                   href="#"
-                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
+                  className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
                   onClick={toggleMenu}
                 >
                   Components
@@ -208,24 +195,17 @@ const Navbar1 = () => {
                 exit={{ opacity: 0, y: 20 }}
                 className="pt-6 flex flex-col gap-4"
               >
-                <a
-                  href="#"
-                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-primary-foreground bg-primary rounded-full hover:bg-primary/90 transition-colors"
-                  onClick={toggleMenu}
-                >
-                  Get Started
-                </a>
                 <div className="flex justify-center items-center gap-4">
                   <a
                     href="https://github.com/PrashantIndurkar/Ocean-ui"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
+                    className="inline-flex items-center gap-2 text-fg-primary hover:text-text-tertiary transition-colors"
                     aria-label="View on GitHub"
                     onClick={toggleMenu}
                   >
                     <GithubIcon size={20} />
-                    <span className="text-sm font-medium text-muted-foreground">
+                    <span className="text-sm font-medium text-text-tertiary">
                       {formatStarCount(starCount)}
                     </span>
                   </a>

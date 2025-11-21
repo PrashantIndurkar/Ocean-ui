@@ -21,7 +21,7 @@ export function ThemeToggle() {
     return (
       <button
         data-slot="button"
-        className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+        className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-border-primary focus-visible:ring-border-primary/50 focus-visible:ring-[3px] aria-invalid:ring-bg-error-solid/20 dark:aria-invalid:ring-bg-error-solid/40 aria-invalid:border-bg-error-solid hover:bg-bg-brand-primary hover:text-text-brand-primary dark:hover:bg-bg-brand-primary/50 group/toggle extend-touch-target size-8"
         title="Toggle theme"
         aria-label="Toggle theme"
         disabled
@@ -36,7 +36,7 @@ export function ThemeToggle() {
       data-slot="button"
       type="button"
       onClick={toggleTheme}
-      className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+      className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-border-primary focus-visible:ring-border-primary/50 focus-visible:ring-[3px] aria-invalid:ring-bg-error-solid/20 dark:aria-invalid:ring-bg-error-solid/40 aria-invalid:border-bg-error-solid hover:bg-bg-brand-primary hover:text-text-brand-primary dark:hover:bg-bg-brand-primary/50 group/toggle extend-touch-target size-8"
       title="Toggle theme"
       aria-label="Toggle theme"
     >
