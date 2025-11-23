@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules/
+**/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -11,18 +12,26 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage/
+**/coverage/
+*.lcov
+.nyc_output
 
 # next.js
-/.next/
-/out/
+.next/
+**/.next/
+out/
+**/out/
 
 # production
-/build
+build/
+**/build/
+dist/
+**/dist/
 
-# misc
-.DS_Store
-*.pem
+# turbo
+.turbo/
+**/.turbo/
 
 # bun
 bun.lock
@@ -32,16 +41,60 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+lerna-debug.log*
+
+# logs
+logs/
+*.log
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+!.env.template
 
 # vercel
 .vercel
+**/.vercel
 
 # typescript
 *.tsbuildinfo
+**/*.tsbuildinfo
 next-env.d.ts
+**/next-env.d.ts
 
 # source
 .source
+**/.source
+
+# github
+.github/
+*.github
+.github_cache/
+gh_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+*.code-workspace
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# temporary files
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+
+# misc
+*.pem
