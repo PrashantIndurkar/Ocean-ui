@@ -38,7 +38,11 @@ export async function CodeBlock({
         {rendered}
       </Base.CodeBlock>
       <div className="absolute top-2 right-2 z-10">
-        <CopyButton code={code} size={15} className="text-brand-400" />
+        <CopyButton
+          code={code}
+          size={15}
+          className="text-brand-400 dark:text-brand-300"
+        />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { highlight } from "fumadocs-core/highlight";
 import { type HTMLAttributes } from "react";
 import { cn } from "@ocean-ui/utils";
 import { CopyButton } from "./copy-button";
+import { CodeBlockWrapper } from "./code-block-wrapper";
 
 interface CodeBlockWithFileProps extends HTMLAttributes<HTMLElement> {
   code: string;
@@ -26,13 +27,20 @@ export async function CodeBlockWithFile({
     components: {
       pre: ({ className: preClassName, ...props }) => (
         <Base.Pre
-          className={cn("text-sm bg-white", codeClassName, preClassName)}
+          className={cn(
+            "text-sm bg-white dark:bg-transparent",
+            codeClassName,
+            preClassName
+          )}
           {...props}
         />
       ),
       code: ({ className: codeElementClassName, ...props }) => (
         <code
-          className={cn("font-mono bg-white rounded-2xl", codeElementClassName)}
+          className={cn(
+            "font-mono bg-white dark:bg-transparent rounded-2xl",
+            codeElementClassName
+          )}
           {...props}
         />
       ),
@@ -41,13 +49,17 @@ export async function CodeBlockWithFile({
 
   return (
     <div className={cn("relative my-4 overflow-hidden ", className)} {...rest}>
-      <div className="bg-brand-100 p-3 rounded-3xl">
+      <CodeBlockWrapper className="p-3">
         {filename && (
           <div className="flex items-center justify-between">
-            <span className="font-inter font-light text-sm text-brand-400 pl-2">
+            <span className="font-inter font-light text-sm text-brand-400 dark:text-brand-300 pl-2">
               {filename}
             </span>
-            <CopyButton code={code} size={15} className="text-brand-400" />
+            <CopyButton
+              code={code}
+              size={15}
+              className="text-brand-400 dark:text-brand-300"
+            />
           </div>
         )}
         <div
@@ -63,7 +75,7 @@ export async function CodeBlockWithFile({
             rendered
           )}
         </div>
-      </div>
+      </CodeBlockWrapper>
     </div>
   );
 }

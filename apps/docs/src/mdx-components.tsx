@@ -3,9 +3,11 @@ import * as stepComponents from "fumadocs-ui/components/steps";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 
-import { ApiBadge } from "./components/api-badge";
+import { BadgeLink } from "./components/badge-link";
 import { CodeBlockCommand } from "./components/code-block-command";
 import ComponentPreview from "./components/component-preview";
+import { Description } from "./components/description";
+import { Divider } from "./components/divider";
 import { MDXCodeBlockClient } from "./components/mdx-code-block-client";
 import { cn } from "@ocean-ui/utils";
 
@@ -45,9 +47,11 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     a: ({ ref: _ref, className, ...props }) => (
       <a className={cn("has-[code]:decoration-dotted", className)} {...props} />
     ),
-    ApiBadge,
+    BadgeLink,
     CodeBlockCommand,
     ComponentPreview,
+    Description,
+    Divider,
     ...stepComponents,
   };
 }

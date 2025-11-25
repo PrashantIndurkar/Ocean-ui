@@ -5,17 +5,17 @@ description: A vertically stacked set of interactive headings that each reveal a
 
 # Accordion
 
-<div className="text-brand-400">
+<Description>
   Allows you to display content in a collapsible manner, making it easy for
   users to access information while conserving screen space.
-</div>
+</Description>
 
-<ApiBadge
+<BadgeLink
   name="@ark-ui/react/accordion"
   href="https://ark-ui.com/docs/components/accordion"
 />
 
-<div className="my-6 h-px w-full border-t-2 border-dashed border-border" />
+<Divider />
 
 <ComponentPreview name="accordion" />
 
@@ -23,7 +23,7 @@ description: A vertically stacked set of interactive headings that each reveal a
 
 <CodeBlockCommand component="accordion" />
 
----
+<Divider />
 
 ## Overview
 
@@ -35,36 +35,6 @@ The Accordion component allows users to toggle the display of sections of conten
 - **Customizable**: Styled with Tailwind CSS utility classes
 - **Type-safe**: Full TypeScript support
 - **Flexible**: Supports single or multiple open items
-
-## Usage
-
-```tsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@ocean-ui/react";
-
-export function Example() {
-  return (
-    <Accordion defaultValue={["item-1"]}>
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Product Information</AccordionTrigger>
-        <AccordionContent>
-          <p>Content for item 1</p>
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Shipping Details</AccordionTrigger>
-        <AccordionContent>
-          <p>Content for item 2</p>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  );
-}
-```
 
 ## Props
 

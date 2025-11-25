@@ -1,10 +1,13 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { Tabs } from "@ark-ui/react/tabs";
+import { Tabs as ArkTabs } from "@ark-ui/react/tabs";
 import { CodeBlock } from "./code-block";
 import { CodeBlockWithFile } from "./code-block-with-file";
 import { PnpmLogo, NPMLogo, YarnLogo, BunLogo } from "./icons/package-managers";
 import { components } from "@/lib/components";
+import { CodeBlockWrapper } from "./code-block-wrapper";
+import { StepItem } from "./step-item";
+import { cn } from "@ocean-ui/utils";
 
 const packageManagers = [
   { value: "pnpm", icon: PnpmLogo },
@@ -147,83 +150,73 @@ export async function CodeBlockCommand({ component }: { component: string }) {
     <div className="space-y-6">
       {/* Step 1: Install dependencies */}
       {dependencies.length > 0 && (
-        <div className="relative flex gap-4 pt-0 mt-0">
-          <div className="flex flex-col items-center">
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border text-brand-500 text-sm">
-              1
-            </span>
-            <div className="h-full w-px border-border border" />
-          </div>
-          <div className="flex-1 min-w-0 pt-0 mt-0">
-            <h3 className="text-base text-brand-500 font-normal leading-7 mt-0">
-              Install the following dependencies:
-            </h3>
-            <div className="bg-brand-100 rounded-3xl px-2 pt-3 my-2 pb-1">
-              <Tabs.Root defaultValue="pnpm" className="[&_figure]:mt-0">
-                <Tabs.List className="inline-flex h-9 items-center border-b border-border bg-muted px-1.5 pt-1.5 pb-3 text-muted-foreground font-mono gap-x-2 w-full">
+        <StepItem
+          stepNumber={1}
+          title="Install the following dependencies:"
+          isLast={false}
+        >
+          <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
+            <div className="[&_figure]:mt-0">
+              <ArkTabs.Root defaultValue="pnpm" className="[&_figure]:mt-0">
+                <ArkTabs.List className="inline-flex h-9 items-center border-b border-border bg-muted px-1.5 pt-1.5 pb-3 text-muted-foreground font-mono gap-x-2 w-full">
                   {installationCodeBlocks.map(({ value, icon: Icon }) => (
-                    <Tabs.Trigger
+                    <ArkTabs.Trigger
                       key={value}
                       value={value}
-                      className="inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 rounded-lg px-2.5 py-3 text-sm font-normal leading-normal ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:shadow-md w-fit data-selected:border data-selected:border-brand-300 border border-transparent"
+                      className={cn(
+                        "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 py-3 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-brand-300 dark:data-selected:border-gray-700 rounded-lg data-selected:shadow-md"
+                      )}
                     >
-                      {Icon && <Icon className="size-4" />} {value}
-                    </Tabs.Trigger>
+                      {Icon && (
+                        <span className="size-4 shrink-0">
+                          <Icon className="size-4" />
+                        </span>
+                      )}
+                      {value}
+                    </ArkTabs.Trigger>
                   ))}
-                </Tabs.List>
-
+                </ArkTabs.List>
                 <div>
-                  <p className="text-sm font-mono text-brand-400 font-light leading-7 my-6 pl-2">
+                  <p className="text-sm font-mono text-brand-400 dark:text-brand-300 font-light leading-7 my-6 pl-2">
                     Terminal
                   </p>
                 </div>
-
                 {installationCodeBlocks.map(({ value, codeBlock }) => (
-                  <Tabs.Content key={value} value={value}>
+                  <ArkTabs.Content key={value} value={value}>
                     {codeBlock}
-                  </Tabs.Content>
+                  </ArkTabs.Content>
                 ))}
-              </Tabs.Root>
+              </ArkTabs.Root>
             </div>
-          </div>
-        </div>
+          </CodeBlockWrapper>
+        </StepItem>
       )}
 
       {/* Step 2: Create file and paste code */}
       {componentCodeBlock && (
-        <div className="relative flex gap-4 pt-0 mt-0">
-          <div className="flex flex-col items-center">
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border text-brand-500 text-sm">
-              2
-            </span>
-            <div className="mt-2 h-full w-px border-border border" />
-          </div>
-          <div className="flex-1 space-y-3 pb-8 min-w-0 pt-0 mt-0">
-            <h3 className="text-base text-brand-500 font-normal leading-7 mt-0">
+        <StepItem
+          stepNumber={2}
+          title={
+            <>
               Create a{" "}
               <code className="relative rounded-lg bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">
                 {filePath.split("/").pop()}
               </code>{" "}
               file and paste the following code into it.
-            </h3>
-            <div className="overflow-x-auto ">{componentCodeBlock}</div>
-          </div>
-        </div>
+            </>
+          }
+          isLast={false}
+        >
+          <div className="overflow-x-auto">{componentCodeBlock}</div>
+        </StepItem>
       )}
 
       {/* Step 3: Update import paths */}
-      <div className="relative flex gap-4 pt-0 mt-0">
-        <div className="flex flex-col items-center">
-          <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border text-primary-foreground text-sm font-semibold">
-            3
-          </span>
-        </div>
-        <div className="flex-1 pt-0 mt-0">
-          <h3 className="text-base font-semibold leading-7 mt-0">
-            Update the import paths to match your project setup.
-          </h3>
-        </div>
-      </div>
+      <StepItem
+        stepNumber={3}
+        title="Update the import paths to match your project setup."
+        isLast={true}
+      />
     </div>
   );
 }

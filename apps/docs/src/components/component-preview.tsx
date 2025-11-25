@@ -26,38 +26,28 @@ export default async function ComponentPreview({
   }
 
   const Component = exampleData.component;
-  const code = exampleData.sourceCode.react || "";
-
-  // Update imports to use @ocean-ui/react
-  // Remove "use client" directive if present
-  let codeWithUpdatedImports = code.replace(/^"use client";\n?/gm, "");
-
-  // Replace imports from @ocean-ui/react to show the correct import path
-  codeWithUpdatedImports = codeWithUpdatedImports.replace(
-    /from ["']@ocean-ui\/react["']/g,
-    'from "@ocean-ui/react"'
+  const code = (exampleData.sourceCode.react || "").replace(
+    /^"use client";\n?/gm,
+    ""
   );
 
-  // Pre-render the CodeBlock in the server component
-  const codeBlockElement = await CodeBlock({
-    code: codeWithUpdatedImports,
+  const codeBlock = await CodeBlock({
+    code,
     lang: "tsx",
     showLineNumbers: true,
     className: cn(
-      "bg-background p-0 overflow-hidden rounded-3xl",
-      "[&_pre]:text-sm [&_pre]:font-normal [&_pre_span]:leading-[1.75]",
-      "[&>div:not(:has(pre))]:top-0 [&>div:not(:has(pre))]:right-0 [&>div:not(:has(pre))]:size-8",
-      "[&>div:has(pre)]:rounded-3xl [&>div:has(pre)]:py-3 [&>div:has(pre)]:px-2 [&>div:has(pre)]:border-none [&>div:has(pre)]:min-h-[400px] my-0",
-      {
-        "[&>div:has(pre)]:max-h-[400px]": constrainHeight,
-      }
+      "bg-white dark:bg-transparent rounded-3xl overflow-hidden",
+      "[&_pre]:text-sm [&_pre]:font-normal [&_pre]:bg-white [&_pre]:dark:bg-transparent [&_pre_span]:leading-[1.75]",
+      "[&_code]:bg-white [&_code]:dark:bg-transparent",
+      "[&>div:has(pre)]:rounded-3xl [&>div:has(pre)]:py-3 [&>div:has(pre)]:px-2 [&>div:has(pre)]:min-h-[400px]",
+      constrainHeight && "[&>div:has(pre)]:max-h-[400px]"
     ),
   });
 
   return (
     <ComponentPreviewTabs
       Component={Component}
-      codeBlock={codeBlockElement}
+      codeBlock={codeBlock}
       center={center}
       constrainHeight={constrainHeight}
     />

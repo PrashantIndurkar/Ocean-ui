@@ -6,13 +6,29 @@ import { useTheme } from "next-themes";
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
   // Avoid hydration mismatch by only rendering after mount
   React.useEffect(() => {
     setMounted(true);
+    // Preload the audio file
+    audioRef.current = new Audio("/audio/ui-sounds/click.wav");
+    audioRef.current.volume = 0.5; // Set volume to 50%
   }, []);
 
+  const playClickSound = () => {
+    if (audioRef.current) {
+      // Reset audio to start if it's already playing
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch((error) => {
+        // Silently handle autoplay restrictions
+        console.debug("Audio playback prevented:", error);
+      });
+    }
+  };
+
   const toggleTheme = () => {
+    playClickSound();
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
@@ -64,5 +80,3 @@ export function ThemeToggle() {
     </button>
   );
 }
-
-
