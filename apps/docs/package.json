@@ -2,6 +2,12 @@
   "name": "@ocean-ui/docs",
   "version": "0.1.0",
   "private": true,
+  "files": [
+    "src",
+    "public",
+    "next.config.mjs",
+    "package.json"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +17,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@ark-ui/react": "^5.20.0",
     "@ocean-ui/tokens": "workspace:*",
     "@ocean-ui/utils": "workspace:*",
     "@radix-ui/react-slot": "^1.2.4",

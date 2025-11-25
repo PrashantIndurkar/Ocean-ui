@@ -23,9 +23,16 @@ export default async function Page({
   const MDXContent = page.data.body;
 
   return (
-    <DocsPage>
+    <DocsPage
+      toc={page.data.toc}
+      tableOfContent={{
+        enabled: true,
+      }}
+    >
       <DocsBody>
-        <MDXContent components={getMDXComponents()} />
+        <div className="docs-content-wrapper">
+          <MDXContent components={getMDXComponents()} />
+        </div>
       </DocsBody>
     </DocsPage>
   );

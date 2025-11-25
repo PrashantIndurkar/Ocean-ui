@@ -7,8 +7,8 @@
     var(--font-inter, "Inter"), -apple-system, "Segoe UI", Roboto, Arial,
     sans-serif;
   --font-mono:
-    ui-monospace, "Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+    var(--font-geist-mono, "Geist Mono"), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* SPACING */
   --spacing: 0.25rem;

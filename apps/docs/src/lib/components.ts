@@ -8,114 +8,134 @@
 export interface Component {
   name: string;
   slug: string;
-  category: string;
+  category: "fundamentals" | "base" | "blocks" | "templates";
+  subcategory: string;
 }
 
 export const components: Component[] = [
-  // Disclosure
+  // Base Components - Disclosure
   {
     name: "Accordion",
     slug: "accordion",
-    category: "Disclosure",
+    category: "base",
+    subcategory: "Disclosure",
   },
   {
     name: "Collapsible",
     slug: "collapsible",
-    category: "Disclosure",
+    category: "base",
+    subcategory: "Disclosure",
   },
 
-  // Form Controls
+  // Base Components - Form Controls
   {
     name: "Button",
     slug: "button",
-    category: "Form",
+    category: "base",
+    subcategory: "Form",
   },
   {
     name: "Input",
     slug: "input",
-    category: "Form",
+    category: "base",
+    subcategory: "Form",
   },
   {
     name: "Checkbox",
     slug: "checkbox",
-    category: "Form",
+    category: "base",
+    subcategory: "Form",
   },
   {
     name: "Radio Group",
     slug: "radio-group",
-    category: "Form",
+    category: "base",
+    subcategory: "Form",
   },
   {
     name: "Select",
     slug: "select",
-    category: "Form",
+    category: "base",
+    subcategory: "Form",
   },
   {
     name: "Switch",
     slug: "switch",
-    category: "Form",
+    category: "base",
+    subcategory: "Form",
   },
   {
     name: "Textarea",
     slug: "textarea",
-    category: "Form",
+    category: "base",
+    subcategory: "Form",
   },
 
-  // Overlay
+  // Base Components - Overlay
   {
     name: "Dialog",
     slug: "dialog",
-    category: "Overlay",
+    category: "base",
+    subcategory: "Overlay",
   },
   {
     name: "Popover",
     slug: "popover",
-    category: "Overlay",
+    category: "base",
+    subcategory: "Overlay",
   },
   {
     name: "Tooltip",
     slug: "tooltip",
-    category: "Overlay",
+    category: "base",
+    subcategory: "Overlay",
   },
 
-  // Data Display
+  // Base Components - Data Display
   {
     name: "Card",
     slug: "card",
-    category: "Data Display",
+    category: "base",
+    subcategory: "Data Display",
   },
   {
     name: "Avatar",
     slug: "avatar",
-    category: "Data Display",
+    category: "base",
+    subcategory: "Data Display",
   },
   {
     name: "Badge",
     slug: "badge",
-    category: "Data Display",
+    category: "base",
+    subcategory: "Data Display",
   },
 
-  // Navigation
+  // Base Components - Navigation
   {
     name: "Tabs",
     slug: "tabs",
-    category: "Navigation",
+    category: "base",
+    subcategory: "Navigation",
   },
   {
     name: "Menu",
     slug: "menu",
-    category: "Navigation",
+    category: "base",
+    subcategory: "Navigation",
   },
 
-  // Feedback
+  // Base Components - Feedback
   {
     name: "Progress",
     slug: "progress",
-    category: "Feedback",
+    category: "base",
+    subcategory: "Feedback",
   },
   {
     name: "Toast",
     slug: "toast",
-    category: "Feedback",
+    category: "base",
+    subcategory: "Feedback",
   },
 ];

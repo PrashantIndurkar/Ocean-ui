@@ -12,11 +12,11 @@ interface RouteParams {
 
 /**
  * Registry API Route
- * 
+ *
  * Returns shadcn-compatible JSON format for component examples
- * 
+ *
  * URL format: /r/[frameworkCode]/[componentIndex]/[exampleIndex].json
- * 
+ *
  * Examples:
  * - /r/r/0/0.json → React, first component (accordion), first example (basic)
  * - /r/s/0/0.json → Solid, first component (accordion), first example (basic)
@@ -49,11 +49,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
     // Get dependencies for the framework
     const getDependencies = (fw: string): string[] => {
-      const baseDeps = [
-        `@ark-ui/${fw}`,
-        `@ocean-ui/tokens`,
-        `@ocean-ui/utils`,
-      ];
+      const baseDeps = [`@ark-ui/${fw}`, `@ocean-ui/tokens`, `@ocean-ui/utils`];
 
       // Add framework-specific icon library
       const iconMap: Record<string, string> = {
@@ -111,4 +107,3 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     );
   }
 }
-

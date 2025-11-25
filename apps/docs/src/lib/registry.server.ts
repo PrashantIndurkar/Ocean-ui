@@ -9,12 +9,14 @@ import { loadComponentManifest } from "./registry.utils";
  * @param slug The component slug
  * @param exampleName The example name
  * @param framework The framework (react, solid)
+ * @param category The component category (fundamentals, base, blocks, templates) - defaults to "base"
  * @returns The source code as a string or null if not found
  */
 export async function getComponentSource(
   slug: string,
   exampleName: string,
-  framework: string
+  framework: string,
+  category: string = "base"
 ): Promise<string | null> {
   try {
     // Both React and Solid use .tsx extension
@@ -27,6 +29,7 @@ export async function getComponentSource(
       "src",
       "registry",
       framework,
+      category,
       slug,
       `${exampleName}.${extension}`
     );
@@ -68,8 +71,11 @@ export async function getComponentRegistry(
       return null;
     }
 
+    // Get component category from metadata
+    const componentCategory = componentMeta.category || "base";
+
     // Load shared manifest using centralized function
-    const manifest = await loadComponentManifest(slug);
+    const manifest = await loadComponentManifest(slug, componentCategory);
     if (!manifest) {
       return null;
     }
@@ -83,13 +89,18 @@ export async function getComponentRegistry(
       try {
         // Always import from React directory for rendering
         const exampleModule = await import(
-          `@/registry/react/${slug}/${exampleMeta.name}.tsx`
+          `@/registry/react/${componentCategory}/${slug}/${exampleMeta.name}.tsx`
         );
 
         // Fetch source code for all frameworks using server-side function
         const sourceCode: { [framework: string]: string | null } = {};
         for (const fw of frameworks) {
-          sourceCode[fw] = await getComponentSource(slug, exampleMeta.name, fw);
+          sourceCode[fw] = await getComponentSource(
+            slug,
+            exampleMeta.name,
+            fw,
+            componentCategory
+          );
         }
 
         examples.push({

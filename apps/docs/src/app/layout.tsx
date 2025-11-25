@@ -3,6 +3,19 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata } from "next";
+import { Inter, Geist_Mono } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -54,7 +67,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen">
+      <body
+        className={`${inter.className} ${inter.variable} ${geistMono.variable} flex flex-col min-h-screen`}
+      >
         <RootProvider>
           <ThemeProvider
             attribute="class"

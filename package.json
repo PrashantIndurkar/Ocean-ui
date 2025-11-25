@@ -2,11 +2,13 @@
   "name": "ocean-ui",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.21.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
@@ -49,6 +51,7 @@
     "solid-js": "^1.9.10",
     "tailwindcss": "^4.1.11",
     "tsx": "^4.20.6",
+    "turbo": "^2.0.0",
     "typescript": "^5",
     "vue": "^3.5.24"
   }

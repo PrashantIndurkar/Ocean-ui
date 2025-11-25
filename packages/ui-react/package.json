@@ -16,8 +16,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@ark-ui/react": "^5.20.0",
     "@ocean-ui/tokens": "workspace:*",
-    "@ocean-ui/utils": "workspace:*"
+    "@ocean-ui/utils": "workspace:*",
+    "lucide-react": "^0.469.0"
   },
   "devDependencies": {
     "@types/node": "^20",
