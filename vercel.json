@@ -1,4 +1,5 @@
 {
-  "buildCommand": "pnpm build --filter=@ocean-ui/docs",
-  "installCommand": "pnpm install"
+  "buildCommand": "cd apps/docs && pnpm build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "apps/docs/.next"
 }
