@@ -1,0 +1,4 @@
+{
+  "buildCommand": "pnpm build --filter=@ocean-ui/docs",
+  "installCommand": "pnpm install"
+}
