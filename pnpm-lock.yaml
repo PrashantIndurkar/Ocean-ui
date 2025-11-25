@@ -135,6 +135,9 @@ importers:
       '@ark-ui/react':
         specifier: ^5.20.0
         version: 5.29.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@ocean-ui/react':
+        specifier: workspace:*
+        version: link:../../packages/ui-react
       '@ocean-ui/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
