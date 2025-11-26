@@ -48,11 +48,11 @@ export async function CodeBlockWithFile({
   });
 
   return (
-    <div className={cn("relative my-4 overflow-hidden ", className)} {...rest}>
-      <CodeBlockWrapper className="p-3">
+    <div className={cn("relative overflow-hidden ", className)} {...rest}>
+      <CodeBlockWrapper className="px-1">
         {filename && (
           <div className="flex items-center justify-between">
-            <span className="font-inter font-light text-sm text-brand-400 dark:text-brand-300 pl-2">
+            <span className="font-inter font-light text-sm text-brand-400 dark:text-brand-300 pl-2 py-5">
               {filename}
             </span>
             <CopyButton

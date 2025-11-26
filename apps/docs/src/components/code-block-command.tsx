@@ -4,6 +4,10 @@ import { Tabs as ArkTabs } from "@ark-ui/react/tabs";
 import { CodeBlock } from "./code-block";
 import { CodeBlockWithFile } from "./code-block-with-file";
 import { PnpmLogo, NPMLogo, YarnLogo, BunLogo } from "./icons/package-managers";
+import { ReactJsIcon } from "./icons/react-icon";
+import { SolidJsIcon } from "./icons/solidjs-icon";
+import { VueJsIcon } from "./icons/vue-icon";
+import { SvelteJSIcon } from "./icons/svelte-icon";
 import { components } from "@/lib/components";
 import { CodeBlockWrapper } from "./code-block-wrapper";
 import { StepItem } from "./step-item";
@@ -14,6 +18,13 @@ const packageManagers = [
   { value: "npm", icon: NPMLogo },
   { value: "yarn", icon: YarnLogo },
   { value: "bun", icon: BunLogo },
+] as const;
+
+const frameworks = [
+  { value: "react", icon: ReactJsIcon },
+  { value: "solid", icon: SolidJsIcon },
+  { value: "vue", icon: VueJsIcon },
+  { value: "svelte", icon: SvelteJSIcon },
 ] as const;
 
 const getInstallationCommand = (
@@ -136,15 +147,30 @@ export async function CodeBlockCommand({ component }: { component: string }) {
     })
   );
 
-  // Pre-render component code block
-  const componentCodeBlock = componentCode
-    ? await CodeBlockWithFile({
-        lang: "tsx",
-        code: componentCode,
-        filename: filePath,
-        showLineNumbers: true,
-      })
-    : null;
+  // Pre-render component code blocks for each framework
+  const frameworkCodeBlocks = componentCode
+    ? await Promise.all(
+        frameworks.map(async (framework) => {
+          // For now, show the same code for all frameworks (as example)
+          const codeBlock = await CodeBlockWithFile({
+            lang:
+              framework.value === "vue"
+                ? "vue"
+                : framework.value === "svelte"
+                  ? "svelte"
+                  : "tsx",
+            code: componentCode,
+            filename: filePath,
+            showLineNumbers: true,
+          });
+          return {
+            value: framework.value,
+            icon: framework.icon,
+            codeBlock,
+          };
+        })
+      )
+    : [];
 
   return (
     <div className="space-y-6">
@@ -193,7 +219,7 @@ export async function CodeBlockCommand({ component }: { component: string }) {
       )}
 
       {/* Step 2: Create file and paste code */}
-      {componentCodeBlock && (
+      {frameworkCodeBlocks.length > 0 && (
         <StepItem
           stepNumber={2}
           title={
@@ -207,7 +233,35 @@ export async function CodeBlockCommand({ component }: { component: string }) {
           }
           isLast={false}
         >
-          <div className="overflow-x-auto">{componentCodeBlock}</div>
+          <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
+            <div className="[&_figure]:mt-0">
+              <ArkTabs.Root defaultValue="react" className="[&_figure]:mt-0">
+                <ArkTabs.List className="inline-flex h-9 items-center border-b border-border bg-muted px-1.5 pt-1.5 pb-3 text-muted-foreground font-mono gap-x-2 w-full">
+                  {frameworkCodeBlocks.map(({ value, icon: Icon }) => (
+                    <ArkTabs.Trigger
+                      key={value}
+                      value={value}
+                      className={cn(
+                        "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 py-3 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-brand-300 dark:data-selected:border-gray-700 rounded-lg data-selected:shadow-md"
+                      )}
+                    >
+                      {Icon && (
+                        <span className="size-4 shrink-0">
+                          <Icon className="size-4" />
+                        </span>
+                      )}
+                      {value}
+                    </ArkTabs.Trigger>
+                  ))}
+                </ArkTabs.List>
+                {frameworkCodeBlocks.map(({ value, codeBlock }) => (
+                  <ArkTabs.Content key={value} value={value}>
+                    <div className="overflow-x-auto">{codeBlock}</div>
+                  </ArkTabs.Content>
+                ))}
+              </ArkTabs.Root>
+            </div>
+          </CodeBlockWrapper>
         </StepItem>
       )}
 

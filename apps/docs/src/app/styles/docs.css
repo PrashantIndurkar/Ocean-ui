@@ -10,6 +10,28 @@ main {
   @apply flex flex-col min-h-screen;
 }
 
+/* Custom text selection styles for light mode */
+::selection {
+  background-color: oklch(0.2 0 0);
+  color: oklch(0.98 0 0);
+}
+
+::-moz-selection {
+  background-color: oklch(0.2 0 0);
+  color: oklch(0.98 0 0);
+}
+
+/* Custom text selection styles for dark mode */
+.dark ::selection {
+  background-color: oklch(0.95 0 0);
+  color: oklch(0.15 0 0);
+}
+
+.dark ::-moz-selection {
+  background-color: oklch(0.95 0 0);
+  color: oklch(0.15 0 0);
+}
+
 /* Hide default Fumadocs copy button */
 .mdx-code-block-wrapper button[aria-label="Copy Text"],
 .mdx-code-block button[aria-label="Copy Text"],
