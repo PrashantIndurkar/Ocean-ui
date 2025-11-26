@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { DocsPage, DocsBody } from "fumadocs-ui/page";
 import { source } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
@@ -15,9 +15,14 @@ export default async function Page({
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
 
+  // Redirect /docs to /docs/documentation/introduction
+  if (!slug || slug.length === 0) {
+    redirect("/docs/documentation/introduction");
+  }
+
   // Next.js optional catch-all provides undefined for /docs
   // Fumadocs expects [] (empty array) for the root index page
-  const page = source.getPage(slug ?? []);
+  const page = source.getPage(slug);
   if (!page) notFound();
 
   const MDXContent = page.data.body;

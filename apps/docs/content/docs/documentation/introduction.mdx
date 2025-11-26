@@ -1,0 +1,211 @@
+---
+title: Introduction
+description: Learn about Ocean UI and what makes it unique
+---
+
+import { ZagIcon } from "@/components/icons/zag-icon";
+import { ArkUiIcon } from "@/components/icons/ark-ui-icon";
+import { TailwindCssIcon } from "@/components/icons/tailwind-css-icon";
+import { TypeScriptIcon } from "@/components/icons/typescript-icon";
+import { ReactJsIcon } from "@/components/icons/react-icon";
+import { SolidJsIcon } from "@/components/icons/solidjs-icon";
+import { TechStackCard } from "@/components/tech-stack-card";
+
+# ⚡ Introduction
+
+<DocText>
+  Welcome to Ocean UI a collection of beautiful, production-ready UI components
+  built on top of Ark UI. Skip months of implementation work. We've transformed
+  the entire Ocean UI design system into code blocks you can drop directly into
+  your project. Get pixel-perfect, accessible components without sacrificing
+  customization or control.
+</DocText>
+
+<Divider className="my-10" />
+
+## What is Ocean UI?
+
+<DocText>
+  Ocean UI is a collection of production-ready UI components built on top of
+  **Ark UI** and powered by **Zag.js**. It combines the flexibility of
+  copy-paste components with the robustness of a headless UI foundation, giving
+  you the best of both worlds.
+</DocText>
+
+<DocText>
+  Built with **Tailwind CSS v4**, **TypeScript**, and designed to work across
+  multiple JavaScript frameworks, Ocean UI is the perfect starting point for any
+  project. Everything you need to design and build modern, beautiful interfaces
+  and websites is right here.
+</DocText>
+
+<Divider className="my-10" />
+
+## Why Ocean UI?
+
+<DocText>
+  While other component libraries lock you into a single framework, Ocean UI
+  breaks free from that limitation. Here's what sets us apart:
+</DocText>
+
+### Multi-Framework Support
+
+<DocText>
+  Unlike Radix UI, React Aria, or Base UI—which are React-only—Ocean UI provides
+  components for multiple JavaScript frameworks. Whether you're building with
+  React, Solid, Vue, or Svelte, Ocean UI has you covered with framework-specific
+  implementations.
+</DocText>
+
+- **React** - Full React component library
+- **Solid** - Complete SolidJS component set
+- **Vue** - Comprehensive Vue component collection
+- **Svelte** - Full Svelte component suite
+
+<DocText>
+  Each framework has its own optimized component implementations, but they all
+  share the same design system and accessibility standards. This means you get
+  consistent behavior and styling across frameworks, while using the native
+  patterns and APIs of your chosen framework.
+</DocText>
+
+<DocText>
+  The underlying foundation—**Ark UI** and **Zag.js**—uses framework-agnostic
+  state machines, which allows Ocean UI to provide the same high-quality
+  components across all supported frameworks while maintaining
+  framework-specific optimizations and patterns.
+</DocText>
+
+### Familiar Patterns, Better Foundation
+
+<DocText>
+  If you're coming from shadcn/ui, you'll feel right at home. Ocean UI provides
+  shadcn/ui-style components but built on Ark UI instead of Radix UI:
+</DocText>
+
+- **Familiar APIs**: Similar props and styling approach to shadcn/ui components
+- **Familiar Patterns**: The same copy-paste philosophy you know and love
+- **Better Foundation**: Built on Ark UI for superior accessibility and cross-framework compatibility
+- **Easy Migration**: Straightforward to switch from shadcn/ui with minimal changes
+
+### Built for Accessibility
+
+<DocText>
+  Accessibility isn't optional—it's the baseline for any modern build. Every
+  Ocean UI component is built on **Ark UI**, a headless UI library with 45+
+  components designed to meet accessibility standards and best practices. This
+  means keyboard navigation, focus management, ARIA attributes, and screen
+  reader support are built in from the ground up.
+</DocText>
+
+<Divider className="my-10" />
+
+## Tech Stack
+
+Ocean UI is built with a modern, powerful stack:
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
+  <TechStackCard
+    icon={<ZagIcon className="h-8 w-auto" />}
+    name="Zag"
+    version="v1.30.0"
+    link="https://zagjs.com/"
+  />
+  <TechStackCard
+    icon={<ArkUiIcon className="h-8 w-auto" />}
+    name="Ark UI"
+    version="v5.29.1"
+    link="https://ark-ui.com/"
+  />
+  <TechStackCard
+    icon={<TailwindCssIcon className="h-8 w-auto" />}
+    name="Tailwind CSS"
+    version="v4.1"
+    link="https://tailwindcss.com/"
+  />
+  <TechStackCard
+    icon={<TypeScriptIcon className="h-8 w-auto" />}
+    name="TypeScript"
+    version="v5.9"
+    link="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html"
+  />
+  <TechStackCard
+    icon={<ReactJsIcon className="h-8 w-auto" />}
+    name="React"
+    version="v19.2.0"
+    link="https://react.dev/blog/2024/12/05/react-19"
+  />
+  <TechStackCard
+    icon={<SolidJsIcon className="h-8 w-auto" />}
+    name="SolidJS"
+    version="v1.9.0"
+    link="https://docs.solidjs.com/"
+  />
+</div>
+
+**Framework Support**: React, Solid, Vue, Svelte
+
+<Divider className="my-10" />
+
+## Philosophy
+
+<DocText>
+  Ocean UI follows the same principles that make copy-paste component libraries
+  powerful:
+</DocText>
+
+- **Copy and Paste** - Own the source code. No black boxes or hidden dependencies—just clean, readable code you control.
+
+- **Customizable** - Modify colors, spacing, animations, or behavior. The code is yours to adapt.
+
+- **TypeScript First** - Full type safety with excellent IntelliSense. Every component is fully typed.
+
+- **Tailwind Styled** - Easy customization with utility classes. Style components your way.
+
+- **No Lock-in** - Modify and extend as needed. No vendor lock-in—just your code in your project.
+
+<Divider className="my-10" />
+
+## How Ark UI and Zag.js Make Us Different
+
+<DocText>
+  Ocean UI is built on **Ark UI** and **Zag.js**, which use finite state
+  machines to model component interactions. While Ocean UI provides separate
+  component implementations for each framework, the underlying foundation
+  ensures consistency and quality:
+</DocText>
+
+**Consistent Behavior**: <DocText as="span">The state machine architecture ensures that components behave the same way across all frameworks. Whether you're using React or Solid, the interaction patterns, keyboard navigation, and accessibility features are identical.</DocText>
+
+**Predictable Logic**: <DocText as="span">State machines provide a clear, testable structure for component behavior. This makes components easier to reason about, debug, and maintain, regardless of which framework implementation you're using.</DocText>
+
+**Unified Accessibility**: <DocText as="span">Keyboard interactions, focus management, and ARIA attributes are handled consistently across all framework implementations, ensuring your components are accessible regardless of whether you choose React, Solid, Vue, or Svelte.</DocText>
+
+**Framework-Native Experience**: <DocText as="span">While the underlying logic is shared, each framework implementation uses native patterns and APIs. React components feel like React, Solid components feel like Solid, and so on—you get the best of both worlds.</DocText>
+
+<Divider className="my-10" />
+
+## How is this different from a library?
+
+<DocText>
+  Unlike traditional component libraries that you install as a dependency, Ocean
+  UI gives you the source code.
+</DocText>
+
+<DocText>
+  When you select a component, its code is added directly to your project. This
+  means:
+</DocText>
+
+- **No package dependencies** <DocText as="span">to manage for components</DocText>
+- **No vendor lock-in** <DocText as="span">—you own the code</DocText>
+- **Full control** <DocText as="span">to modify, extend, or adapt components to your specific needs</DocText>
+- **Framework-specific implementations** <DocText as="span">—use the React version in your React project, the Solid version in your Solid project, and so on</DocText>
+
+<DocText>
+  Because you own the code, you can customize it to match your exact
+  requirements, integrate it with your existing design system, and evolve it as
+  your needs change.
+</DocText>
+
+<Divider className="my-10" />

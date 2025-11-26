@@ -1,0 +1,5 @@
+{
+  "title": "Documentation",
+  "defaultOpen": true,
+  "pages": ["introduction", "installation", "changelog"]
+}

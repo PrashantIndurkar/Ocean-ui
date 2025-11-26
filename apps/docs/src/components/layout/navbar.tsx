@@ -66,7 +66,7 @@ const Navbar1 = () => {
             whileHover={{ scale: 1.05 }}
           >
             <Link
-              href="/docs"
+              href="/docs/documentation/introduction"
               className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
             >
               Docs
@@ -167,7 +167,7 @@ const Navbar1 = () => {
                 exit={{ opacity: 0, x: 20 }}
               >
                 <Link
-                  href="/docs"
+                  href="/docs/documentation/introduction"
                   className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
                   onClick={toggleMenu}
                 >

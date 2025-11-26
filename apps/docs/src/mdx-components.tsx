@@ -8,7 +8,15 @@ import { CodeBlockCommand } from "./components/code-block-command";
 import ComponentPreview from "./components/component-preview";
 import { Description } from "./components/description";
 import { Divider } from "./components/divider";
+import { DocText } from "./components/doc-text";
 import { MDXCodeBlockClient } from "./components/mdx-code-block-client";
+import { TechStackCard } from "./components/tech-stack-card";
+import { ArkUiIcon } from "./components/icons/ark-ui-icon";
+import { ZagIcon } from "./components/icons/zag-icon";
+import { TailwindCssIcon } from "./components/icons/tailwind-css-icon";
+import { TypeScriptIcon } from "./components/icons/typescript-icon";
+import { ReactJsIcon } from "./components/icons/react-icon";
+import { SolidJsIcon } from "./components/icons/solidjs-icon";
 import { cn } from "@ocean-ui/utils";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -52,6 +60,14 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ComponentPreview,
     Description,
     Divider,
+    DocText,
+    TechStackCard,
+    ArkUiIcon,
+    ZagIcon,
+    TailwindCssIcon,
+    TypeScriptIcon,
+    ReactJsIcon,
+    SolidJsIcon,
     ...stepComponents,
   };
 }
