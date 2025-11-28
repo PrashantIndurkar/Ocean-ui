@@ -4,7 +4,7 @@ import type { Transition } from 'motion/react';
 import type { HTMLAttributes } from 'react';
 import { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import { motion, useAnimation } from 'motion/react';
-import { cn } from '@ocean-ui/utils';
+import { cn } from '@/lib/utils';
 
 export interface CopyIconHandle {
   startAnimation: () => void;

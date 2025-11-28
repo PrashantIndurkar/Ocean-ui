@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 import { Tabs, type TabItem } from "./ui/tabs";
 import { Eye, Code as CodeIcon } from "lucide-react";
 import type { ReactElement, ReactNode } from "react";

@@ -1,0 +1,184 @@
+---
+title: How to Install Components
+description: Learn how to install Ocean UI components using the CLI
+---
+
+# How to Install Components
+
+Ocean UI provides a simple CLI tool to install components directly into your project. This guide will walk you through the installation process.
+
+## Prerequisites
+
+Before installing components, make sure you have:
+
+- Node.js 18+ installed
+- A package manager (npm, pnpm, yarn, or bun)
+- A React or Solid project set up
+
+## Installation Methods
+
+### Using the CLI (Recommended)
+
+The easiest way to add Ocean UI components to your project is using our CLI tool.
+
+#### Install a Component
+
+```bash
+npx @ocean-ui/cli add <component-name>
+```
+
+**Example:**
+
+```bash
+# Install accordion component
+npx @ocean-ui/cli add accordion
+
+# Install button component
+npx @ocean-ui/cli add button
+```
+
+#### Framework Support
+
+By default, the CLI installs React components. To install Solid components, use the `--framework` flag:
+
+```bash
+# Install React component (default)
+npx @ocean-ui/cli add accordion
+
+# Install Solid component
+npx @ocean-ui/cli add accordion --framework solid
+```
+
+#### Package Manager
+
+The CLI automatically detects your package manager by checking for lock files. You can also specify it manually:
+
+```bash
+# Auto-detect (default)
+npx @ocean-ui/cli add accordion
+
+# Specify package manager
+npx @ocean-ui/cli add accordion --pm pnpm
+npx @ocean-ui/cli add accordion --pm npm
+npx @ocean-ui/cli add accordion --pm yarn
+npx @ocean-ui/cli add accordion --pm bun
+```
+
+#### Custom Target Directory
+
+By default, components are installed to `components/ui/`. You can specify a custom directory:
+
+```bash
+npx @ocean-ui/cli add accordion --dir src/components
+```
+
+#### Overwrite Existing Files
+
+If a component file already exists, the CLI will show an error. Use the `--overwrite` flag to replace it:
+
+```bash
+npx @ocean-ui/cli add accordion --overwrite
+```
+
+## What Gets Installed?
+
+When you run the CLI command, it will:
+
+1. **Detect your package manager** (or use the one you specified)
+2. **Extract dependencies** from the component source code
+3. **Install required dependencies** including:
+   - `@ark-ui/react` or `@ark-ui/solid` (framework-specific)
+   - `lucide-react` or `lucide-solid` (for icons)
+   - `@ocean-ui/tokens` (if the component uses design tokens)
+4. **Create `lib/utils.ts`** automatically if it doesn't exist (contains the `cn` utility function)
+5. **Copy the component file** to your project at `components/ui/{component-name}.tsx` with imports transformed to use `@/lib/utils`
+
+## Available Components
+
+You can install any of the following components:
+
+- **Disclosure**: `accordion`, `collapsible`
+- **Form Controls**: `button`, `input`, `checkbox`, `radio-group`, `select`, `switch`, `textarea`
+- **Overlay**: `dialog`, `popover`, `tooltip`
+- **Data Display**: `card`, `avatar`, `badge`
+- **Navigation**: `tabs`, `menu`
+- **Feedback**: `progress`, `toast`
+
+## Complete Example
+
+Here's a complete example of installing an accordion component:
+
+```bash
+# Install accordion for React
+npx @ocean-ui/cli add accordion
+
+# The CLI will:
+# 1. Detect your package manager (e.g., pnpm)
+# 2. Install: @ark-ui/react/accordion, lucide-react
+# 3. Create: src/lib/utils.ts (if it doesn't exist)
+# 4. Create: components/ui/accordion.tsx
+```
+
+After installation, you can import and use the component:
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+
+export function MyComponent() {
+  return (
+    <Accordion>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```
+
+## Troubleshooting
+
+### Component Not Found
+
+If you see an error that the component is not found, make sure you're using the correct component slug. Check the available components list above.
+
+### Package Manager Not Detected
+
+If the CLI can't detect your package manager, specify it manually using the `--pm` flag.
+
+### File Already Exists
+
+If a component file already exists in your project, use the `--overwrite` flag to replace it.
+
+### Dependencies Installation Fails
+
+Make sure you have the correct permissions and that your package manager is properly configured. Try running the install command manually to see the specific error.
+
+## Path Alias Configuration
+
+Ocean UI components use the `@/lib/utils` import path. Make sure your `tsconfig.json` has the path alias configured:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+If the CLI created `src/lib/utils.ts` for you, this path alias is required for the components to work correctly.
+
+## Next Steps
+
+After installing components:
+
+1. Ensure your `tsconfig.json` has the `@/*` path alias configured (see above)
+2. The `lib/utils.ts` file is automatically created if it doesn't exist
+3. Start using the components in your project!
+
+For more information, check out the [component documentation](/docs/base-components).

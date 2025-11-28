@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,12 +19,18 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@ocean-ui/utils": ["./packages/utils/src/index.ts"],
-      "@ocean-ui/utils/*": ["./packages/utils/src/*"],
-      "@ocean-ui/react": ["./packages/ui-react/src/index.ts"],
-      "@ocean-ui/react/*": ["./packages/ui-react/src/*"]
+      "@ocean-ui/react": [
+        "./packages/ui-react/src/index.ts"
+      ],
+      "@ocean-ui/react/*": [
+        "./packages/ui-react/src/*"
+      ]
     }
   },
-  "exclude": ["node_modules", "**/dist", "**/.next", "**/build"]
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/.next",
+    "**/build"
+  ]
 }
-

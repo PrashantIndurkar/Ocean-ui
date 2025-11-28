@@ -8,7 +8,7 @@ import { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
 
 import { motion, useAnimation } from "motion/react";
 
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 
 export interface GithubIconHandle {
   startAnimation: () => void;

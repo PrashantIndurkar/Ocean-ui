@@ -17,7 +17,7 @@ import { TailwindCssIcon } from "./components/icons/tailwind-css-icon";
 import { TypeScriptIcon } from "./components/icons/typescript-icon";
 import { ReactJsIcon } from "./components/icons/react-icon";
 import { SolidJsIcon } from "./components/icons/solidjs-icon";
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {

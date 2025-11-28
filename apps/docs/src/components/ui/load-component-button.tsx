@@ -9,7 +9,7 @@ import { Loader2, Check, Sparkles } from "lucide-react";
 
 import confetti from "canvas-confetti";
 
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 
 import { BoxesIcon, type BoxesIconHandle } from "@/components/icons/boxes-icon";
 

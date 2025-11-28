@@ -1,7 +1,7 @@
 import * as Base from "fumadocs-ui/components/codeblock";
 import { highlight } from "fumadocs-core/highlight";
 import { type HTMLAttributes } from "react";
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 import { CopyButton } from "./copy-button";
 
 export async function CodeBlock({

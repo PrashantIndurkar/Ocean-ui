@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 
 interface StepItemProps {
   stepNumber: number | string;

@@ -2,19 +2,22 @@
 
 import { Accordion as AccordionPrimitive } from "@ark-ui/react/accordion";
 import { ChevronDownIcon } from "lucide-react";
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 
-function Accordion({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Root>) {
+function Accordion({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Root>) {
   return (
-    <AccordionPrimitive.Root
-      className={cn("w-full", className)}
-      {...props}
-    />
+    <AccordionPrimitive.Root className={cn("w-full", className)} {...props} />
   );
 }
 
-function AccordionItem({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) {
+function AccordionItem({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Item>) {
   return (
     <AccordionPrimitive.Item
       className={cn("border-b border-border last:border-b-0", className)}
@@ -54,6 +57,7 @@ function AccordionContent({
   return (
     <AccordionPrimitive.ItemContent
       className={cn(
+        "bg-red-500",
         "overflow-hidden text-sm",
         "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
         className
@@ -66,4 +70,3 @@ function AccordionContent({
 }
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
-

@@ -1,6 +1,6 @@
 import { getComponentRegistry } from "@/lib/registry.server";
 import { CodeBlock } from "./code-block";
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 import { ComponentPreviewTabs } from "./component-preview-tabs";
 
 export default async function ComponentPreview({

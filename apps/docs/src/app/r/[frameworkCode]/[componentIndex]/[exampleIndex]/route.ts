@@ -49,7 +49,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
     // Get dependencies for the framework
     const getDependencies = (fw: string): string[] => {
-      const baseDeps = [`@ark-ui/${fw}`, `@ocean-ui/tokens`, `@ocean-ui/utils`];
+      const baseDeps = [`@ark-ui/${fw}`, `@ocean-ui/tokens`];
 
       // Add framework-specific icon library
       const iconMap: Record<string, string> = {

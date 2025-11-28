@@ -1,5 +1,5 @@
 {
   "title": "Documentation",
   "defaultOpen": true,
-  "pages": ["introduction", "installation", "changelog"]
+  "pages": ["introduction", "installation", "how-to-install", "component-building-guide", "changelog"]
 }

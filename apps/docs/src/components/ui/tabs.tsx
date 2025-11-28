@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 import { Tabs as ArkTabs } from "@ark-ui/react/tabs";
 import type { ReactNode } from "react";
 

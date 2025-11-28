@@ -1,4 +1,4 @@
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 
 type DividerOrientation = "horizontal" | "vertical";
 type DividerStyle = "solid" | "dashed" | "dotted";

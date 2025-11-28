@@ -11,7 +11,7 @@ import { SvelteJSIcon } from "./icons/svelte-icon";
 import { components } from "@/lib/components";
 import { CodeBlockWrapper } from "./code-block-wrapper";
 import { StepItem } from "./step-item";
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 
 const packageManagers = [
   { value: "pnpm", icon: PnpmLogo },

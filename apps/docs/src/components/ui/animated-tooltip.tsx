@@ -10,7 +10,7 @@ import {
   useSpring,
 } from "motion/react";
 
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 
 const AnimatedTooltipItem = ({
   item,

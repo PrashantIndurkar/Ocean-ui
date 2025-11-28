@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { CopyIcon } from './copy-icon';
-import { cn } from '@ocean-ui/utils';
+import { cn } from '@/lib/utils';
 
 interface CopyButtonProps {
   code: string;

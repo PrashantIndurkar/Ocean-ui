@@ -1,4 +1,4 @@
-import { cn } from "@ocean-ui/utils";
+import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 interface DocTextProps {

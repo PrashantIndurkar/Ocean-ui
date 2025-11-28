@@ -18,14 +18,13 @@
   "dependencies": {
     "@ark-ui/solid": "^5.28.0",
     "@ocean-ui/tokens": "workspace:*",
-    "@ocean-ui/utils": "workspace:*",
     "lucide-solid": "^0.553.0",
     "solid-js": "^1.9.10"
   },
   "devDependencies": {
     "@types/node": "^20",
     "eslint": "^9",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5"
   }
 }
-

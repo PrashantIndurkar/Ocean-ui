@@ -20,7 +20,6 @@
     "@ark-ui/react": "^5.20.0",
     "@ocean-ui/react": "workspace:*",
     "@ocean-ui/tokens": "workspace:*",
-    "@ocean-ui/utils": "workspace:*",
     "@radix-ui/react-slot": "^1.2.4",
     "@types/mdx": "^2.0.13",
     "@types/three": "^0.181.0",

@@ -1,0 +1,270 @@
+---
+title: Component Building Guide
+description: A comprehensive checklist and guide for building new Ocean UI components
+---
+
+# Component Building Guide
+
+This guide provides a step-by-step checklist for building new Ocean UI components that follow the copy-paste library pattern.
+
+## Overview
+
+Ocean UI follows a **copy-paste component library** pattern (like shadcn/ui and basecn), where components are:
+- Self-contained and copy-paste friendly
+- Use local utilities (`@/lib/utils`) instead of package dependencies
+- Fully customizable by users
+- Built on top of Ark UI primitives
+
+## Component Structure Template
+
+Here's the standard structure for a new component:
+
+```tsx
+"use client";
+
+import { ComponentName as ComponentPrimitive } from "@ark-ui/react/component-name";
+import { IconName } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { ComponentProps } from "react";
+
+function ComponentName({ className, ...props }: ComponentProps<typeof ComponentPrimitive.Root>) {
+  return (
+    <ComponentPrimitive.Root
+      className={cn("base-styles", className)}
+      {...props}
+    />
+  );
+}
+
+function ComponentSubPart({ className, ...props }: ComponentProps<typeof ComponentPrimitive.SubPart>) {
+  return (
+    <ComponentPrimitive.SubPart
+      className={cn("sub-part-styles", className)}
+      {...props}
+    />
+  );
+}
+
+export { ComponentName, ComponentSubPart };
+```
+
+## Checklist for Building Components
+
+### 1. Import Patterns ✓
+
+- [ ] **Use `@/lib/utils`** - Never use `@ocean-ui/utils` in component source files
+- [ ] Import Ark UI primitives: `@ark-ui/react/{component-name}`
+- [ ] Import icons from `lucide-react` (or `lucide-solid` for Solid components)
+- [ ] Use `"use client"` directive for React components that need client-side features
+
+**Correct:**
+```tsx
+import { cn } from "@/lib/utils";
+```
+
+**Wrong:**
+```tsx
+import { cn } from "@ocean-ui/utils";
+```
+
+### 2. TypeScript Typing ✓
+
+- [ ] Use `ComponentProps<typeof ComponentPrimitive.Root>` for type safety
+- [ ] Alternatively, use `ComponentPrimitive.Root.Props` (more type-safe, like basecn)
+- [ ] Always include `className` prop for customization
+- [ ] Spread `...props` to pass through all primitive props
+
+**Example:**
+```tsx
+function Accordion({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Root>) {
+  // ...
+}
+```
+
+### 3. Styling with `cn` Utility ✓
+
+- [ ] Always use `cn()` for className merging
+- [ ] Put base styles first, then `className` prop
+- [ ] Use Tailwind CSS classes
+- [ ] Support dark mode with `dark:` variants where needed
+
+**Example:**
+```tsx
+className={cn(
+  "base-styles-here",
+  "hover:underline",
+  "focus-visible:ring-2",
+  className
+)}
+```
+
+### 4. Component Structure ✓
+
+- [ ] Export all sub-components separately
+- [ ] Keep components small and focused
+- [ ] Use semantic HTML where possible
+- [ ] Follow accessibility best practices
+
+### 5. Optional: Data Attributes ✓
+
+Consider adding `data-slot` attributes for better styling hooks (optional, but recommended):
+
+```tsx
+<ComponentPrimitive.Root
+  data-slot="component-name"
+  className={cn("...", className)}
+  {...props}
+/>
+```
+
+### 6. Testing Checklist ✓
+
+Before submitting a component:
+
+- [ ] Component renders without errors
+- [ ] All props are properly typed
+- [ ] `className` prop works for customization
+- [ ] Component is accessible (keyboard navigation, ARIA attributes)
+- [ ] Works in both light and dark mode
+- [ ] Responsive on mobile and desktop
+- [ ] No console errors or warnings
+
+### 7. CLI Integration ✓
+
+After creating the component:
+
+- [ ] Place component in `packages/ui-react/src/components/base/{component-name}.tsx`
+- [ ] Run `pnpm build` in the CLI package to copy component to CLI
+- [ ] Test CLI installation: `npx @ocean-ui/cli add {component-name}`
+- [ ] Verify imports are transformed correctly (`@/lib/utils`)
+- [ ] Verify utils file is created if missing
+- [ ] Verify dependencies are extracted correctly
+
+### 8. Documentation ✓
+
+- [ ] Add component to component list in docs
+- [ ] Create component documentation page
+- [ ] Add usage examples
+- [ ] Document all props and variants
+- [ ] Include accessibility notes
+
+## Copy-Paste Friendly Patterns
+
+### ✅ DO
+
+- Use local imports (`@/lib/utils`)
+- Keep components self-contained
+- Use standard TypeScript patterns
+- Follow Ark UI patterns
+- Make components easily customizable
+
+### ❌ DON'T
+
+- Don't use package dependencies for utilities (`@ocean-ui/utils`)
+- Don't export utilities from component package
+- Don't create circular dependencies
+- Don't hardcode values that should be customizable
+- Don't skip accessibility features
+
+## Example: Complete Component
+
+Here's a complete example following all best practices:
+
+```tsx
+"use client";
+
+import { Accordion as AccordionPrimitive } from "@ark-ui/react/accordion";
+import { ChevronDownIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { ComponentProps } from "react";
+
+function Accordion({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Root>) {
+  return (
+    <AccordionPrimitive.Root
+      className={cn("w-full", className)}
+      {...props}
+    />
+  );
+}
+
+function AccordionItem({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) {
+  return (
+    <AccordionPrimitive.Item
+      className={cn("border-b border-border last:border-b-0", className)}
+      {...props}
+    />
+  );
+}
+
+function AccordionTrigger({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.ItemTrigger>) {
+  return (
+    <AccordionPrimitive.ItemTrigger
+      className={cn(
+        "flex flex-1 items-center justify-between gap-4 py-4 text-left text-sm font-medium transition-all outline-none",
+        "hover:underline",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "disabled:pointer-events-none disabled:opacity-50",
+        "[&[data-state=open]>svg]:rotate-180",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronDownIcon className="text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200" />
+    </AccordionPrimitive.ItemTrigger>
+  );
+}
+
+function AccordionContent({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.ItemContent>) {
+  return (
+    <AccordionPrimitive.ItemContent
+      className={cn(
+        "overflow-hidden text-sm",
+        "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
+        className
+      )}
+      {...props}
+    >
+      <div className="pb-4 pt-0">{children}</div>
+    </AccordionPrimitive.ItemContent>
+  );
+}
+
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+```
+
+## Quick Reference
+
+### File Location
+```
+packages/ui-react/src/components/base/{component-name}.tsx
+```
+
+### Required Imports
+```tsx
+import { ComponentName as ComponentPrimitive } from "@ark-ui/react/component-name";
+import { cn } from "@/lib/utils";
+import type { ComponentProps } from "react";
+```
+
+### Export Pattern
+```tsx
+export { ComponentName, ComponentSubPart1, ComponentSubPart2 };
+```
+
+## Next Steps
+
+1. Review existing components for patterns
+2. Follow this checklist for each new component
+3. Test thoroughly before submitting
+4. Update documentation
+
+For questions or help, refer to the [Installation Guide](/docs/documentation/how-to-install) or check existing component implementations.
