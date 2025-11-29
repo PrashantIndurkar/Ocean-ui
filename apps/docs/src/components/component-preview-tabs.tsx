@@ -32,9 +32,9 @@ export function ComponentPreviewTabs({
             constrainHeight ? "max-h-[400px]" : "py-10"
           )}
         >
-          {/* <div className="max-w-1/2 mx-auto"> */}
-          <Component />
-          {/* </div> */}
+          <div className="max-w-1/2 mx-auto">
+            <Component />
+          </div>
         </div>
       ),
     },
