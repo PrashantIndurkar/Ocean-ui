@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ES2020",
@@ -13,8 +13,13 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "noEmit": false
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "components/**/*", "lib/**/*"],
   "exclude": ["node_modules", "dist"]
 }
