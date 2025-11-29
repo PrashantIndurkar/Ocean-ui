@@ -27,12 +27,14 @@ export function ComponentPreviewTabs({
       content: (
         <div
           className={cn(
-            "border rounded-3xl p-2 min-h-[400px] flex overflow-y-auto",
+            "border rounded-3xl p-2 min-h-[400px] flex overflow-y-auto ",
             center && "items-center justify-center",
             constrainHeight ? "max-h-[400px]" : "py-10"
           )}
         >
+          {/* <div className="max-w-1/2 mx-auto"> */}
           <Component />
+          {/* </div> */}
         </div>
       ),
     },

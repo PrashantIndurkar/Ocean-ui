@@ -58,14 +58,12 @@ function AccordionContent({
     <AccordionPrimitive.ItemContent
       className={cn(
         "overflow-hidden text-sm",
-        "grid transition-[grid-template-rows,opacity] duration-500 ease-in-out",
-        "data-[state=closed]:grid-rows-[0fr] data-[state=open]:grid-rows-[1fr]",
-        "data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
+        "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
         className
       )}
       {...props}
     >
-      <div className="min-h-0 pb-4 pt-0">{children}</div>
+      <div className="pb-4 pt-0">{children}</div>
     </AccordionPrimitive.ItemContent>
   );
 }
