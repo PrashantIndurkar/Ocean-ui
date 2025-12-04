@@ -26,28 +26,69 @@ export default async function ComponentPreview({
   }
 
   const Component = exampleData.component;
-  const code = (exampleData.sourceCode.react || "").replace(
-    /^"use client";\n?/gm,
-    ""
+
+  // Framework configuration with icons and language settings
+  const frameworks = [
+    { value: "react", lang: "tsx" },
+    { value: "solid", lang: "tsx" },
+    { value: "vue", lang: "vue" },
+    { value: "svelte", lang: "svelte" },
+  ] as const;
+
+  type FrameworkValue = (typeof frameworks)[number]["value"];
+
+  // Generate code blocks for all available frameworks
+  const frameworkCodeBlocks = await Promise.all(
+    frameworks.map(
+      async (
+        framework
+      ): Promise<{
+        value: FrameworkValue;
+        codeBlock: Awaited<ReturnType<typeof CodeBlock>>;
+      } | null> => {
+        const sourceCode = exampleData.sourceCode[framework.value];
+        if (!sourceCode) {
+          return null;
+        }
+
+        // Remove "use client" directive for display
+        const code = sourceCode.replace(/^"use client";\n?/gm, "");
+
+        const codeBlock = await CodeBlock({
+          code,
+          lang: framework.lang,
+          showLineNumbers: true,
+          className: cn(
+            "bg-white dark:bg-transparent rounded-3xl overflow-hidden",
+            "[&_pre]:text-sm [&_pre]:font-normal [&_pre]:bg-white [&_pre]:dark:bg-transparent [&_pre_span]:leading-[1.75]",
+            "[&_code]:bg-white [&_code]:dark:bg-transparent",
+            "[&>div:has(pre)]:rounded-3xl [&>div:has(pre)]:py-3 [&>div:has(pre)]:px-2 [&>div:has(pre)]:min-h-[400px]",
+            constrainHeight && "[&>div:has(pre)]:max-h-[400px]"
+          ),
+        });
+
+        return {
+          value: framework.value,
+          codeBlock,
+        };
+      }
+    )
   );
 
-  const codeBlock = await CodeBlock({
-    code,
-    lang: "tsx",
-    showLineNumbers: true,
-    className: cn(
-      "bg-white dark:bg-transparent rounded-3xl overflow-hidden",
-      "[&_pre]:text-sm [&_pre]:font-normal [&_pre]:bg-white [&_pre]:dark:bg-transparent [&_pre_span]:leading-[1.75]",
-      "[&_code]:bg-white [&_code]:dark:bg-transparent",
-      "[&>div:has(pre)]:rounded-3xl [&>div:has(pre)]:py-3 [&>div:has(pre)]:px-2 [&>div:has(pre)]:min-h-[400px]",
-      constrainHeight && "[&>div:has(pre)]:max-h-[400px]"
-    ),
-  });
+  // Filter out null entries (frameworks without source code)
+  const availableFrameworkCodeBlocks = frameworkCodeBlocks.filter(
+    (
+      block
+    ): block is {
+      value: FrameworkValue;
+      codeBlock: Awaited<ReturnType<typeof CodeBlock>>;
+    } => block !== null
+  );
 
   return (
     <ComponentPreviewTabs
       Component={Component}
-      codeBlock={codeBlock}
+      frameworkCodeBlocks={availableFrameworkCodeBlocks}
       center={center}
       constrainHeight={constrainHeight}
     />

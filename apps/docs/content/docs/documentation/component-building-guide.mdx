@@ -10,6 +10,7 @@ This guide provides a step-by-step checklist for building new Ocean UI component
 ## Overview
 
 Ocean UI follows a **copy-paste component library** pattern (like shadcn/ui and basecn), where components are:
+
 - Self-contained and copy-paste friendly
 - Use local utilities (`@/lib/utils`) instead of package dependencies
 - Fully customizable by users
@@ -27,7 +28,10 @@ import { IconName } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 
-function ComponentName({ className, ...props }: ComponentProps<typeof ComponentPrimitive.Root>) {
+function ComponentName({
+  className,
+  ...props
+}: ComponentProps<typeof ComponentPrimitive.Root>) {
   return (
     <ComponentPrimitive.Root
       className={cn("base-styles", className)}
@@ -36,7 +40,10 @@ function ComponentName({ className, ...props }: ComponentProps<typeof ComponentP
   );
 }
 
-function ComponentSubPart({ className, ...props }: ComponentProps<typeof ComponentPrimitive.SubPart>) {
+function ComponentSubPart({
+  className,
+  ...props
+}: ComponentProps<typeof ComponentPrimitive.SubPart>) {
   return (
     <ComponentPrimitive.SubPart
       className={cn("sub-part-styles", className)}
@@ -58,11 +65,13 @@ export { ComponentName, ComponentSubPart };
 - [ ] Use `"use client"` directive for React components that need client-side features
 
 **Correct:**
+
 ```tsx
 import { cn } from "@/lib/utils";
 ```
 
 **Wrong:**
+
 ```tsx
 import { cn } from "@ocean-ui/utils";
 ```
@@ -75,8 +84,12 @@ import { cn } from "@ocean-ui/utils";
 - [ ] Spread `...props` to pass through all primitive props
 
 **Example:**
+
 ```tsx
-function Accordion({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Root>) {
+function Accordion({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Root>) {
   // ...
 }
 ```
@@ -89,6 +102,7 @@ function Accordion({ className, ...props }: ComponentProps<typeof AccordionPrimi
 - [ ] Support dark mode with `dark:` variants where needed
 
 **Example:**
+
 ```tsx
 className={cn(
   "base-styles-here",
@@ -178,16 +192,19 @@ import { ChevronDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 
-function Accordion({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Root>) {
+function Accordion({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Root>) {
   return (
-    <AccordionPrimitive.Root
-      className={cn("w-full", className)}
-      {...props}
-    />
+    <AccordionPrimitive.Root className={cn("w-full", className)} {...props} />
   );
 }
 
-function AccordionItem({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) {
+function AccordionItem({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Item>) {
   return (
     <AccordionPrimitive.Item
       className={cn("border-b border-border last:border-b-0", className)}
@@ -226,14 +243,18 @@ function AccordionContent({
 }: ComponentProps<typeof AccordionPrimitive.ItemContent>) {
   return (
     <AccordionPrimitive.ItemContent
-      className={cn(
-        "overflow-hidden text-sm",
-        "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
-        className
-      )}
+      className={cn("overflow-hidden text-sm", className)}
       {...props}
     >
-      <div className="pb-4 pt-0">{children}</div>
+      <div
+        className={cn(
+          "pb-4 pt-0",
+          "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
+          className
+        )}
+      >
+        {children}
+      </div>
     </AccordionPrimitive.ItemContent>
   );
 }
@@ -244,11 +265,13 @@ export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
 ## Quick Reference
 
 ### File Location
+
 ```
 packages/ui-react/src/components/base/{component-name}.tsx
 ```
 
 ### Required Imports
+
 ```tsx
 import { ComponentName as ComponentPrimitive } from "@ark-ui/react/component-name";
 import { cn } from "@/lib/utils";
@@ -256,6 +279,7 @@ import type { ComponentProps } from "react";
 ```
 
 ### Export Pattern
+
 ```tsx
 export { ComponentName, ComponentSubPart1, ComponentSubPart2 };
 ```

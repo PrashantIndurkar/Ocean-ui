@@ -59,7 +59,7 @@ const defaultListClasses = {
 };
 
 const defaultTriggerClasses =
-  "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 py-1 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-brand-300 dark:data-selected:border-gray-700";
+  "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-brand-300 dark:data-selected:border-gray-700";
 
 export function Tabs({
   items,
@@ -82,8 +82,10 @@ export function Tabs({
             value={item.value}
             className={cn(
               defaultTriggerClasses,
-              variant === "default" && "rounded-lg data-selected:shadow-md",
-              variant === "bordered" && "rounded-lg data-selected:shadow-md",
+              variant === "default" &&
+                "py-1 rounded-lg data-selected:shadow-md",
+              variant === "bordered" &&
+                "py-3 rounded-lg data-selected:shadow-md",
               triggerClassName,
               item.triggerClassName
             )}

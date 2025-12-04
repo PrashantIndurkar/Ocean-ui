@@ -167,7 +167,7 @@
 
   @keyframes accordion-collapse {
     from {
-      height: var(--accordion-panel-height, auto);
+      height: var(--height);
     }
     to {
       height: 0;
@@ -179,7 +179,7 @@
       height: 0;
     }
     to {
-      height: var(--accordion-panel-height, auto);
+      height: var(--height);
     }
   }
 

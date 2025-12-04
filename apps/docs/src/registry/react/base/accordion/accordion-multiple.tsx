@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from "@ocean-ui/react";
 
-export default function AccordionBasic() {
+export default function AccordionDemo() {
   return (
     <Accordion defaultValue={[]} multiple={true}>
       <AccordionItem value="item-1">

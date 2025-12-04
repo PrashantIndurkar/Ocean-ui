@@ -1,6 +1,7 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { Tabs as ArkTabs } from "@ark-ui/react/tabs";
+import { Tabs } from "./ui/tabs";
+import { TabsWithLabel } from "./ui/tabs-with-label";
 import { CodeBlock } from "./code-block";
 import { CodeBlockWithFile } from "./code-block-with-file";
 import { PnpmLogo, NPMLogo, YarnLogo, BunLogo } from "./icons/package-managers";
@@ -11,7 +12,6 @@ import { SvelteJSIcon } from "./icons/svelte-icon";
 import { components } from "@/lib/components";
 import { CodeBlockWrapper } from "./code-block-wrapper";
 import { StepItem } from "./step-item";
-import { cn } from "@/lib/utils";
 
 const packageManagers = [
   { value: "pnpm", icon: PnpmLogo },
@@ -183,36 +183,20 @@ export async function CodeBlockCommand({ component }: { component: string }) {
         >
           <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
             <div className="[&_figure]:mt-0">
-              <ArkTabs.Root defaultValue="pnpm" className="[&_figure]:mt-0">
-                <ArkTabs.List className="inline-flex h-9 items-center border-b border-border bg-muted px-1.5 pt-1.5 pb-3 text-muted-foreground font-mono gap-x-2 w-full">
-                  {installationCodeBlocks.map(({ value, icon: Icon }) => (
-                    <ArkTabs.Trigger
-                      key={value}
-                      value={value}
-                      className={cn(
-                        "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 py-3 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-brand-300 dark:data-selected:border-gray-700 rounded-lg data-selected:shadow-md"
-                      )}
-                    >
-                      {Icon && (
-                        <span className="size-4 shrink-0">
-                          <Icon className="size-4" />
-                        </span>
-                      )}
-                      {value}
-                    </ArkTabs.Trigger>
-                  ))}
-                </ArkTabs.List>
-                <div>
-                  <p className="text-sm font-mono text-brand-400 dark:text-brand-300 font-light leading-7 my-6 pl-2">
-                    Terminal
-                  </p>
-                </div>
-                {installationCodeBlocks.map(({ value, codeBlock }) => (
-                  <ArkTabs.Content key={value} value={value}>
-                    {codeBlock}
-                  </ArkTabs.Content>
-                ))}
-              </ArkTabs.Root>
+              <TabsWithLabel
+                items={installationCodeBlocks.map(
+                  ({ value, icon: Icon, codeBlock }) => ({
+                    value,
+                    label: value,
+                    icon: Icon ? <Icon className="size-4" /> : undefined,
+                    content: codeBlock,
+                  })
+                )}
+                defaultValue="pnpm"
+                label="Terminal"
+                variant="bordered"
+                className="[&_figure]:mt-0"
+              />
             </div>
           </CodeBlockWrapper>
         </StepItem>
@@ -235,31 +219,19 @@ export async function CodeBlockCommand({ component }: { component: string }) {
         >
           <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
             <div className="[&_figure]:mt-0">
-              <ArkTabs.Root defaultValue="react" className="[&_figure]:mt-0">
-                <ArkTabs.List className="inline-flex h-9 items-center border-b border-border bg-muted px-1.5 pt-1.5 pb-3 text-muted-foreground font-mono gap-x-2 w-full">
-                  {frameworkCodeBlocks.map(({ value, icon: Icon }) => (
-                    <ArkTabs.Trigger
-                      key={value}
-                      value={value}
-                      className={cn(
-                        "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 py-3 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-brand-300 dark:data-selected:border-gray-700 rounded-lg data-selected:shadow-md"
-                      )}
-                    >
-                      {Icon && (
-                        <span className="size-4 shrink-0">
-                          <Icon className="size-4" />
-                        </span>
-                      )}
-                      {value}
-                    </ArkTabs.Trigger>
-                  ))}
-                </ArkTabs.List>
-                {frameworkCodeBlocks.map(({ value, codeBlock }) => (
-                  <ArkTabs.Content key={value} value={value}>
-                    <div className="overflow-x-auto">{codeBlock}</div>
-                  </ArkTabs.Content>
-                ))}
-              </ArkTabs.Root>
+              <Tabs
+                items={frameworkCodeBlocks.map(
+                  ({ value, icon: Icon, codeBlock }) => ({
+                    value,
+                    label: value,
+                    icon: Icon ? <Icon className="size-4" /> : undefined,
+                    content: <div className="overflow-x-auto">{codeBlock}</div>,
+                  })
+                )}
+                defaultValue="react"
+                variant="bordered"
+                className="[&_figure]:mt-0"
+              />
             </div>
           </CodeBlockWrapper>
         </StepItem>

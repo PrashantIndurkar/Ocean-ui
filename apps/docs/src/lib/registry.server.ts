@@ -8,7 +8,7 @@ import { loadComponentManifest } from "./registry.utils";
  * Server-only function to get source code for a specific framework
  * @param slug The component slug
  * @param exampleName The example name
- * @param framework The framework (react, solid)
+ * @param framework The framework (react, solid, vue, svelte)
  * @param category The component category (fundamentals, base, blocks, templates) - defaults to "base"
  * @returns The source code as a string or null if not found
  */
@@ -19,8 +19,9 @@ export async function getComponentSource(
   category: string = "base"
 ): Promise<string | null> {
   try {
-    // Both React and Solid use .tsx extension
-    const extension = "tsx";
+    // Determine file extension based on framework
+    const extension =
+      framework === "vue" ? "vue" : framework === "svelte" ? "svelte" : "tsx";
 
     // Construct file path relative to the app directory
     // In Next.js, process.cwd() is the project root (apps/docs)
@@ -83,7 +84,7 @@ export async function getComponentRegistry(
     // Load examples based on manifest (order is determined by array position)
     // Always render React components in the UI, regardless of selected framework
     const examples: ComponentExample[] = [];
-    const frameworks = ["react", "solid"];
+    const frameworks = ["react", "solid", "vue", "svelte"];
 
     for (const exampleMeta of manifest.examples) {
       try {
@@ -133,4 +134,3 @@ export async function getComponentRegistry(
     return null;
   }
 }
-
