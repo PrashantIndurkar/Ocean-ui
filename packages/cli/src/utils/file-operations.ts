@@ -1,6 +1,6 @@
 /**
  * File Operations Utility
- * 
+ *
  * Handles reading component sources and writing to user's project
  */
 
@@ -14,14 +14,41 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * Transform component imports to use local utils
- * Replaces @ocean-ui/utils with @/lib/utils for copy-paste friendly components
+ * Transform component imports to use local paths
+ * Replaces:
+ * - @ocean-ui/react → @/components/ui/{componentSlug}
+ * - @ocean-ui/utils → @/lib/utils
+ *
+ * @param content - Component source code
+ * @param componentSlug - Component slug (e.g., "accordion")
+ * @returns Transformed code with local import paths
  */
-export function transformComponentImports(content: string): string {
-  return content.replace(
-    /from ["']@ocean-ui\/utils["']/g,
+export function transformComponentImports(
+  content: string,
+  componentSlug: string
+): string {
+  let transformed = content;
+
+  // Transform @ocean-ui/react to @/components/ui/{componentSlug}
+  transformed = transformed.replace(
+    /from\s+["']@ocean-ui\/react["']/g,
+    `from "@/components/ui/${componentSlug}"`
+  );
+
+  // Transform @ocean-ui/utils to @/lib/utils
+  transformed = transformed.replace(
+    /from\s+["']@ocean-ui\/utils["']/g,
     'from "@/lib/utils"'
   );
+
+  return transformed;
+}
+
+/**
+ * Get utils dependencies that need to be installed
+ */
+export function getUtilsDependencies(): string[] {
+  return ["clsx", "tailwind-merge"];
 }
 
 /**
@@ -72,10 +99,30 @@ export async function readComponentSource(
   componentSlug: string,
   framework: "react" | "solid"
 ): Promise<string> {
+  // Find package root by looking for package.json
+  // Start from current file location and walk up
+  let currentDir = __dirname;
+  let packageRoot: string | null = null;
+
+  // Walk up directories to find package.json
+  for (let i = 0; i < 10; i++) {
+    const packageJsonPath = join(currentDir, "package.json");
+    if (existsSync(packageJsonPath)) {
+      packageRoot = currentDir;
+      break;
+    }
+    const parentDir = join(currentDir, "..");
+    if (parentDir === currentDir) break; // Reached filesystem root
+    currentDir = parentDir;
+  }
+
+  if (!packageRoot) {
+    throw new Error(`Could not find package root. Started from: ${__dirname}`);
+  }
+
+  // Components are at package root/components/{framework}/base/{component}.tsx
   const componentPath = join(
-    __dirname,
-    "..",
-    "..",
+    packageRoot,
     "components",
     framework,
     "base",
@@ -84,7 +131,9 @@ export async function readComponentSource(
 
   if (!existsSync(componentPath)) {
     throw new Error(
-      `Component ${componentSlug} not found for framework ${framework}`
+      `Component ${componentSlug} not found for framework ${framework}.\n` +
+        `Expected at: ${componentPath}\n` +
+        `Package root: ${packageRoot}`
     );
   }
 
@@ -151,10 +200,12 @@ export async function writeComponentWithOverwrite(
   }
 
   // Transform imports before writing (for copy-paste friendly components)
-  const transformedContent = transformComponentImports(content);
+  const transformedContent = transformComponentImports(content, componentSlug);
 
   await writeFile(targetPath, transformedContent, "utf-8");
-  console.log(chalk.green(`✓ ${overwrite ? "Updated" : "Created"} ${targetPath}`));
+  console.log(
+    chalk.green(`✓ ${overwrite ? "Updated" : "Created"} ${targetPath}`)
+  );
 
   return targetPath;
 }

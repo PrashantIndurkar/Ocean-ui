@@ -1,6 +1,6 @@
 /**
  * Dependency Extractor Utility
- * 
+ *
  * Extracts dependencies from component source code
  * Reuses logic from apps/docs/src/components/code-block-command.tsx
  */
@@ -41,15 +41,22 @@ export async function extractDependencies(
     const content = await readFile(componentPath, "utf-8");
 
     // Extract @ark-ui imports
-    const arkMatches = content.match(/from ["']@ark-ui\/(react|solid)\/([^"']+)["']/g);
+    // Ark UI uses subpath exports, so we install the main package @ark-ui/react
+    // not individual subpaths like @ark-ui/react/accordion
+    const arkMatches = content.match(
+      /from ["']@ark-ui\/(react|solid)\/([^"']+)["']/g
+    );
     if (arkMatches) {
+      const frameworkPackages = new Set<string>();
       arkMatches.forEach((match) => {
-        const depMatch = match.match(/@ark-ui\/(react|solid)\/([^"']+)/);
+        const depMatch = match.match(/@ark-ui\/(react|solid)\//);
         if (depMatch) {
-          const [, fw, component] = depMatch;
-          dependencies.push(`@ark-ui/${fw}/${component}`);
+          const [, fw] = depMatch;
+          // Install main package, not subpath
+          frameworkPackages.add(`@ark-ui/${fw}`);
         }
       });
+      dependencies.push(...Array.from(frameworkPackages));
     }
 
     // Extract lucide imports
@@ -61,17 +68,20 @@ export async function extractDependencies(
     }
 
     // Check for @ocean-ui/tokens
-    if (content.includes("@ocean-ui/tokens") && !dependencies.includes("@ocean-ui/tokens")) {
+    if (
+      content.includes("@ocean-ui/tokens") &&
+      !dependencies.includes("@ocean-ui/tokens")
+    ) {
       dependencies.push("@ocean-ui/tokens");
     }
 
     return dependencies;
   } catch (error) {
     // Fallback: return common dependencies for known components
-    const fallbackDeps = [
-      `@ark-ui/${framework}/accordion`,
-      lucideMap[framework],
-    ].filter(Boolean) as string[];
+    // Install main @ark-ui/react package, not subpath
+    const fallbackDeps = [`@ark-ui/${framework}`, lucideMap[framework]].filter(
+      Boolean
+    ) as string[];
 
     if (componentSlug === "accordion") {
       return fallbackDeps;

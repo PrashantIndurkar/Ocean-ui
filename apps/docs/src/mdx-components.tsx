@@ -10,6 +10,7 @@ import { Description } from "./components/description";
 import { Divider } from "./components/divider";
 import { DocText } from "./components/doc-text";
 import { MDXCodeBlockClient } from "./components/mdx-code-block-client";
+import { Note } from "./components/note";
 import { TechStackCard } from "./components/tech-stack-card";
 import { ArkUiIcon } from "./components/icons/ark-ui-icon";
 import { ZagIcon } from "./components/icons/zag-icon";
@@ -61,6 +62,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Description,
     Divider,
     DocText,
+    Note,
     TechStackCard,
     ArkUiIcon,
     ZagIcon,

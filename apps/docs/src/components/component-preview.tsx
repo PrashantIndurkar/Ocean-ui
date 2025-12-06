@@ -2,6 +2,7 @@ import { getComponentRegistry } from "@/lib/registry.server";
 import { CodeBlock } from "./code-block";
 import { cn } from "@/lib/utils";
 import { ComponentPreviewTabs } from "./component-preview-tabs";
+import { transformImportsForDisplay } from "@/lib/import-transformer";
 
 export default async function ComponentPreview({
   name,
@@ -52,7 +53,11 @@ export default async function ComponentPreview({
         }
 
         // Remove "use client" directive for display
-        const code = sourceCode.replace(/^"use client";\n?/gm, "");
+        let code = sourceCode.replace(/^"use client";\n?/gm, "");
+
+        // Transform imports for copy-paste ready code
+        // Transform @ocean-ui/react to @/components/ui/{componentSlug}
+        code = transformImportsForDisplay(code, name);
 
         const codeBlock = await CodeBlock({
           code,

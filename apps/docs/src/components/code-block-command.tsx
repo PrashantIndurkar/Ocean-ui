@@ -44,6 +44,23 @@ const getInstallationCommand = (
   }
 };
 
+const getShadcnInstallationCommand = (
+  packageManager: string,
+  registry: string,
+  component: string
+) => {
+  switch (packageManager) {
+    case "pnpm":
+      return `pnpm dlx shadcn@latest add ${registry}/${component}`;
+    case "npm":
+      return `npx shadcn@latest add ${registry}/${component}`;
+    case "yarn":
+      return `yarn dlx shadcn@latest add ${registry}/${component}`;
+    case "bun":
+      return `bunx shadcn@latest add ${registry}/${component}`;
+  }
+};
+
 async function getComponentDependencies(
   componentSlug: string
 ): Promise<string[]> {
@@ -126,7 +143,13 @@ function getComponentFilePath(componentSlug: string): string {
   return `/components/ui/${componentSlug}.tsx`;
 }
 
-export async function CodeBlockCommand({ component }: { component: string }) {
+export async function CodeBlockCommand({
+  component,
+  registry,
+}: {
+  component: string;
+  registry?: string;
+}) {
   const dependencies = await getComponentDependencies(component);
   const componentCode = await getComponentCode(component);
   const filePath = getComponentFilePath(component);
@@ -134,10 +157,12 @@ export async function CodeBlockCommand({ component }: { component: string }) {
   // Pre-render installation command code blocks
   const installationCodeBlocks = await Promise.all(
     packageManagers.map(async (pm) => {
-      const command = getInstallationCommand(pm.value, dependencies) || "";
+      const command = registry
+        ? getShadcnInstallationCommand(pm.value, registry, component)
+        : getInstallationCommand(pm.value, dependencies) || "";
       const codeBlock = await CodeBlock({
         lang: "bash",
-        code: command,
+        code: command ?? "",
       });
       return {
         value: pm.value,
@@ -171,6 +196,39 @@ export async function CodeBlockCommand({ component }: { component: string }) {
         })
       )
     : [];
+
+  // If using registry, show simplified installation
+  if (registry) {
+    return (
+      <div className="space-y-6">
+        {/* Step 1: Install via shadcn CLI */}
+        <StepItem
+          stepNumber={1}
+          title={`Install the component using shadcn CLI:`}
+          isLast={true}
+        >
+          <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
+            <div className="[&_figure]:mt-0">
+              <TabsWithLabel
+                items={installationCodeBlocks.map(
+                  ({ value, icon: Icon, codeBlock }) => ({
+                    value,
+                    label: value,
+                    icon: Icon ? <Icon className="size-4" /> : undefined,
+                    content: codeBlock,
+                  })
+                )}
+                defaultValue="pnpm"
+                label="Terminal"
+                variant="bordered"
+                className="[&_figure]:mt-0"
+              />
+            </div>
+          </CodeBlockWrapper>
+        </StepItem>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

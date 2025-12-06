@@ -14,7 +14,8 @@
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "registry:build": "pnpm dlx shadcn@latest build"
   },
   "dependencies": {
     "@ark-ui/react": "^5.20.0",

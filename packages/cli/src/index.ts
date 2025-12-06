@@ -23,6 +23,7 @@ import {
   readComponentSource,
   writeComponentWithOverwrite,
   ensureUtilsFile,
+  getUtilsDependencies,
 } from "./utils/file-operations.js";
 
 const program = new Command();
@@ -88,18 +89,22 @@ program
       // Extract dependencies
       const dependencies = await extractDependencies(componentSlug, framework);
 
-      // Install dependencies
-      await installDependencies(pm, dependencies);
-
       // Ensure utils file exists (creates lib/utils.ts if needed)
       const utilsCreated = await ensureUtilsFile();
+
+      // If utils file was created, add clsx and tailwind-merge to dependencies
       if (utilsCreated) {
+        const utilsDeps = ["clsx", "tailwind-merge"];
+        dependencies.push(...utilsDeps);
         console.log(
           chalk.gray(
             "Note: Created src/lib/utils.ts with cn utility function\n"
           )
         );
       }
+
+      // Install dependencies
+      await installDependencies(pm, dependencies);
 
       // Read component source
       const componentSource = await readComponentSource(

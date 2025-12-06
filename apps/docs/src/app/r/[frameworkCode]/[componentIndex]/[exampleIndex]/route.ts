@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getComponentSource } from "@/lib/registry.server";
 import { getRegistryParams, loadComponentManifest } from "@/lib/registry.utils";
+import { transformAllImports } from "@/lib/import-transformer";
 
 interface RouteParams {
   params: Promise<{
@@ -38,7 +39,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     const exampleName = example.replace(/\.json$/, "");
 
     // Get the source code for the specific framework and example
-    const sourceCode = await getComponentSource(slug, exampleName, framework);
+    let sourceCode = await getComponentSource(slug, exampleName, framework);
 
     if (!sourceCode) {
       return NextResponse.json(
@@ -46,6 +47,10 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
         { status: 404 }
       );
     }
+
+    // Transform imports for shadcn CLI compatibility
+    // Transform @ocean-ui/react to @/components/ui/{componentSlug}
+    sourceCode = transformAllImports(sourceCode, slug);
 
     // Get dependencies for the framework
     const getDependencies = (fw: string): string[] => {
