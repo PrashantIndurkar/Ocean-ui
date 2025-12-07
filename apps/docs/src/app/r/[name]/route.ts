@@ -14,7 +14,6 @@ interface RouteParams {
  *
  * Serves static JSON files from the root public/r/ directory
  * This route matches requests like /r/registry.json and /r/accordion.json
- * before the dynamic route handler at /r/[frameworkCode]/[componentIndex]/[exampleIndex]/route.ts
  *
  * URL format: /r/{name}.json
  *

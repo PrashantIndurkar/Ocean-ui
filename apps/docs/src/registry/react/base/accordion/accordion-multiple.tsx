@@ -9,7 +9,11 @@ import {
 
 export default function AccordionDemo() {
   return (
-    <Accordion defaultValue={[]} multiple={true}>
+    <Accordion
+      className="w-full max-w-sm mx-auto"
+      defaultValue={[]}
+      multiple={true}
+    >
       <AccordionItem value="item-1">
         <AccordionTrigger>
           How do I update my account information?
