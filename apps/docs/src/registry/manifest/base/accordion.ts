@@ -6,6 +6,18 @@ const manifest: ComponentManifest = {
       name: "accordion-demo",
       title: "Basic Accordion",
     },
+    {
+      name: "accordion-multiple",
+      title: "Multiple Items Open",
+    },
+    {
+      name: "accordion-collapsible",
+      title: "Collapsible",
+    },
+    {
+      name: "accordion-with-loader",
+      title: "With Loader Icon",
+    },
   ],
 };
 

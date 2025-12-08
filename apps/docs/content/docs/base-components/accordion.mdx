@@ -23,85 +23,51 @@ description: A vertically stacked set of interactive headings that each reveal a
 
 <CodeBlockCommand component="accordion" registry="@ocean-ui" />
 
-<Note>
-  The component code installed via the shadcn CLI comes from the Ocean UI React
-  package (`@ocean-ui/react`). The shadcn CLI will automatically handle
-  dependencies, CSS variables, and animations when you install the component.
-</Note>
-
 <Divider />
 
 ## Overview
 
 The Accordion component allows users to toggle the display of sections of content. It's built with Ark UI primitives and styled with Tailwind CSS for a modern, accessible experience.
 
-## Features
+## Anatomy
 
-- **Accessible**: Built on Ark UI with full keyboard navigation and ARIA support
-- **Customizable**: Styled with Tailwind CSS utility classes
-- **Type-safe**: Full TypeScript support
-- **Flexible**: Supports single or multiple open items
+<DocImage
+  lightSrc="/images/accordion-light.png"
+  darkSrc="/images/accordion-dark.png"
+  alt="Accordion Anatomy"
+/>
 
-## Props
+The accordion consists of the following parts:
 
-### Accordion (Root)
+- **root**: The main container wrapping all accordion items
+- **item**: An individual collapsible section
+- **item trigger**: The clickable header that toggles the item's visibility
+- **item indicator**: The icon (typically a chevron) that shows the open/closed state
+- **item content**: The collapsible content area that expands and collapses
 
-The root component that wraps all accordion items.
-
-- `defaultValue` - Array of item values that should be open by default
-- `value` - Controlled value (array of open item values)
-- `onValueChange` - Callback when value changes
-- `collapsible` - Whether items can be collapsed (default: `true`)
-- `multiple` - Whether multiple items can be open at once (default: `false`)
-
-### AccordionItem
-
-An individual accordion item.
-
-- `value` - Unique value for this item (required)
-- `disabled` - Whether the item is disabled
-
-### AccordionTrigger
-
-The clickable trigger for an accordion item.
-
-- `asChild` - Render as child element
-- All standard button props
-
-### AccordionContent
-
-The expandable content area.
-
-- `asChild` - Render as child element
-- All standard div props
+<Divider />
 
 ## Examples
-
-### Basic Accordion
-
-The simplest accordion with default styling.
 
 ### Multiple Items Open
 
 Set `multiple={true}` to allow multiple items to be open simultaneously.
 
-### Disabled Item
+<ComponentPreview name="accordion" example="accordion-multiple" />
 
-Use the `disabled` prop on `AccordionItem` to disable specific items.
+<Divider className="my-12" />
 
-## Accessibility
+### Collapsible
 
-The Accordion component follows WAI-ARIA guidelines:
+Use the `collapsible` prop to allow the user to collapse all panels.
 
-- Keyboard navigation (Enter, Space, Arrow keys)
-- ARIA attributes for screen readers
-- Focus management
-- Proper heading hierarchy
+<ComponentPreview name="accordion" example="accordion-collapsible" />
 
-## Styling
+<Divider className="my-12" />
 
-The component uses Tailwind CSS utility classes. You can customize the appearance by:
+### With Loader Icon
 
-- Overriding className props
-- Using CSS variables from the design tokens
-- Extending the component styles
+Add an animated loader icon to indicate active accordion items. The loader spins infinitely when an item is open and displays in a theme-aware color (white/black based on theme). When closed, it shows in a muted grayish color.
+
+<ComponentPreview name="accordion" example="accordion-with-loader" />
+<Divider className="my-12" />

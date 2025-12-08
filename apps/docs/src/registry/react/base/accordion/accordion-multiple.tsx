@@ -10,7 +10,7 @@ import {
 export default function AccordionDemo() {
   return (
     <Accordion
-      className="w-full max-w-sm mx-auto"
+      className="w-full max-w-lg mx-auto"
       defaultValue={[]}
       multiple={true}
     >

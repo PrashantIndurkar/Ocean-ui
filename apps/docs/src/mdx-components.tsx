@@ -12,6 +12,8 @@ import { DocText } from "./components/doc-text";
 import { MDXCodeBlockClient } from "./components/mdx-code-block-client";
 import { Note } from "./components/note";
 import { TechStackCard } from "./components/tech-stack-card";
+import { ThemeImage } from "./components/theme-image";
+import { DocImage } from "./components/doc-image";
 import { ArkUiIcon } from "./components/icons/ark-ui-icon";
 import { ZagIcon } from "./components/icons/zag-icon";
 import { TailwindCssIcon } from "./components/icons/tailwind-css-icon";
@@ -64,6 +66,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     DocText,
     Note,
     TechStackCard,
+    ThemeImage,
+    DocImage,
     ArkUiIcon,
     ZagIcon,
     TailwindCssIcon,

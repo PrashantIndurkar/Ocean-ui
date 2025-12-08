@@ -49,15 +49,23 @@ const getShadcnInstallationCommand = (
   registry: string,
   component: string
 ) => {
+  // Convert registry identifier to full URL if needed
+  // @ocean-ui -> https://components.prashantindurkar.in/r/{component}.json
+  const registryUrl = registry.startsWith("@")
+    ? `https://components.prashantindurkar.in/r/${component}.json`
+    : registry.includes("/")
+      ? `${registry}/${component}.json`
+      : `${registry}/${component}`;
+
   switch (packageManager) {
     case "pnpm":
-      return `pnpm dlx shadcn@latest add ${registry}/${component}`;
+      return `pnpm dlx shadcn@latest add ${registryUrl}`;
     case "npm":
-      return `npx shadcn@latest add ${registry}/${component}`;
+      return `npx shadcn@latest add ${registryUrl}`;
     case "yarn":
-      return `yarn dlx shadcn@latest add ${registry}/${component}`;
+      return `yarn dlx shadcn@latest add ${registryUrl}`;
     case "bun":
-      return `bunx shadcn@latest add ${registry}/${component}`;
+      return `bunx shadcn@latest add ${registryUrl}`;
   }
 };
 
