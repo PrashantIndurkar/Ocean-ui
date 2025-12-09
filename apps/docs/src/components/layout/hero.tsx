@@ -78,7 +78,7 @@ export default function Hero() {
             text={{
               idle: "Browse Component",
               saving: "Loading Components...",
-              saved: "Loaded Components!",
+              saved: "Showing Components!",
             }}
           />
         </motion.div>

@@ -64,7 +64,7 @@ export function LoadComponentButton({
           shapes: ["star", "circle"],
         });
         setTimeout(() => {
-          router.push("/docs/components");
+          router.push("/docs/base-components/accordion");
         }, 2000);
       } catch (error) {
         setStatus("idle");

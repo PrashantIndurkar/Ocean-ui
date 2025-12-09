@@ -78,12 +78,12 @@ const Navbar1 = () => {
             transition={{ duration: 0.3, delay: 0.1 }}
             whileHover={{ scale: 1.05 }}
           >
-            <a
-              href="#"
+            <Link
+              href="/docs/base-components/accordion"
               className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
             >
               Components
-            </a>
+            </Link>
           </motion.div>
         </nav>
         {/* Desktop CTA Button, GitHub Icon and Theme Toggle */}
@@ -180,13 +180,13 @@ const Navbar1 = () => {
                 transition={{ delay: 0.3 }}
                 exit={{ opacity: 0, x: 20 }}
               >
-                <a
-                  href="#"
+                <Link
+                  href="/docs/base-components/accordion"
                   className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
                   onClick={toggleMenu}
                 >
                   Components
-                </a>
+                </Link>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
