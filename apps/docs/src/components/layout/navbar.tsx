@@ -15,7 +15,7 @@ import { GithubIcon } from "@/components/icons/github-icon";
 const Navbar1 = () => {
   const [isOpen, setIsOpen] = useState(false);
   // TODO: Fetch from GitHub API later
-  const [starCount] = useState(0);
+  const [starCount] = useState(1);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
