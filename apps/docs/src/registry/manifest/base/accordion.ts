@@ -22,6 +22,10 @@ const manifest: ComponentManifest = {
       name: "accordion-with-icons",
       title: "With Plus/Minus Icons",
     },
+    {
+      name: "accordion-faq",
+      title: "FAQ with Icons",
+    },
   ],
 };
 

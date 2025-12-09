@@ -20,11 +20,12 @@ function AccordionTriggerWithLoader({
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         "disabled:pointer-events-none disabled:opacity-50",
         "[&[data-state=open]>.accordion-chevron]:rotate-180",
-        // Style Loader when parent is open: animate and change color
-        "[&[data-state=open]>.accordion-loader]:animate-spin",
+        // Style Loader when parent is open: animate and change color, use slower spin
+        "[&[data-state=open]>.accordion-loader]:animate-spin [&[data-state=open]>.accordion-loader]:[animation-duration:1.5s]",
         "[&[data-state=open]>.accordion-loader]:text-brand-primary",
         // Style Loader when parent is closed: muted color, no animation
-        "[&[data-state=closed]>.accordion-loader]:text-brand-quaternary",
+        "[&[data-state=closed]>.accordion-loader]:text-brand-quaternary/60",
+        "data-[state=closed]:text-primary/60 data-[state=closed]:hover:text-primary data-[state=open]:text-primary",
         className
       )}
       {...props}
@@ -42,45 +43,42 @@ function AccordionTriggerWithLoader({
   );
 }
 
+const accordionItems = [
+  {
+    value: "item-1",
+    title: "Set up shipping options",
+    content:
+      "Configure multiple shipping methods to meet your customers' needs. Set up local and international delivery options, define shipping zones, and create flexible pricing rules. Integrate with popular carriers for real-time rates and tracking capabilities.",
+  },
+  {
+    value: "item-2",
+    title: "Configure tax settings",
+    content:
+      "Set up tax calculations for different regions and product categories. Configure automatic tax calculation based on customer location, manage tax exemptions, and integrate with tax services for accurate compliance.",
+  },
+  {
+    value: "item-3",
+    title: "Manage payment methods",
+    content:
+      "Enable and configure various payment gateways including credit cards, digital wallets, and bank transfers. Set up payment processing rules, handle refunds, and manage payment security settings.",
+  },
+];
+
 export default function AccordionWithLoader() {
   return (
     <Accordion
       className="w-full max-w-lg mx-auto"
-      defaultValue={["item-1"]}
+      defaultValue={[accordionItems[0].value]}
       collapsible
     >
-      <AccordionItem value="item-1">
-        <AccordionTriggerWithLoader>
-          Set up shipping options
-        </AccordionTriggerWithLoader>
-        <AccordionContent hasIcon>
-          Configure multiple shipping methods to meet your customers&apos;
-          needs. Set up local and international delivery options, define
-          shipping zones, and create flexible pricing rules. Integrate with
-          popular carriers for real-time rates and tracking capabilities.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTriggerWithLoader>
-          Configure tax settings
-        </AccordionTriggerWithLoader>
-        <AccordionContent hasIcon>
-          Set up tax calculations for different regions and product categories.
-          Configure automatic tax calculation based on customer location, manage
-          tax exemptions, and integrate with tax services for accurate
-          compliance.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTriggerWithLoader>
-          Manage payment methods
-        </AccordionTriggerWithLoader>
-        <AccordionContent hasIcon>
-          Enable and configure various payment gateways including credit cards,
-          digital wallets, and bank transfers. Set up payment processing rules,
-          handle refunds, and manage payment security settings.
-        </AccordionContent>
-      </AccordionItem>
+      {accordionItems.map((item) => (
+        <AccordionItem key={item.value} value={item.value}>
+          <AccordionTriggerWithLoader>{item.title}</AccordionTriggerWithLoader>
+          <AccordionContent className="pl-5 text-tertiary">
+            {item.content}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 }

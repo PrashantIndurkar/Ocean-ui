@@ -40,6 +40,7 @@ function AccordionTrigger({
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         "disabled:pointer-events-none disabled:opacity-50",
         "[&[data-state=open]>.accordion-chevron]:rotate-180",
+        "data-[state=closed]:text-primary/60 data-[state=closed]:hover:text-primary data-[state=open]:text-primary",
         className
       )}
       {...props}
@@ -53,11 +54,8 @@ function AccordionTrigger({
 function AccordionContent({
   className,
   children,
-  hasIcon = false,
   ...props
-}: ComponentProps<typeof AccordionPrimitive.ItemContent> & {
-  hasIcon?: boolean;
-}) {
+}: ComponentProps<typeof AccordionPrimitive.ItemContent>) {
   return (
     <AccordionPrimitive.ItemContent
       className={cn(
@@ -72,12 +70,7 @@ function AccordionContent({
       )}
       {...props}
     >
-      <div
-        style={{ color: "var(--text-color-tertiary)" }}
-        className={cn("min-h-0 pb-4 pt-0", hasIcon && "pl-9", className)}
-      >
-        {children}
-      </div>
+      <div className={cn("pb-4", className)}>{children}</div>
     </AccordionPrimitive.ItemContent>
   );
 }
