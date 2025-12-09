@@ -53,8 +53,11 @@ function AccordionTrigger({
 function AccordionContent({
   className,
   children,
+  hasIcon = false,
   ...props
-}: ComponentProps<typeof AccordionPrimitive.ItemContent>) {
+}: ComponentProps<typeof AccordionPrimitive.ItemContent> & {
+  hasIcon?: boolean;
+}) {
   return (
     <AccordionPrimitive.ItemContent
       className={cn(
@@ -69,7 +72,12 @@ function AccordionContent({
       )}
       {...props}
     >
-      <div className="min-h-0 pb-4 pt-0">{children}</div>
+      <div
+        style={{ color: "var(--text-color-tertiary)" }}
+        className={cn("min-h-0 pb-4 pt-0", hasIcon && "pl-9", className)}
+      >
+        {children}
+      </div>
     </AccordionPrimitive.ItemContent>
   );
 }

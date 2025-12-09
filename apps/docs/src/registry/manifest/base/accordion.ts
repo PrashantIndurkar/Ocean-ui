@@ -18,6 +18,10 @@ const manifest: ComponentManifest = {
       name: "accordion-with-loader",
       title: "With Loader Icon",
     },
+    {
+      name: "accordion-with-icons",
+      title: "With Plus/Minus Icons",
+    },
   ],
 };
 

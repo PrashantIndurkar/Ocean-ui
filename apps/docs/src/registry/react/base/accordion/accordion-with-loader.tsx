@@ -53,7 +53,7 @@ export default function AccordionWithLoader() {
         <AccordionTriggerWithLoader>
           Set up shipping options
         </AccordionTriggerWithLoader>
-        <AccordionContent>
+        <AccordionContent hasIcon>
           Configure multiple shipping methods to meet your customers&apos;
           needs. Set up local and international delivery options, define
           shipping zones, and create flexible pricing rules. Integrate with
@@ -64,7 +64,7 @@ export default function AccordionWithLoader() {
         <AccordionTriggerWithLoader>
           Configure tax settings
         </AccordionTriggerWithLoader>
-        <AccordionContent>
+        <AccordionContent hasIcon>
           Set up tax calculations for different regions and product categories.
           Configure automatic tax calculation based on customer location, manage
           tax exemptions, and integrate with tax services for accurate
@@ -75,7 +75,7 @@ export default function AccordionWithLoader() {
         <AccordionTriggerWithLoader>
           Manage payment methods
         </AccordionTriggerWithLoader>
-        <AccordionContent>
+        <AccordionContent hasIcon>
           Enable and configure various payment gateways including credit cards,
           digital wallets, and bank transfers. Set up payment processing rules,
           handle refunds, and manage payment security settings.

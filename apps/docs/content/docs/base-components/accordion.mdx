@@ -25,6 +25,19 @@ description: A vertically stacked set of interactive headings that each reveal a
 
 <Divider />
 
+## Features
+
+- Beautifully designed with Tailwind CSS
+- Micro-animated for delightful interactions
+- Fully keyboard-accessible
+- Vertical and horizontal layouts
+- Works with RTL languages
+- Single or multiple items open
+- Control state yourself or let it be automatic
+- Any panel can be collapsed
+
+<Divider />
+
 ## Overview
 
 The Accordion component allows users to toggle the display of sections of content. It's built with Ark UI primitives and styled with Tailwind CSS for a modern, accessible experience.
@@ -70,4 +83,12 @@ Use the `collapsible` prop to allow the user to collapse all panels.
 Add an animated loader icon to indicate active accordion items. The loader spins infinitely when an item is open and displays in a theme-aware color (white/black based on theme). When closed, it shows in a muted grayish color.
 
 <ComponentPreview name="accordion" example="accordion-with-loader" />
+
+<Divider className="my-12" />
+
+### With Plus/Minus Icons
+
+Display Plus and Minus icons from lucide-react to indicate the accordion state. The Plus icon appears when an item is closed, and the Minus icon appears when an item is open. Both icons are positioned on the left side of the title, with a chevron icon on the right side.
+
+<ComponentPreview name="accordion" example="accordion-with-icons" />
 <Divider className="my-12" />
