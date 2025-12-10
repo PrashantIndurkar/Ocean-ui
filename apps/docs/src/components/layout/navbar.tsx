@@ -2,29 +2,59 @@
 
 import * as React from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 
-import { Menu, X } from "lucide-react";
+import { Menu, X, GitFork } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { WavesIcon } from "@/components/icons/waves-icon";
 import { GithubIcon } from "@/components/icons/github-icon";
 
 const Navbar1 = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // TODO: Fetch from GitHub API later
-  const [starCount] = useState(1);
+  const [starCount, setStarCount] = useState(0);
+  const [forkCount, setForkCount] = useState(0);
+  const [showStars, setShowStars] = useState(true);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const formatStarCount = (count: number): string => {
+  const formatCount = (count: number): string => {
     if (count >= 1000) {
       return `${(count / 1000).toFixed(1)}k`;
     }
     return count.toString();
   };
+
+  // Fetch GitHub stats on component mount
+  useEffect(() => {
+    const fetchGitHubStats = async () => {
+      try {
+        const response = await fetch(
+          "https://api.github.com/repos/PrashantIndurkar/Ocean-ui"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setStarCount(data.stargazers_count || 0);
+          setForkCount(data.forks_count || 0);
+        }
+      } catch (error) {
+        // Silent error handling - component continues with default values
+      }
+    };
+
+    fetchGitHubStats();
+  }, []);
+
+  // Toggle between stars and forks every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowStars((prev) => !prev);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-center w-full py-6 px-4 z-50">
@@ -100,12 +130,49 @@ const Navbar1 = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-fg-primary hover:text-text-tertiary transition-colors"
-              aria-label="View on GitHub"
+              aria-label={
+                showStars
+                  ? `View on GitHub - ${formatCount(starCount)} stars`
+                  : `View on GitHub - ${formatCount(forkCount)} forks`
+              }
             >
-              <GithubIcon size={20} />
-              <span className="text-sm font-medium text-text-tertiary">
-                {formatStarCount(starCount)}
-              </span>
+              <AnimatePresence mode="wait">
+                {showStars ? (
+                  <motion.div
+                    key="star-icon"
+                    className="inline-flex items-center"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <GithubIcon size={20} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="fork-icon"
+                    className="inline-flex items-center"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <GitFork size={20} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={showStars ? "stars" : "forks"}
+                  className="text-sm font-medium text-text-tertiary"
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {formatCount(showStars ? starCount : forkCount)}
+                </motion.span>
+              </AnimatePresence>
             </a>
           </motion.div>
           <motion.div
@@ -201,13 +268,50 @@ const Navbar1 = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-fg-primary hover:text-text-tertiary transition-colors"
-                    aria-label="View on GitHub"
+                    aria-label={
+                      showStars
+                        ? `View on GitHub - ${formatCount(starCount)} stars`
+                        : `View on GitHub - ${formatCount(forkCount)} forks`
+                    }
                     onClick={toggleMenu}
                   >
-                    <GithubIcon size={20} />
-                    <span className="text-sm font-medium text-text-tertiary">
-                      {formatStarCount(starCount)}
-                    </span>
+                    <AnimatePresence mode="wait">
+                      {showStars ? (
+                        <motion.div
+                          key="star-icon"
+                          className="inline-flex items-center"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.8 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <GithubIcon size={20} />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="fork-icon"
+                          className="inline-flex items-center"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.8 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <GitFork size={20} />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={showStars ? "stars" : "forks"}
+                        className="text-sm font-medium text-text-tertiary"
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {formatCount(showStars ? starCount : forkCount)}
+                      </motion.span>
+                    </AnimatePresence>
                   </a>
                   <ThemeToggle />
                 </div>
