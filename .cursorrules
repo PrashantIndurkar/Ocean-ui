@@ -1,11 +1,4 @@
----
-title: Component Building Guide
-description: A comprehensive checklist and guide for building new Ocean UI components
----
-
-# Component Building Guide
-
-This guide provides a step-by-step checklist for building new Ocean UI components that follow the copy-paste library pattern.
+# Ocean UI Component Building Guide
 
 ## Overview
 
@@ -17,8 +10,6 @@ Ocean UI follows a **copy-paste component library** pattern (like shadcn/ui and 
 - Built on top of Ark UI primitives
 
 ## Component Structure Template
-
-Here's the standard structure for a new component:
 
 ```tsx
 "use client";
@@ -59,10 +50,10 @@ export { ComponentName, ComponentSubPart };
 
 ### 1. Import Patterns ✓
 
-- [ ] **Use `@/lib/utils`** - Never use `@ocean-ui/utils` in component source files
-- [ ] Import Ark UI primitives: `@ark-ui/react/{component-name}`
-- [ ] Import icons from `lucide-react` (or `lucide-solid` for Solid components)
-- [ ] Use `"use client"` directive for React components that need client-side features
+- **Use `@/lib/utils`** - Never use `@ocean-ui/utils` in component source files
+- Import Ark UI primitives: `@ark-ui/react/{component-name}`
+- Import icons from `lucide-react` (or `lucide-solid` for Solid components)
+- Use `"use client"` directive for React components that need client-side features
 
 **Correct:**
 
@@ -78,10 +69,10 @@ import { cn } from "@ocean-ui/utils";
 
 ### 2. TypeScript Typing ✓
 
-- [ ] Use `ComponentProps<typeof ComponentPrimitive.Root>` for type safety
-- [ ] Alternatively, use `ComponentPrimitive.Root.Props` (more type-safe, like basecn)
-- [ ] Always include `className` prop for customization
-- [ ] Spread `...props` to pass through all primitive props
+- Use `ComponentProps<typeof ComponentPrimitive.Root>` for type safety
+- Alternatively, use `ComponentPrimitive.Root.Props` (more type-safe, like basecn)
+- Always include `className` prop for customization
+- Spread `...props` to pass through all primitive props
 
 **Example:**
 
@@ -96,10 +87,10 @@ function Accordion({
 
 ### 3. Styling with `cn` Utility ✓
 
-- [ ] Always use `cn()` for className merging
-- [ ] Put base styles first, then `className` prop
-- [ ] Use Tailwind CSS classes
-- [ ] Support dark mode with `dark:` variants where needed
+- Always use `cn()` for className merging
+- Put base styles first, then `className` prop
+- Use Tailwind CSS classes
+- Support dark mode with `dark:` variants where needed
 
 **Example:**
 
@@ -114,10 +105,10 @@ className={cn(
 
 ### 4. Component Structure ✓
 
-- [ ] Export all sub-components separately
-- [ ] Keep components small and focused
-- [ ] Use semantic HTML where possible
-- [ ] Follow accessibility best practices
+- Export all sub-components separately
+- Keep components small and focused
+- Use semantic HTML where possible
+- Follow accessibility best practices
 
 ### 5. Optional: Data Attributes ✓
 
@@ -135,32 +126,32 @@ Consider adding `data-slot` attributes for better styling hooks (optional, but r
 
 Before submitting a component:
 
-- [ ] Component renders without errors
-- [ ] All props are properly typed
-- [ ] `className` prop works for customization
-- [ ] Component is accessible (keyboard navigation, ARIA attributes)
-- [ ] Works in both light and dark mode
-- [ ] Responsive on mobile and desktop
-- [ ] No console errors or warnings
+- Component renders without errors
+- All props are properly typed
+- `className` prop works for customization
+- Component is accessible (keyboard navigation, ARIA attributes)
+- Works in both light and dark mode
+- Responsive on mobile and desktop
+- No console errors or warnings
 
 ### 7. CLI Integration ✓
 
 After creating the component:
 
-- [ ] Place component in `packages/ui-react/src/components/base/{component-name}.tsx`
-- [ ] Run `pnpm build` in the CLI package to copy component to CLI
-- [ ] Test CLI installation: `npx @ocean-ui/cli add {component-name}`
-- [ ] Verify imports are transformed correctly (`@/lib/utils`)
-- [ ] Verify utils file is created if missing
-- [ ] Verify dependencies are extracted correctly
+- Place component in `packages/ui-react/src/components/base/{component-name}.tsx`
+- Run `pnpm build` in the CLI package to copy component to CLI
+- Test CLI installation: `npx @ocean-ui/cli add {component-name}`
+- Verify imports are transformed correctly (`@/lib/utils`)
+- Verify utils file is created if missing
+- Verify dependencies are extracted correctly
 
 ### 8. Documentation ✓
 
-- [ ] Add component to component list in docs
-- [ ] Create component documentation page
-- [ ] Add usage examples
-- [ ] Document all props and variants
-- [ ] Include accessibility notes
+- Add component to component list in docs
+- Create component documentation page
+- Add usage examples
+- Document all props and variants
+- Include accessibility notes
 
 ## Copy-Paste Friendly Patterns
 
@@ -180,9 +171,27 @@ After creating the component:
 - Don't hardcode values that should be customizable
 - Don't skip accessibility features
 
-## Example: Complete Component
+## File Location
 
-Here's a complete example following all best practices:
+```
+packages/ui-react/src/components/base/{component-name}.tsx
+```
+
+## Required Imports
+
+```tsx
+import { ComponentName as ComponentPrimitive } from "@ark-ui/react/component-name";
+import { cn } from "@/lib/utils";
+import type { ComponentProps } from "react";
+```
+
+## Export Pattern
+
+```tsx
+export { ComponentName, ComponentSubPart1, ComponentSubPart2 };
+```
+
+## Complete Example
 
 ```tsx
 "use client";
@@ -261,34 +270,3 @@ function AccordionContent({
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
 ```
-
-## Quick Reference
-
-### File Location
-
-```
-packages/ui-react/src/components/base/{component-name}.tsx
-```
-
-### Required Imports
-
-```tsx
-import { ComponentName as ComponentPrimitive } from "@ark-ui/react/component-name";
-import { cn } from "@/lib/utils";
-import type { ComponentProps } from "react";
-```
-
-### Export Pattern
-
-```tsx
-export { ComponentName, ComponentSubPart1, ComponentSubPart2 };
-```
-
-## Next Steps
-
-1. Review existing components for patterns
-2. Follow this checklist for each new component
-3. Test thoroughly before submitting
-4. Update documentation
-
-For questions or help, refer to the [Installation Guide](/docs/documentation/how-to-install) or check existing component implementations.
