@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 
 import { GLSLHills } from "@/components/graphics/glsl-hills";
 import { LoadComponentButton } from "@/components/ui/load-component-button";
+import { DevelopmentStatusBadge } from "@/components/ui/development-status-badge";
 import { ReactJsIcon } from "@/components/icons/react-icon";
 import { VueJsIcon } from "@/components/icons/vue-icon";
 import { SolidJsIcon } from "@/components/icons/solidjs-icon";
@@ -48,6 +49,13 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
+        <motion.div
+          className="flex justify-center mb-4 sm:mb-6"
+          variants={itemVariants}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <DevelopmentStatusBadge text="Pre-alpha stage" />
+        </motion.div>
         <motion.h1
           className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight whitespace-pre-wrap bg-clip-text text-transparent mb-6 sm:mb-8 md:mb-10"
           style={{
