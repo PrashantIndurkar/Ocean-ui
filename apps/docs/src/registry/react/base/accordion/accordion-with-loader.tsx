@@ -1,45 +1,22 @@
 "use client";
 
-import { Accordion as AccordionPrimitive } from "@ark-ui/react/accordion";
-import { Loader, ChevronDownIcon } from "lucide-react";
-import type { ComponentProps } from "react";
+import { Loader } from "lucide-react";
 
-import { Accordion, AccordionContent, AccordionItem } from "@ocean-ui/react";
-import { cn } from "@/lib/utils";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@ocean-ui/react";
 
-function AccordionTriggerWithLoader({
-  className,
-  children,
-  ...props
-}: ComponentProps<typeof AccordionPrimitive.ItemTrigger>) {
+/**
+ * Renders a loader icon that spins when the accordion is open.
+ *
+ * @returns The loader icon component styled appropriately for the left side of the trigger.
+ */
+function AccordionLoaderLeftIcon() {
   return (
-    <AccordionPrimitive.ItemTrigger
-      className={cn(
-        "group flex w-full items-center gap-4 py-4 text-left cursor-pointer text-sm font-medium transition-all outline-none",
-        "hover:underline",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        "disabled:pointer-events-none disabled:opacity-50",
-        "[&[data-state=open]>.accordion-chevron]:rotate-180",
-        // Style Loader when parent is open: animate and change color, use slower spin
-        "[&[data-state=open]>.accordion-loader]:animate-spin [&[data-state=open]>.accordion-loader]:[animation-duration:1.5s]",
-        "[&[data-state=open]>.accordion-loader]:text-brand-primary",
-        // Style Loader when parent is closed: muted color, no animation
-        "[&[data-state=closed]>.accordion-loader]:text-brand-quaternary/60",
-        "data-[state=closed]:text-primary/60 data-[state=closed]:hover:text-primary data-[state=open]:text-primary",
-        className
-      )}
-      {...props}
-    >
-      <Loader
-        className={cn(
-          "accordion-loader size-5 shrink-0 transition-colors duration-200",
-          // Default to muted when state is not yet determined
-          "text-secondary"
-        )}
-      />
-      <span className="flex-1">{children}</span>
-      <ChevronDownIcon className="accordion-chevron text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 ml-auto" />
-    </AccordionPrimitive.ItemTrigger>
+    <Loader className="size-5 shrink-0 transition-colors duration-200 text-secondary [.group[data-state=open]_&]:animate-spin [.group[data-state=open]_&]:[animation-duration:1.5s] [.group[data-state=open]_&]:text-brand-primary [.group[data-state=closed]_&]:text-brand-quaternary/60" />
   );
 }
 
@@ -73,7 +50,9 @@ export default function AccordionWithLoader() {
     >
       {accordionItems.map((item) => (
         <AccordionItem key={item.value} value={item.value}>
-          <AccordionTriggerWithLoader>{item.title}</AccordionTriggerWithLoader>
+          <AccordionTrigger leftIcon={<AccordionLoaderLeftIcon />}>
+            {item.title}
+          </AccordionTrigger>
           <AccordionContent className="pl-5 text-tertiary">
             {item.content}
           </AccordionContent>

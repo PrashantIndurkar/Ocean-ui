@@ -2,7 +2,7 @@
 
 import { Accordion as AccordionPrimitive } from "@ark-ui/react/accordion";
 import { ChevronDownIcon } from "lucide-react";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -27,11 +27,26 @@ function AccordionItem({
   );
 }
 
+interface AccordionTriggerProps
+  extends ComponentProps<typeof AccordionPrimitive.ItemTrigger> {
+  /**
+   * Optional icon or content to display on the left side
+   */
+  leftIcon?: ReactNode;
+  /**
+   * Optional icon or content to display on the right side
+   * If not provided, defaults to ChevronDownIcon
+   */
+  rightIcon?: ReactNode;
+}
+
 function AccordionTrigger({
   className,
   children,
+  leftIcon,
+  rightIcon,
   ...props
-}: ComponentProps<typeof AccordionPrimitive.ItemTrigger>) {
+}: AccordionTriggerProps) {
   return (
     <AccordionPrimitive.ItemTrigger
       className={cn(
@@ -45,8 +60,18 @@ function AccordionTrigger({
       )}
       {...props}
     >
+      {/* Left Icon Slot */}
+      {leftIcon}
+
+      {/* Title/Content */}
       <span className="flex-1">{children}</span>
-      <ChevronDownIcon className="accordion-chevron text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 ml-auto" />
+
+      {/* Right Icon Slot */}
+      {rightIcon ? (
+        <span className="ml-auto">{rightIcon}</span>
+      ) : (
+        <ChevronDownIcon className="accordion-chevron text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 ml-auto" />
+      )}
     </AccordionPrimitive.ItemTrigger>
   );
 }

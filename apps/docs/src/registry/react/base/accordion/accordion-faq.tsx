@@ -1,6 +1,5 @@
 "use client";
 
-import { Accordion as AccordionPrimitive } from "@ark-ui/react/accordion";
 import {
   UserRound,
   CreditCard,
@@ -8,39 +7,44 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
-import type { ComponentProps } from "react";
 
-import { Accordion, AccordionContent, AccordionItem } from "@ocean-ui/react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@ocean-ui/react";
 import { cn } from "@/lib/utils";
+import type { LucideIcon } from "lucide-react";
 
-function AccordionTriggerFAQ({
-  className,
-  children,
-  icon: Icon,
-  ...props
-}: ComponentProps<typeof AccordionPrimitive.ItemTrigger> & {
-  icon: React.ComponentType<{ className?: string }>;
-}) {
+interface AccordionItemIconProps {
+  icon: LucideIcon;
+}
+
+/**
+ * Renders the left icon for an accordion item.
+ *
+ * @param icon - A Lucide icon component to display on the left.
+ * @returns The icon component styled appropriately.
+ */
+function AccordionItemLeftIcon({ icon: Icon }: AccordionItemIconProps) {
   return (
-    <AccordionPrimitive.ItemTrigger
-      className={cn(
-        "group flex w-full items-center gap-4 py-4 px-4 text-left cursor-pointer text-sm font-medium transition-all duration-200 ease-out outline-none",
-        "bg-muted data-[state=closed]:hover:bg-quaternary/40",
-        "data-[state=open]:bg-background",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        "disabled:pointer-events-none disabled:opacity-50",
-        "[&[data-state=open]>.accordion-plus-icon]:hidden",
-        "[&[data-state=closed]>.accordion-minus-icon]:hidden",
-        "data-[state=closed]:hover:text-primary",
-        className
-      )}
-      {...props}
-    >
-      <Icon className="size-5 shrink-0 text-primary/40 transition duration-200 [.group[data-state=closed]:hover_&]:text-primary [.group[data-state=open]_&]:text-primary" />
-      <span className="flex-1">{children}</span>
-      <Plus className="accordion-plus-icon size-5 shrink-0 text-secondary transition-opacity duration-200" />
-      <Minus className="accordion-minus-icon size-5 shrink-0 text-secondary transition-opacity duration-200" />
-    </AccordionPrimitive.ItemTrigger>
+    <Icon className="size-5 shrink-0 text-primary/40 transition duration-200 [.group[data-state=closed]:hover_&]:text-primary [.group[data-state=open]_&]:text-primary" />
+  );
+}
+
+/**
+ * Shows a plus icon when the accordion is closed
+ * and a minus icon when the accordion is open.
+ *
+ * @returns The toggle icon to display on the right of the trigger.
+ */
+function AccordionToggleRightIcon() {
+  return (
+    <>
+      <Plus className="accordion-plus-icon size-5 shrink-0 text-secondary transition-opacity duration-200 [.group[data-state=open]_&]:hidden" />
+      <Minus className="accordion-minus-icon size-5 shrink-0 text-secondary transition-opacity duration-200 [.group[data-state=closed]_&]:hidden" />
+    </>
   );
 }
 
@@ -84,14 +88,16 @@ export default function AccordionFAQ() {
             index === accordionItems.length - 1 && "border-b-0"
           )}
         >
-          <AccordionTriggerFAQ
+          <AccordionTrigger
+            leftIcon={<AccordionItemLeftIcon icon={item.icon} />}
+            rightIcon={<AccordionToggleRightIcon />}
             className={cn(
-              "data-[state=closed]:text-primary/60 data-[state=open]:text-primary"
+              "px-4 bg-muted data-[state=closed]:hover:bg-quaternary/40 data-[state=open]:bg-background",
+              "data-[state=closed]:text-primary/60 data-[state=open]:text-primary data-[state=closed]:hover:text-primary"
             )}
-            icon={item.icon}
           >
             {item.title}
-          </AccordionTriggerFAQ>
+          </AccordionTrigger>
           <AccordionContent className="pl-7 pr-5 text-tertiary">
             {item.content}
           </AccordionContent>
