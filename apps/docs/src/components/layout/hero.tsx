@@ -57,7 +57,7 @@ export default function Hero() {
           <DevelopmentStatusBadge text="Pre-alpha stage" />
         </motion.div>
         <motion.h1
-          className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] tracking-tight whitespace-pre-wrap bg-clip-text text-transparent mb-6 sm:mb-8 md:mb-10"
+          className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.2] tracking-tight whitespace-pre-wrap bg-clip-text text-transparent mb-6 sm:mb-8 md:mb-10 pb-1"
           style={{
             backgroundImage:
               "linear-gradient(to bottom, var(--color-fg-primary) 0%, var(--color-fg-primary) 50%, var(--color-text-tertiary) 70%, var(--color-text-tertiary) 100%)",
