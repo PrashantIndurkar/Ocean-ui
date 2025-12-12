@@ -25,9 +25,17 @@ interface TabsProps {
    */
   items: TabItem[];
   /**
-   * Default selected tab value
+   * Default selected tab value (uncontrolled mode)
    */
   defaultValue?: string;
+  /**
+   * Controlled selected tab value (controlled mode)
+   */
+  value?: string;
+  /**
+   * Callback fired when tab value changes (controlled mode)
+   */
+  onValueChange?: (value: string) => void;
   /**
    * List container className
    */
@@ -64,6 +72,8 @@ const defaultTriggerClasses =
 export function Tabs({
   items,
   defaultValue,
+  value,
+  onValueChange,
   listClassName,
   triggerClassName,
   contentClassName,
@@ -71,10 +81,19 @@ export function Tabs({
   variant = "default",
 }: TabsProps) {
   const firstValue = items[0]?.value;
-  const selectedValue = defaultValue || firstValue;
+  
+  // Controlled mode: use value prop if provided
+  // Uncontrolled mode: use defaultValue or fallback to first item
+  const isControlled = value !== undefined;
+  const selectedValue = isControlled ? value : (defaultValue || firstValue);
 
   return (
-    <ArkTabs.Root defaultValue={selectedValue} className={className}>
+    <ArkTabs.Root
+      value={isControlled ? value : undefined}
+      defaultValue={isControlled ? undefined : selectedValue}
+      onValueChange={onValueChange}
+      className={className}
+    >
       <ArkTabs.List className={cn(defaultListClasses[variant], listClassName)}>
         {items.map((item) => (
           <ArkTabs.Trigger

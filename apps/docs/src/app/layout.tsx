@@ -2,6 +2,7 @@ import "./styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConditionalNavbar } from "@/components/layout/conditional-navbar";
 import { RootProvider } from "fumadocs-ui/provider/next";
+import { FrameworkProvider } from "@/contexts/framework-context";
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 
@@ -77,8 +78,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <ConditionalNavbar />
-            {children}
+            <FrameworkProvider>
+              <ConditionalNavbar />
+              {children}
+            </FrameworkProvider>
           </ThemeProvider>
         </RootProvider>
       </body>

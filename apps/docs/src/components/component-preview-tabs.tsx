@@ -9,6 +9,7 @@ import { ReactJsIcon } from "./icons/react-icon";
 import { SolidJsIcon } from "./icons/solidjs-icon";
 import { VueJsIcon } from "./icons/vue-icon";
 import { SvelteJSIcon } from "./icons/svelte-icon";
+import { useFramework } from "@/contexts/framework-context";
 
 const frameworks = [
   { value: "react", icon: ReactJsIcon },
@@ -33,11 +34,20 @@ export function ComponentPreviewTabs({
   center = true,
   constrainHeight = true,
 }: ComponentPreviewTabsProps) {
-  // Get the first available framework as default, or "react" if available
-  const defaultFramework =
+  const { framework, setFramework } = useFramework();
+
+  // Calculate active framework tab value based on framework hook
+  // Fallback to first available if selected framework not available
+  const activeFramework =
+    frameworkCodeBlocks.find((block) => block.value === framework)?.value ||
     frameworkCodeBlocks.find((block) => block.value === "react")?.value ||
     frameworkCodeBlocks[0]?.value ||
     "react";
+
+  // Handle framework tab change - update hook when user manually switches tabs
+  const handleFrameworkChange = (value: string) => {
+    setFramework(value as "react" | "solid" | "vue" | "svelte");
+  };
 
   // Create framework tabs content
   const codeContent =
@@ -57,7 +67,8 @@ export function ComponentPreviewTabs({
                 ),
               };
             })}
-            defaultValue={defaultFramework}
+            value={activeFramework}
+            onValueChange={handleFrameworkChange}
             variant="bordered"
             className="[&_figure]:mt-0"
           />
