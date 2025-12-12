@@ -16,6 +16,8 @@ const __dirname = dirname(__filename);
 /**
  * Transform component imports to use local paths
  * Replaces:
+ * - Relative component imports (../../../components/base/{component}) → @/components/ui/{componentSlug}
+ * - Relative utils imports (../../../lib/utils) → @/lib/utils
  * - @ocean-ui/react → @/components/ui/{componentSlug}
  * - @ocean-ui/utils → @/lib/utils
  *
@@ -28,6 +30,19 @@ export function transformComponentImports(
   componentSlug: string
 ): string {
   let transformed = content;
+
+  // Transform relative component imports first (e.g., ../../../components/base/accordion)
+  // Pattern handles various relative path depths and both quote types
+  transformed = transformed.replace(
+    /from\s+["']\.\.\/.*?components\/base\/[\w-]+["']/g,
+    `from "@/components/ui/${componentSlug}"`
+  );
+
+  // Transform relative utils imports (e.g., ../../../lib/utils)
+  transformed = transformed.replace(
+    /from\s+["']\.\.\/.*?lib\/utils["']/g,
+    'from "@/lib/utils"'
+  );
 
   // Transform @ocean-ui/react to @/components/ui/{componentSlug}
   transformed = transformed.replace(

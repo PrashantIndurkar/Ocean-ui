@@ -69,6 +69,19 @@ const getShadcnInstallationCommand = (
   }
 };
 
+const getOceanUICLICommand = (packageManager: string, component: string) => {
+  switch (packageManager) {
+    case "pnpm":
+      return `pnpm dlx ocean-ui-cli add ${component}`;
+    case "npm":
+      return `npx ocean-ui-cli add ${component}`;
+    case "yarn":
+      return `yarn dlx ocean-ui-cli add ${component}`;
+    case "bun":
+      return `bunx ocean-ui-cli add ${component}`;
+  }
+};
+
 async function getComponentDependencies(
   componentSlug: string
 ): Promise<string[]> {
@@ -180,6 +193,24 @@ export async function CodeBlockCommand({
     })
   );
 
+  // Pre-render Ocean UI CLI installation command code blocks (when registry is provided)
+  const oceanUICLICodeBlocks = registry
+    ? await Promise.all(
+        packageManagers.map(async (pm) => {
+          const command = getOceanUICLICommand(pm.value, component);
+          const codeBlock = await CodeBlock({
+            lang: "bash",
+            code: command ?? "",
+          });
+          return {
+            value: pm.value,
+            icon: pm.icon,
+            codeBlock,
+          };
+        })
+      )
+    : [];
+
   // Pre-render component code blocks for each framework
   const frameworkCodeBlocks = componentCode
     ? await Promise.all(
@@ -205,34 +236,62 @@ export async function CodeBlockCommand({
       )
     : [];
 
-  // If using registry, show simplified installation
+  // If using registry, show simplified installation with both options
   if (registry) {
     return (
       <div className="space-y-6">
-        {/* Step 1: Install via shadcn CLI */}
+        {/* Step 1: Install via shadcn CLI or Ocean UI CLI */}
         <StepItem
           stepNumber={1}
           title={`Install the component using shadcn CLI:`}
           isLast={true}
         >
-          <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
-            <div className="[&_figure]:mt-0">
-              <TabsWithLabel
-                items={installationCodeBlocks.map(
-                  ({ value, icon: Icon, codeBlock }) => ({
-                    value,
-                    label: value,
-                    icon: Icon ? <Icon className="size-4" /> : undefined,
-                    content: codeBlock,
-                  })
-                )}
-                defaultValue="pnpm"
-                label="Terminal"
-                variant="bordered"
-                className="[&_figure]:mt-0"
-              />
+          <div className="flex flex-col gap-4 pt-0 mt-0 w-full">
+            {/* shadcn CLI installation */}
+            <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1 w-full">
+              <div className="[&_figure]:mt-0">
+                <TabsWithLabel
+                  items={installationCodeBlocks.map(
+                    ({ value, icon: Icon, codeBlock }) => ({
+                      value,
+                      label: value,
+                      icon: Icon ? <Icon className="size-4" /> : undefined,
+                      content: codeBlock,
+                    })
+                  )}
+                  defaultValue="pnpm"
+                  label="Terminal"
+                  variant="bordered"
+                  className="[&_figure]:mt-0"
+                />
+              </div>
+            </CodeBlockWrapper>
+
+            {/* OR separator */}
+            <div className="flex items-center justify-center">
+              <span className="text-lg font-semibold text-foreground">OR</span>
             </div>
-          </CodeBlockWrapper>
+
+            {/* Ocean UI CLI installation */}
+            <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1 w-full">
+              <div className="[&_figure]:mt-0">
+                <TabsWithLabel
+                  items={oceanUICLICodeBlocks.map(
+                    ({ value, icon: Icon, codeBlock }) => ({
+                      value,
+                      label: value,
+                      icon: Icon ? <Icon className="size-4" /> : undefined,
+                      content: codeBlock,
+                    })
+                  )}
+                  defaultValue="pnpm"
+                  label="Terminal"
+                  variant="bordered"
+                  className="[&_figure]:mt-0"
+                />
+              </div>
+            </CodeBlockWrapper>
+          </div>
         </StepItem>
       </div>
     );

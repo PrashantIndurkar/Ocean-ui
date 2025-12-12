@@ -5,6 +5,18 @@ import { components } from "./components";
 import { loadComponentManifest } from "./registry.utils";
 
 /**
+ * Maps kebab-case example file names to PascalCase export names
+ */
+const EXAMPLE_NAME_MAP: Record<string, string> = {
+  "accordion-demo": "AccordionDemo",
+  "accordion-multiple": "AccordionMultiple",
+  "accordion-collapsible": "AccordionCollapsible",
+  "accordion-with-loader": "AccordionWithLoader",
+  "accordion-with-icons": "AccordionWithIcons",
+  "accordion-faq": "AccordionFAQ",
+};
+
+/**
  * Server-only function to get source code for a specific framework
  * @param slug The component slug
  * @param exampleName The example name
@@ -22,6 +34,30 @@ export async function getComponentSource(
     // Determine file extension based on framework
     const extension =
       framework === "vue" ? "vue" : framework === "svelte" ? "svelte" : "tsx";
+
+    // For SolidJS, check package path first
+    if (framework === "solid") {
+      const packagePath = join(
+        process.cwd(),
+        "..",
+        "..",
+        "packages",
+        "ui-solid",
+        "src",
+        "examples",
+        category,
+        slug,
+        `${exampleName}.${extension}`
+      );
+
+      try {
+        await access(packagePath);
+        const sourceCode = await readFile(packagePath, "utf-8");
+        return sourceCode;
+      } catch {
+        // Fall through to check docs registry path
+      }
+    }
 
     // Construct file path relative to the app directory
     // In Next.js, process.cwd() is the project root (apps/docs)
@@ -82,16 +118,52 @@ export async function getComponentRegistry(
     }
 
     // Load examples based on manifest (order is determined by array position)
-    // Always render React components in the UI, regardless of selected framework
     const examples: ComponentExample[] = [];
     const frameworks = ["react", "solid", "vue", "svelte"];
 
     for (const exampleMeta of manifest.examples) {
       try {
-        // Always import from React directory for rendering
-        const exampleModule = await import(
-          `@/registry/react/${componentCategory}/${slug}/${exampleMeta.name}.tsx`
-        );
+        let exampleModule;
+
+        // For SolidJS framework, import from package
+        if (framework === "solid") {
+          try {
+            const solidPackage = await import("@ocean-ui/solid/examples");
+            const exportName =
+              EXAMPLE_NAME_MAP[exampleMeta.name] ||
+              exampleMeta.name
+                .split("-")
+                .map(
+                  (word) =>
+                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                )
+                .join("");
+            // Type-safe access to module exports using keyof assertion
+            const component = (solidPackage as Record<string, unknown>)[
+              exportName
+            ];
+            if (!component) {
+              throw new Error(
+                `Component ${exportName} not found in SolidJS examples`
+              );
+            }
+            exampleModule = { default: component };
+          } catch (error) {
+            console.warn(
+              `Failed to import SolidJS example ${exampleMeta.name} from package:`,
+              error
+            );
+            // Fallback to React for rendering
+            exampleModule = await import(
+              `@/registry/react/${componentCategory}/${slug}/${exampleMeta.name}.tsx`
+            );
+          }
+        } else {
+          // For other frameworks, import from React directory for rendering
+          exampleModule = await import(
+            `@/registry/react/${componentCategory}/${slug}/${exampleMeta.name}.tsx`
+          );
+        }
 
         // Fetch source code for all frameworks using server-side function
         const sourceCode: { [framework: string]: string | null } = {};

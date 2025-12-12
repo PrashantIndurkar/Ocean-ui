@@ -20,6 +20,7 @@
   "dependencies": {
     "@ark-ui/react": "^5.20.0",
     "@ocean-ui/react": "workspace:*",
+    "@ocean-ui/solid": "workspace:*",
     "@ocean-ui/tokens": "workspace:*",
     "@radix-ui/react-slot": "^1.2.4",
     "@react-three/fiber": "9.0.0-alpha.8",
