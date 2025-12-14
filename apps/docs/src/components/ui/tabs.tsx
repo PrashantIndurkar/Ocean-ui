@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Tabs as ArkTabs } from "@ark-ui/react/tabs";
 import type { ReactNode } from "react";
+import type { TabsValueChangeDetails } from "@ark-ui/react/tabs";
 
 export interface TabItem {
   value: string;
@@ -81,17 +82,24 @@ export function Tabs({
   variant = "default",
 }: TabsProps) {
   const firstValue = items[0]?.value;
-  
+
   // Controlled mode: use value prop if provided
   // Uncontrolled mode: use defaultValue or fallback to first item
   const isControlled = value !== undefined;
-  const selectedValue = isControlled ? value : (defaultValue || firstValue);
+  const selectedValue = isControlled ? value : defaultValue || firstValue;
 
   return (
     <ArkTabs.Root
       value={isControlled ? value : undefined}
       defaultValue={isControlled ? undefined : selectedValue}
-      onValueChange={onValueChange}
+      onValueChange={
+        onValueChange
+          ? (details: TabsValueChangeDetails) => {
+              // Ark UI passes TabsValueChangeDetails object with value property
+              onValueChange(details.value);
+            }
+          : undefined
+      }
       className={className}
     >
       <ArkTabs.List className={cn(defaultListClasses[variant], listClassName)}>

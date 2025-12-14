@@ -50,9 +50,10 @@ const getShadcnInstallationCommand = (
   component: string
 ) => {
   // Convert registry identifier to full URL if needed
-  // @ocean-ui -> https://components.prashantindurkar.in/r/{component}.json
+  // @ocean-ui -> https://components.prashantindurkar.in/api/registry/react/{component}.json
+  // Note: shadcn CLI only supports React, so we use /api/registry/react/ path
   const registryUrl = registry.startsWith("@")
-    ? `https://components.prashantindurkar.in/r/${component}.json`
+    ? `https://components.prashantindurkar.in/api/registry/react/${component}.json`
     : registry.includes("/")
       ? `${registry}/${component}.json`
       : `${registry}/${component}`;

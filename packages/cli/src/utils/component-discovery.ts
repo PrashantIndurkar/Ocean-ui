@@ -1,162 +1,89 @@
 /**
  * Component Discovery Utility
- * 
- * Provides component registry and validation
+ *
+ * Fetches component list from registry API and provides validation
  */
 
-export interface Component {
-  name: string;
-  slug: string;
-  category: "fundamentals" | "base" | "blocks" | "templates";
-  subcategory: string;
-}
+import { defaultRegistryClient, type RegistryIndex } from "./registry-client.js";
+import { getRegistryURL } from "./config.js";
 
-// Component registry - matches apps/docs/src/lib/components.ts
-export const components: Component[] = [
-  // Base Components - Disclosure
-  {
-    name: "Accordion",
-    slug: "accordion",
-    category: "base",
-    subcategory: "Disclosure",
-  },
-  {
-    name: "Collapsible",
-    slug: "collapsible",
-    category: "base",
-    subcategory: "Disclosure",
-  },
-
-  // Base Components - Form Controls
-  {
-    name: "Button",
-    slug: "button",
-    category: "base",
-    subcategory: "Form",
-  },
-  {
-    name: "Input",
-    slug: "input",
-    category: "base",
-    subcategory: "Form",
-  },
-  {
-    name: "Checkbox",
-    slug: "checkbox",
-    category: "base",
-    subcategory: "Form",
-  },
-  {
-    name: "Radio Group",
-    slug: "radio-group",
-    category: "base",
-    subcategory: "Form",
-  },
-  {
-    name: "Select",
-    slug: "select",
-    category: "base",
-    subcategory: "Form",
-  },
-  {
-    name: "Switch",
-    slug: "switch",
-    category: "base",
-    subcategory: "Form",
-  },
-  {
-    name: "Textarea",
-    slug: "textarea",
-    category: "base",
-    subcategory: "Form",
-  },
-
-  // Base Components - Overlay
-  {
-    name: "Dialog",
-    slug: "dialog",
-    category: "base",
-    subcategory: "Overlay",
-  },
-  {
-    name: "Popover",
-    slug: "popover",
-    category: "base",
-    subcategory: "Overlay",
-  },
-  {
-    name: "Tooltip",
-    slug: "tooltip",
-    category: "base",
-    subcategory: "Overlay",
-  },
-
-  // Base Components - Data Display
-  {
-    name: "Card",
-    slug: "card",
-    category: "base",
-    subcategory: "Data Display",
-  },
-  {
-    name: "Avatar",
-    slug: "avatar",
-    category: "base",
-    subcategory: "Data Display",
-  },
-  {
-    name: "Badge",
-    slug: "badge",
-    category: "base",
-    subcategory: "Data Display",
-  },
-
-  // Base Components - Navigation
-  {
-    name: "Tabs",
-    slug: "tabs",
-    category: "base",
-    subcategory: "Navigation",
-  },
-  {
-    name: "Menu",
-    slug: "menu",
-    category: "base",
-    subcategory: "Navigation",
-  },
-
-  // Base Components - Feedback
-  {
-    name: "Progress",
-    slug: "progress",
-    category: "base",
-    subcategory: "Feedback",
-  },
-  {
-    name: "Toast",
-    slug: "toast",
-    category: "base",
-    subcategory: "Feedback",
-  },
-];
+// Cache for component lists per framework
+const componentCache = new Map<string, string[]>();
 
 /**
- * Find a component by slug
+ * Get all available component slugs for a framework from registry
+ *
+ * @param framework - Framework name (e.g., "react", "solid")
+ * @returns Array of component slugs
  */
-export function findComponent(slug: string): Component | undefined {
-  return components.find((c) => c.slug === slug);
+export async function getAvailableComponents(
+  framework: string = "react"
+): Promise<string[]> {
+  // Check cache first
+  if (componentCache.has(framework)) {
+    return componentCache.get(framework)!;
+  }
+
+  try {
+    // Set registry URL from config
+    const registryURL = await getRegistryURL();
+    defaultRegistryClient.setBaseURL(registryURL);
+
+    // Fetch index from registry
+    const index: RegistryIndex = await defaultRegistryClient.fetchIndex(
+      framework
+    );
+
+    // Extract component slugs from index
+    const componentSlugs = index.items.map((item) => item.name);
+
+    // Cache the result
+    componentCache.set(framework, componentSlugs);
+
+    return componentSlugs;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        `Failed to fetch component list: ${error.message}`
+      );
+    }
+    throw error;
+  }
 }
 
 /**
- * Validate that a component exists
+ * Validate that a component exists in the registry
+ *
+ * @param slug - Component slug to validate
+ * @param framework - Framework name (e.g., "react", "solid")
+ * @returns True if component exists
  */
-export function validateComponent(slug: string): boolean {
-  return findComponent(slug) !== undefined;
+export async function validateComponent(
+  slug: string,
+  framework: string = "react"
+): Promise<boolean> {
+  try {
+    const availableComponents = await getAvailableComponents(framework);
+    return availableComponents.includes(slug);
+  } catch (error) {
+    // If we can't fetch the list, return false
+    return false;
+  }
 }
 
 /**
- * Get all available component slugs
+ * Find a component by slug (for backward compatibility)
+ * Note: This now returns a simple object with name and slug
+ *
+ * @param slug - Component slug
+ * @returns Component object or undefined
  */
-export function getAvailableComponents(): string[] {
-  return components.map((c) => c.slug);
+export function findComponent(slug: string): { name: string; slug: string } | undefined {
+  // Convert slug to title case for display name
+  const name = slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return { name, slug };
 }

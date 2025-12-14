@@ -4,14 +4,10 @@
  * Handles reading component sources and writing to user's project
  */
 
-import { readFile, writeFile, mkdir } from "fs/promises";
+import { writeFile, mkdir } from "fs/promises";
 import { join, dirname } from "path";
 import { existsSync } from "fs";
-import { fileURLToPath } from "url";
 import chalk from "chalk";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 /**
  * Transform component imports to use local paths
@@ -108,51 +104,38 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Read component source from bundled components
+ * Read component source from registry API
  */
 export async function readComponentSource(
   componentSlug: string,
   framework: "react" | "solid"
 ): Promise<string> {
-  // Find package root by looking for package.json
-  // Start from current file location and walk up
-  let currentDir = __dirname;
-  let packageRoot: string | null = null;
+  const { defaultRegistryClient } = await import("./registry-client.js");
+  const { getRegistryURL } = await import("./config.js");
 
-  // Walk up directories to find package.json
-  for (let i = 0; i < 10; i++) {
-    const packageJsonPath = join(currentDir, "package.json");
-    if (existsSync(packageJsonPath)) {
-      packageRoot = currentDir;
-      break;
-    }
-    const parentDir = join(currentDir, "..");
-    if (parentDir === currentDir) break; // Reached filesystem root
-    currentDir = parentDir;
-  }
+  try {
+    // Set registry URL from config
+    const registryURL = await getRegistryURL();
+    defaultRegistryClient.setBaseURL(registryURL);
 
-  if (!packageRoot) {
-    throw new Error(`Could not find package root. Started from: ${__dirname}`);
-  }
-
-  // Components are at package root/components/{framework}/base/{component}.tsx
-  const componentPath = join(
-    packageRoot,
-    "components",
-    framework,
-    "base",
-    `${componentSlug}.tsx`
-  );
-
-  if (!existsSync(componentPath)) {
-    throw new Error(
-      `Component ${componentSlug} not found for framework ${framework}.\n` +
-        `Expected at: ${componentPath}\n` +
-        `Package root: ${packageRoot}`
+    // Fetch component from registry
+    const registryItem = await defaultRegistryClient.fetchComponent(
+      framework,
+      componentSlug
     );
-  }
 
-  return await readFile(componentPath, "utf-8");
+    // Get the first file's content (main component file)
+    if (!registryItem.files || registryItem.files.length === 0) {
+      throw new Error(`Component "${componentSlug}" has no files in registry`);
+    }
+
+    return registryItem.files[0].content;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to fetch component source: ${error.message}`);
+    }
+    throw error;
+  }
 }
 
 /**

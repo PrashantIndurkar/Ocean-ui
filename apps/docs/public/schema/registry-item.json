@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://components.prashantindurkar.in/schema/registry-item.json",
+  "title": "Ocean UI Registry Item",
+  "description": "Schema for Ocean UI component registry items. Defines the structure for components, recipes, themes, and other registry assets used by the Ocean UI CLI.",
+  "type": "object",
+  "required": ["$schema", "name", "type", "dependencies", "files"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Reference to this JSON schema"
+    },
+    "name": {
+      "type": "string",
+      "description": "Unique identifier for the registry item (component slug, e.g., 'accordion')"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of registry item",
+      "enum": [
+        "registry:ui",
+        "registry:recipe",
+        "registry:theme",
+        "registry:color"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Component display name (e.g., 'Accordion')"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the registry item"
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "NPM package dependencies required by this item",
+      "items": {
+        "type": "string"
+      }
+    },
+    "registryDependencies": {
+      "type": "array",
+      "description": "Other registry items this item depends on",
+      "items": {
+        "type": "string"
+      }
+    },
+    "files": {
+      "type": "array",
+      "description": "Files included in this registry item",
+      "items": {
+        "$ref": "#/definitions/registryFile"
+      },
+      "minItems": 1
+    },
+    "cssVars": {
+      "type": "object",
+      "description": "CSS variables configuration",
+      "properties": {
+        "theme": {
+          "type": "object",
+          "description": "Theme-specific CSS variables",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "css": {
+      "type": "object",
+      "description": "CSS keyframes and animations",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "registryFile": {
+      "type": "object",
+      "required": ["content", "path", "type"],
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "File content as a string"
+        },
+        "path": {
+          "type": "string",
+          "description": "Destination path where the file should be written"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of file content",
+          "enum": [
+            "registry:ui",
+            "registry:recipe",
+            "registry:theme",
+            "registry:color"
+          ]
+        },
+        "exports": {
+          "type": "string",
+          "description": "Export statement for the file"
+        },
+        "imports": {
+          "type": "string",
+          "description": "Import statement for the file"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+

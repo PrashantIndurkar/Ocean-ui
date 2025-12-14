@@ -125,39 +125,14 @@ export async function getComponentRegistry(
       try {
         let exampleModule;
 
-        // For SolidJS framework, import from package
+        // For SolidJS framework, skip component import (can't render SolidJS in React/Next.js server)
+        // Only provide source code - components will be rendered client-side if needed
         if (framework === "solid") {
-          try {
-            const solidPackage = await import("@ocean-ui/solid/examples");
-            const exportName =
-              EXAMPLE_NAME_MAP[exampleMeta.name] ||
-              exampleMeta.name
-                .split("-")
-                .map(
-                  (word) =>
-                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-                )
-                .join("");
-            // Type-safe access to module exports using keyof assertion
-            const component = (solidPackage as Record<string, unknown>)[
-              exportName
-            ];
-            if (!component) {
-              throw new Error(
-                `Component ${exportName} not found in SolidJS examples`
-              );
-            }
-            exampleModule = { default: component };
-          } catch (error) {
-            console.warn(
-              `Failed to import SolidJS example ${exampleMeta.name} from package:`,
-              error
-            );
-            // Fallback to React for rendering
-            exampleModule = await import(
-              `@/registry/react/${componentCategory}/${slug}/${exampleMeta.name}.tsx`
-            );
-          }
+          // Use React component as placeholder since SolidJS can't be rendered server-side
+          // The source code is still provided for display in code blocks
+          exampleModule = await import(
+            `@/registry/react/${componentCategory}/${slug}/${exampleMeta.name}.tsx`
+          );
         } else {
           // For other frameworks, import from React directory for rendering
           exampleModule = await import(

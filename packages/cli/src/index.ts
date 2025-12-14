@@ -46,22 +46,6 @@ program
   .option("-d, --dir <dir>", "Target directory", "components/ui")
   .action(async (componentSlug: string, options) => {
     try {
-      // Validate component
-      if (!validateComponent(componentSlug)) {
-        const available = getAvailableComponents().join(", ");
-        console.error(
-          chalk.red(
-            `✗ Component "${componentSlug}" not found.\n\nAvailable components: ${available}`
-          )
-        );
-        process.exit(1);
-      }
-
-      const component = findComponent(componentSlug);
-      if (!component) {
-        process.exit(1);
-      }
-
       // Validate framework
       const framework = options.framework as "react" | "solid";
       if (framework !== "react" && framework !== "solid") {
@@ -70,6 +54,23 @@ program
             `✗ Invalid framework "${framework}". Supported: react, solid`
           )
         );
+        process.exit(1);
+      }
+
+      // Validate component (now async - fetches from registry)
+      const isValid = await validateComponent(componentSlug, framework);
+      if (!isValid) {
+        const available = await getAvailableComponents(framework);
+        console.error(
+          chalk.red(
+            `✗ Component "${componentSlug}" not found.\n\nAvailable components: ${available.join(", ")}`
+          )
+        );
+        process.exit(1);
+      }
+
+      const component = findComponent(componentSlug);
+      if (!component) {
         process.exit(1);
       }
 
