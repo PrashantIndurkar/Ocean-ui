@@ -103,13 +103,15 @@ export function cn(...inputs: ClassValue[]) {
   return true; // File was created
 }
 
+import type { RegistryItem } from "./registry-client.js";
+
 /**
  * Read component source from registry API
  */
 export async function readComponentSource(
   componentSlug: string,
   framework: "react" | "solid"
-): Promise<string> {
+): Promise<{ content: string; registryItem: RegistryItem }> {
   const { defaultRegistryClient } = await import("./registry-client.js");
   const { getRegistryURL } = await import("./config.js");
 
@@ -129,7 +131,7 @@ export async function readComponentSource(
       throw new Error(`Component "${componentSlug}" has no files in registry`);
     }
 
-    return registryItem.files[0].content;
+    return { content: registryItem.files[0].content, registryItem };
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Failed to fetch component source: ${error.message}`);

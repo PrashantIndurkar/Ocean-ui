@@ -1,10 +1,10 @@
 {
   "name": "ocean-ui-cli",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "CLI tool for installing Ocean UI components",
   "type": "module",
   "bin": {
-    "ocean-ui": "./dist/src/index.js"
+    "ocean-ui": "dist/src/index.js"
   },
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",

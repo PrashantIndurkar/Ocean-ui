@@ -25,6 +25,7 @@ import {
   ensureUtilsFile,
   getUtilsDependencies,
 } from "./utils/file-operations.js";
+import { updateCssVariables } from "./utils/css-manager.js";
 
 const program = new Command();
 
@@ -108,7 +109,7 @@ program
       await installDependencies(pm, dependencies);
 
       // Read component source
-      const componentSource = await readComponentSource(
+      const { content: componentSource, registryItem } = await readComponentSource(
         componentSlug,
         framework
       );
@@ -120,6 +121,9 @@ program
         options.dir,
         options.overwrite
       );
+
+      // Inject CSS variables and keyframes
+      await updateCssVariables(registryItem);
 
       console.log(chalk.green(`\n✓ Successfully added ${component.name}!\n`));
       console.log(
