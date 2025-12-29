@@ -14,72 +14,23 @@ Built with **Tailwind CSS v4**, **TypeScript**, and designed to work across mult
 - ♿ **Accessible** - Built on Ark UI for superior accessibility standards
 - 🔧 **Framework Agnostic** - Supports React and SolidJS (with more coming)
 - 📦 **Copy-Paste Philosophy** - Own your code, customize freely
-- 🚀 **Lightweight CLI** - Small package size (~50KB) with remote registry
 - 📱 **Responsive** - Mobile-first design approach
 - 🎯 **TypeScript** - Full type safety out of the box
 - 🎨 **Tailwind CSS v4** - Modern utility-first styling
 
-## 🚀 Quick Start
-
-### Installation
-
-Install the Ocean UI CLI globally or locally:
-
-```bash
-# Global installation
-npm install -g @ocean-ui/cli
-
-# Or local installation (recommended)
-npm install -D @ocean-ui/cli
-```
-
-### Add Components
-
-```bash
-# Add a component (defaults to React)
-npx ocean-ui add accordion
-
-# Specify framework
-npx ocean-ui add accordion --framework solid
-
-# Custom output directory
-npx ocean-ui add accordion --dir src/components/ui
-```
-
-### Configuration
-
-Create a `components.json` file in your project root:
-
-```json
-{
-  "framework": "react",
-  "registry": {
-    "url": "https://components.prashantindurkar.in/api/registry"
-  },
-  "aliases": {
-    "components": "~/components",
-    "lib": "~/lib",
-    "ui": "~/components/ui"
-  }
-}
-```
-
 ## 📚 Documentation
 
 - [Component Documentation](https://components.prashantindurkar.in) - Browse all available components
-- [CLI Documentation](./packages/cli/README.md) - Complete CLI usage guide
-- [Installation Guide](https://components.prashantindurkar.in/docs/documentation/how-to-install) - Detailed setup instructions
 
 ## 🏗️ Architecture
 
 ### Registry System
 
-Ocean UI uses a remote registry system for component distribution. This approach provides several benefits:
+Ocean UI uses a registry system for component distribution. This approach provides several benefits:
 
-- **Small Package Size**: CLI package is ~50KB vs ~500KB with bundled components (90% reduction)
-- **Always Up-to-Date**: Components are fetched from a remote registry, so you always get the latest versions
-- **Independent Updates**: Update components without republishing CLI
-- **Framework Support**: Same CLI works for multiple frameworks
+- **Component Discovery**: Registry provides metadata and source code for all components
+- **Framework Support**: Components available for multiple frameworks (React, SolidJS, and more)
+- **Always Up-to-Date**: Components are served from the registry, ensuring you get the latest versions
 
 ### Registry Structure
 
@@ -93,20 +44,6 @@ apps/website/public/registry/
     └── [component].json
 ```
 
-### Generating Registry
-
-To generate registry files for components:
-
-```bash
-pnpm --filter @ocean-ui/scripts registry:generate
-```
-
-This command:
-
-1. Scans component source files
-2. Extracts dependencies and metadata
-3. Generates JSON registry files in `apps/website/public/registry/`
-4. Validates registry structure
 
 ## 🛠️ Development
 
@@ -127,9 +64,6 @@ pnpm build
 
 # Run development server
 pnpm --filter @ocean-ui/website dev
-
-# Watch mode for CLI
-pnpm --filter @ocean-ui/cli dev
 ```
 
 ### Project Structure
@@ -146,8 +80,6 @@ Ocean-ui/
 │           ├── demos/     # Component demo/example files
 │           └── lib/       # Utilities & shared code
 ├── packages/
-│   ├── cli/               # CLI tool for installing components
-│   ├── scripts/           # Registry generation scripts
 │   ├── tokens/            # Design tokens
 │   ├── ui-react/          # React component implementations
 │   └── ui-solid/          # SolidJS component implementations
@@ -160,15 +92,11 @@ Ocean-ui/
 
 1. Create component files in `packages/ui-react/src/components/` or `packages/ui-solid/src/components/`
 2. Add component metadata and dependencies
-3. Generate registry: `pnpm --filter @ocean-ui/scripts registry:generate`
-4. Test component installation: `npx ocean-ui add [component-name]`
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed contribution guidelines.
 
 ## 📦 Packages
 
-- **@ocean-ui/cli** - CLI tool for installing components
-- **@ocean-ui/scripts** - Registry generation and build scripts
 - **@ocean-ui/tokens** - Design tokens and CSS variables
 - **@ocean-ui/ui-react** - React component implementations
 - **@ocean-ui/ui-solid** - SolidJS component implementations
@@ -183,15 +111,6 @@ We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for gu
 - Testing procedures
 - Code style and conventions
 
-## 🔄 Migration
-
-If you're upgrading from an older version of the CLI, see [MIGRATION.md](./MIGRATION.md) for:
-
-- Breaking changes
-- Configuration updates
-- Migration steps
-- Troubleshooting
-
 ## 📄 License
 
 See the [LICENSE](./LICENSE) file for details.
@@ -199,9 +118,7 @@ See the [LICENSE](./LICENSE) file for details.
 ## 🔗 Links
 
 - [Documentation](https://components.prashantindurkar.in)
-- [CLI README](./packages/cli/README.md)
 - [Contributing Guide](./CONTRIBUTING.md)
-- [Migration Guide](./MIGRATION.md)
 
 ## 🙏 Acknowledgments
 
@@ -217,4 +134,4 @@ Ocean UI is built on top of:
 
 ## Summary
 
-Ocean UI is a modern component system built on Ark UI that provides copy-paste components for React and SolidJS. It uses a remote registry system to keep the CLI lightweight (~50KB) while providing always up-to-date components. The system supports multiple frameworks, includes a CLI tool for easy installation, and follows a copy-paste philosophy that gives developers full ownership of their code. Components are generated into a registry JSON format and served via API, making updates independent of CLI releases.
+Ocean UI is a modern component system built on Ark UI that provides copy-paste components for React and SolidJS. The system supports multiple frameworks and follows a copy-paste philosophy that gives developers full ownership of their code. Components are displayed on the documentation website with code blocks that can be copied directly into your project.

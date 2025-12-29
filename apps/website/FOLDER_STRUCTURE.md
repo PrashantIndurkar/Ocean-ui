@@ -13,24 +13,12 @@ apps/website/
 │   ├── components/     # React components for the website
 │   ├── demos/         # Component demo/example files
 │   └── lib/           # Utilities and shared code
-├── components.json     # shadcn/ui configuration
-├── registry.json       # Component registry metadata
 └── source.config.ts    # Fumadocs configuration
 ```
 
 ---
 
 ## 📄 Root Files
-
-### `components.json`
-**Purpose**: Configuration file for shadcn/ui CLI  
-**What goes here**: Component installation settings, aliases, Tailwind config  
-**When to edit**: When configuring component paths or adding new registries
-
-### `registry.json`
-**Purpose**: Master registry file listing all available components  
-**What goes here**: Component metadata, dependencies, file paths  
-**When to edit**: When adding new components to the registry
 
 ### `source.config.ts`
 **Purpose**: Fumadocs configuration for MDX content  
@@ -363,13 +351,13 @@ src/lib/
 4. **Preview Component** (`src/components/preview/component-preview.tsx`) → Displays demos
 5. **MDX** (`content/docs/base-components/{component}.mdx`) → Uses `<ComponentPreview>`
 
-### How Registry Works:
+### How Component System Works:
 
 1. **Component Source** (`packages/ui-react/`) → Actual component code
-2. **Registry Generator** (`packages/scripts/`) → Generates JSON files
-3. **Registry JSON** (`public/registry/`) → Served as static files
-4. **API Routes** (`src/app/api/registry/`) → Serve registry JSON
-5. **CLI** (`packages/cli/`) → Fetches from API and installs components
+2. **Component Metadata** (`src/lib/components.ts`) → Component list and metadata
+3. **Demo Components** (`src/demos/`) → Example implementations
+4. **Manifests** (`src/demos/manifest/`) → Define available examples
+5. **Documentation Website** → Displays components and code for copy-paste
 
 ---
 
@@ -386,7 +374,6 @@ src/lib/
 | New utility function | `src/lib/utils.ts` or `src/lib/{category}/` |
 | New icon | `src/components/icons/{icon}.tsx` |
 | New image | `public/images/{image}.png` |
-| Registry entry | `registry.json` (root) |
 
 ---
 
@@ -423,7 +410,7 @@ src/lib/
 2. Add to navigation: Edit `content/docs/base-components/meta.json`
 3. Create demo: `src/demos/react/base/{component}/{component}-demo.tsx`
 4. Create manifest: `src/demos/manifest/base/{component}.ts`
-5. Add to registry: `registry.json` (root)
+5. Add component to `src/lib/components.ts`
 
 ### Adding a New MDX Component
 

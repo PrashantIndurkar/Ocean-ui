@@ -9,8 +9,7 @@
     "start": "turbo start",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "postinstall": "fumadocs-mdx",
-    "registry:build": "cd apps/website && pnpm registry:build"
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@ark-ui/react": "^5.28.0",

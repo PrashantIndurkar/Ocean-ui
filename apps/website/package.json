@@ -10,13 +10,11 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "prebuild": "pnpm --filter @ocean-ui/scripts registry:generate",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "postinstall": "fumadocs-mdx",
-    "registry:build": "pnpm dlx shadcn@latest build"
+    "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
     "@ark-ui/react": "^5.20.0",

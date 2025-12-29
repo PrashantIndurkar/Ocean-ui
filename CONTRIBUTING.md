@@ -104,33 +104,6 @@ When adding a new component, ensure it's included in the registry generation pro
 3. Generate component metadata
 4. Create registry JSON files
 
-### Step 5: Generate Registry
-
-After creating your component, generate the registry:
-
-```bash
-pnpm --filter @ocean-ui/scripts registry:generate
-```
-
-This will:
-
-- Generate `apps/website/public/registry/react/[component-name].json`
-- Generate `apps/website/public/registry/solid/[component-name].json`
-- Update registry index files
-
-### Step 6: Test Component Installation
-
-Test that your component can be installed via CLI:
-
-```bash
-# Build CLI first
-pnpm --filter @ocean-ui/cli build
-
-# Test installation
-cd /path/to/test-project
-npx ../packages/cli/dist/src/index.js add [component-name] --framework react
-```
-
 ## Registry System
 
 ### How Registry Works
@@ -176,15 +149,9 @@ The registry system stores component metadata and source code in JSON format:
 ### Testing Registry Changes
 
 ```bash
-# Generate registry
-pnpm --filter @ocean-ui/scripts registry:generate
-
-# Validate registry
-pnpm --filter @ocean-ui/scripts registry:validate
-
-# Test API route (if running docs locally)
+# Test component in docs (if running docs locally)
 pnpm --filter @ocean-ui/website dev
-# Visit: http://localhost:3000/api/registry/react/index.json
+# Visit: http://localhost:3000/docs/base-components/[component-name]
 ```
 
 ## Testing
@@ -193,8 +160,8 @@ pnpm --filter @ocean-ui/website dev
 
 1. **Manual Testing**
 
-   - Install component via CLI
-   - Verify it works in a test project
+   - Copy component code into a test project
+   - Verify it works correctly
    - Check TypeScript types
    - Test accessibility with screen readers
 
@@ -206,22 +173,9 @@ pnpm --filter @ocean-ui/website dev
 ### Registry Testing
 
 ```bash
-# Validate registry JSON structure
-pnpm --filter @ocean-ui/scripts registry:validate
-
-# Test component installation
-npx ocean-ui add [component-name] --framework react
-```
-
-### CLI Testing
-
-```bash
-# Build CLI
-pnpm --filter @ocean-ui/cli build
-
-# Test in a sample project
-cd /path/to/test-project
-npx ../packages/cli/dist/src/index.js add accordion
+# Test component in docs (if running docs locally)
+pnpm --filter @ocean-ui/website dev
+# Visit: http://localhost:3000/docs/base-components/[component-name]
 ```
 
 ## Code Style
@@ -265,17 +219,15 @@ import type { AccordionProps } from "./types";
 ### Before Submitting
 
 1. ✅ Component follows structure guidelines
-2. ✅ Registry generated successfully
-3. ✅ Component installs via CLI
-4. ✅ TypeScript types are correct
-5. ✅ Accessibility tested
-6. ✅ Code follows style guidelines
+2. ✅ Component code is copy-paste ready
+3. ✅ TypeScript types are correct
+4. ✅ Accessibility tested
+5. ✅ Code follows style guidelines
 
 ### PR Checklist
 
 - [ ] Component works in both React and SolidJS (if applicable)
 - [ ] Dependencies are correctly listed
-- [ ] Registry files generated
 - [ ] Documentation updated (if needed)
 - [ ] Tests pass (if applicable)
 - [ ] No TypeScript errors
@@ -296,17 +248,16 @@ Include:
 1. Maintainers will review your PR
 2. Address any feedback
 3. Once approved, PR will be merged
-4. Registry will be regenerated if needed
-5. Changes will be available via CLI
+4. Changes will be available on the documentation website
 
 ## Common Issues
 
-### Component Not Appearing in Registry
+### Component Not Appearing in Documentation
 
 - Ensure component file exists in correct location
-- Run `registry:generate` command
-- Check for errors in generation output
+- Check that component is listed in `src/lib/components.ts`
 - Verify component name matches file name
+- Ensure demo files are created in `src/demos/`
 
 ### Dependencies Not Detected
 
@@ -337,4 +288,4 @@ By contributing, you agree that your contributions will be licensed under the sa
 
 ## Summary
 
-This contributing guide covers how to add new components to Ocean UI, including creating component files, generating registry entries, testing components, and submitting pull requests. The registry system automatically extracts dependencies and metadata from components, making it easy to add new components. Follow the code style guidelines, test thoroughly, and ensure components work with the CLI installation process before submitting PRs.
+This contributing guide covers how to add new components to Ocean UI, including creating component files, generating registry entries, testing components, and submitting pull requests. The registry system automatically extracts dependencies and metadata from components, making it easy to add new components. Follow the code style guidelines, test thoroughly, and ensure components are copy-paste ready before submitting PRs.
