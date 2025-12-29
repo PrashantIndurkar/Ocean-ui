@@ -84,7 +84,7 @@ Ocean UI uses a remote registry system for component distribution. This approach
 ### Registry Structure
 
 ```
-apps/docs/public/registry/
+apps/website/public/registry/
 ├── react/
 │   ├── index.json          # Component index
 │   └── [component].json    # Individual component files
@@ -105,7 +105,7 @@ This command:
 
 1. Scans component source files
 2. Extracts dependencies and metadata
-3. Generates JSON registry files in `apps/docs/public/registry/`
+3. Generates JSON registry files in `apps/website/public/registry/`
 4. Validates registry structure
 
 ## 🛠️ Development
@@ -126,7 +126,7 @@ pnpm install
 pnpm build
 
 # Run development server
-pnpm --filter @ocean-ui/docs dev
+pnpm --filter @ocean-ui/website dev
 
 # Watch mode for CLI
 pnpm --filter @ocean-ui/cli dev
@@ -137,9 +137,14 @@ pnpm --filter @ocean-ui/cli dev
 ```
 Ocean-ui/
 ├── apps/
-│   └── docs/              # Documentation site (Next.js)
-│       └── public/
-│           └── registry/  # Generated registry JSON files
+│   └── website/           # Documentation site (Next.js)
+│       ├── content/       # MDX documentation content
+│       ├── public/        # Static assets & registry JSON files
+│       └── src/           # Source code
+│           ├── app/       # Next.js App Router (pages & API)
+│           ├── components/# Website UI components
+│           ├── demos/     # Component demo/example files
+│           └── lib/       # Utilities & shared code
 ├── packages/
 │   ├── cli/               # CLI tool for installing components
 │   ├── scripts/           # Registry generation scripts
@@ -148,6 +153,8 @@ Ocean-ui/
 │   └── ui-solid/          # SolidJS component implementations
 └── README.md
 ```
+
+📖 **For detailed folder structure documentation**, see [`apps/website/FOLDER_STRUCTURE.md`](./apps/website/FOLDER_STRUCTURE.md)
 
 ### Adding New Components
 

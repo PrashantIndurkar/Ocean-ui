@@ -114,8 +114,8 @@ pnpm --filter @ocean-ui/scripts registry:generate
 
 This will:
 
-- Generate `apps/docs/public/registry/react/[component-name].json`
-- Generate `apps/docs/public/registry/solid/[component-name].json`
+- Generate `apps/website/public/registry/react/[component-name].json`
+- Generate `apps/website/public/registry/solid/[component-name].json`
 - Update registry index files
 
 ### Step 6: Test Component Installation
@@ -183,7 +183,7 @@ pnpm --filter @ocean-ui/scripts registry:generate
 pnpm --filter @ocean-ui/scripts registry:validate
 
 # Test API route (if running docs locally)
-pnpm --filter @ocean-ui/docs dev
+pnpm --filter @ocean-ui/website dev
 # Visit: http://localhost:3000/api/registry/react/index.json
 ```
 

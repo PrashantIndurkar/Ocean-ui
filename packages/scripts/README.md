@@ -25,13 +25,13 @@ pnpm --filter @ocean-ui/scripts registry:generate
 This will:
 1. Read component sources from `packages/ui-react` and `packages/ui-solid`
 2. Extract dependencies and metadata
-3. Generate JSON files in `apps/docs/public/registry/`
+3. Generate JSON files in `apps/website/public/registry/`
 4. Create index files for each framework
 
 ### Output Structure
 
 ```
-apps/docs/public/registry/
+apps/website/public/registry/
 ├── react/
 │   ├── index.json          # List of all React components
 │   ├── accordion.json      # Individual component registry file

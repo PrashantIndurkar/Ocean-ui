@@ -1,0 +1,20 @@
+{
+  "$schema": "https://components.prashantindurkar.in/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
+  "dependencies": [
+    "react",
+    "@ark-ui/react",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { Accordion as AccordionPrimitive } from \"@ark-ui/react/accordion\";\nimport { ChevronDownIcon } from \"lucide-react\";\nimport type { ComponentProps, ReactNode } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\nfunction Accordion({\n  className,\n  ...props\n}: ComponentProps<typeof AccordionPrimitive.Root>) {\n  return (\n    <AccordionPrimitive.Root className={cn(\"w-full\", className)} {...props} />\n  );\n}\n\nfunction AccordionItem({\n  className,\n  ...props\n}: ComponentProps<typeof AccordionPrimitive.Item>) {\n  return (\n    <AccordionPrimitive.Item\n      className={cn(\"border-b border-border last:border-b-0\", className)}\n      {...props}\n    />\n  );\n}\n\ninterface AccordionTriggerProps\n  extends ComponentProps<typeof AccordionPrimitive.ItemTrigger> {\n  /**\n   * Optional icon or content to display on the left side\n   */\n  leftIcon?: ReactNode;\n  /**\n   * Optional icon or content to display on the right side\n   * If not provided, defaults to ChevronDownIcon\n   */\n  rightIcon?: ReactNode;\n}\n\nfunction AccordionTrigger({\n  className,\n  children,\n  leftIcon,\n  rightIcon,\n  ...props\n}: AccordionTriggerProps) {\n  return (\n    <AccordionPrimitive.ItemTrigger\n      className={cn(\n        \"group flex w-full items-center gap-4 py-4 text-left cursor-pointer text-sm font-medium transition-all outline-none\",\n        \"hover:underline\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        \"[&[data-state=open]>.accordion-chevron]:rotate-180\",\n        \"data-[state=closed]:text-primary/60 data-[state=closed]:hover:text-primary data-[state=open]:text-primary\",\n        className\n      )}\n      {...props}\n    >\n      {/* Left Icon Slot */}\n      {leftIcon}\n\n      {/* Title/Content */}\n      <span className=\"flex-1\">{children}</span>\n\n      {/* Right Icon Slot */}\n      {rightIcon ? (\n        <span className=\"ml-auto\">{rightIcon}</span>\n      ) : (\n        <ChevronDownIcon className=\"accordion-chevron text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 ml-auto\" />\n      )}\n    </AccordionPrimitive.ItemTrigger>\n  );\n}\n\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: ComponentProps<typeof AccordionPrimitive.ItemContent>) {\n  return (\n    <AccordionPrimitive.ItemContent\n      className={cn(\n        \"overflow-hidden text-sm\",\n        // Ark UI recommended animations (matches selection prompt)\n        \"data-[state=closed]:opacity-0 data-[state=open]:opacity-100\",\n        \"data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand\",\n        // Ark UI recommended data selectors for custom animations:\n        \"[data-scope=accordion][data-part=item-content][data-state=open]:animate-[slideDown_250ms_ease-in-out]\",\n        \"[data-scope=accordion][data-part=item-content][data-state=closed]:animate-[slideUp_200ms_ease-in-out]\",\n        className\n      )}\n      {...props}\n    >\n      <div className={cn(\"pb-4\", className)}>{children}</div>\n    </AccordionPrimitive.ItemContent>\n  );\n}\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "path": "accordion.tsx",
+      "type": "registry:ui",
+      "exports": "export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './accordion'"
+    }
+  ]
+}

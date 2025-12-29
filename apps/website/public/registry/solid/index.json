@@ -1,0 +1,11 @@
+{
+  "$schema": "https://components.prashantindurkar.in/schema/registry.json",
+  "name": "@ocean-ui/solid",
+  "homepage": "https://components.prashantindurkar.in",
+  "items": [
+    {
+      "name": "accordion",
+      "type": "registry:ui"
+    }
+  ]
+}
