@@ -1,15 +1,9 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
+import Link from "next/link";
+import { BookOpenIcon, ExternalLinkIcon } from "lucide-react";
 import { Tabs } from "../ui/tabs";
-import { TabsWithLabel } from "../ui/tabs-with-label";
-import { CodeBlock } from "./code-block";
 import { CodeBlockWithFile } from "./code-block-with-file";
-import {
-  PnpmLogo,
-  NPMLogo,
-  YarnLogo,
-  BunLogo,
-} from "../icons/package-managers";
 import { ReactJsIcon } from "../icons/react-icon";
 import { SolidJsIcon } from "../icons/solidjs-icon";
 import { VueJsIcon } from "../icons/vue-icon";
@@ -17,13 +11,7 @@ import { SvelteJSIcon } from "../icons/svelte-icon";
 import { components } from "@/lib/components";
 import { CodeBlockWrapper } from "./code-block-wrapper";
 import { StepItem } from "../mdx/step-item";
-
-const packageManagers = [
-  { value: "pnpm", icon: PnpmLogo },
-  { value: "npm", icon: NPMLogo },
-  { value: "yarn", icon: YarnLogo },
-  { value: "bun", icon: BunLogo },
-] as const;
+import { cn } from "@/lib/utils";
 
 const frameworks = [
   { value: "react", icon: ReactJsIcon },
@@ -38,12 +26,10 @@ async function getComponentCode(componentSlug: string): Promise<string | null> {
 
   const componentPath = join(
     process.cwd(),
-    "..",
-    "..",
-    "packages",
-    "ui-react",
     "src",
     "components",
+    "library",
+    "react",
     componentMeta.category,
     `${componentSlug}.tsx`
   );
@@ -66,36 +52,6 @@ function getComponentFilePath(componentSlug: string): string {
 export async function CodeBlockCommand({ component }: { component: string }) {
   const componentCode = await getComponentCode(component);
   const filePath = getComponentFilePath(component);
-
-  // Dummy static commands for installation (to be replaced with real commands later)
-  const getDummyInstallCommand = (packageManager: string) => {
-    switch (packageManager) {
-      case "pnpm":
-        return "pnpm add example-package";
-      case "npm":
-        return "npm install example-package";
-      case "yarn":
-        return "yarn add example-package";
-      case "bun":
-        return "bun add example-package";
-    }
-  };
-
-  // Pre-render dummy installation command code blocks
-  const installationCodeBlocks = await Promise.all(
-    packageManagers.map(async (pm) => {
-      const command = getDummyInstallCommand(pm.value);
-      const codeBlock = await CodeBlock({
-        lang: "bash",
-        code: command ?? "",
-      });
-      return {
-        value: pm.value,
-        icon: pm.icon,
-        codeBlock,
-      };
-    })
-  );
 
   // Pre-render component code blocks for each framework
   const frameworkCodeBlocks = componentCode
@@ -128,30 +84,47 @@ export async function CodeBlockCommand({ component }: { component: string }) {
 
   return (
     <div className="space-y-6">
-      {/* Step 1: Install dependencies */}
+      {/* Step 1: Manual Installation Link */}
       <StepItem
         stepNumber={1}
-        title="Install the following dependencies:"
+        title="Complete the manual installation setup"
         isLast={false}
       >
-        <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
-          <div className="[&_figure]:mt-0">
-            <TabsWithLabel
-              items={installationCodeBlocks.map(
-                ({ value, icon: Icon, codeBlock }) => ({
-                  value,
-                  label: value,
-                  icon: Icon ? <Icon className="size-4" /> : undefined,
-                  content: codeBlock,
-                })
-              )}
-              defaultValue="pnpm"
-              label="Terminal"
-              variant="bordered"
-              className="[&_figure]:mt-0"
-            />
+        <div>
+          <div
+            className={cn(
+              "relative rounded-3xl border border-border/50 bg-muted/50  text-sm"
+            )}
+          >
+            <div className="flex gap-4 px-4">
+              <div className="shrink-0 mt-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-500/10 border border-brand-500/20">
+                  <BookOpenIcon className="h-5 w-5 text-brand-400 dark:text-brand-400" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <p className=" text-brand-500 dark:text-brand-400">
+                  If you haven&apos;t already completed the first 4 steps of
+                  the&nbsp;
+                  <Link
+                    href="/docs/documentation/manual-installation"
+                    className={cn(
+                      "inline-flex items-center gap-1 text-sm font-medium text-brand-500 dark:text-brand-300",
+                      "hover:text-brand-500 dark:hover:text-brand-400 transition-colors",
+                      "underline underline-offset-4 decoration-dotted",
+                      "decoration-brand-300",
+                      "dark:decoration-brand-200"
+                    )}
+                  >
+                    manual installation guide
+                    <ExternalLinkIcon className="size-3.5 shrink-0 text-brand-400 dark:text-brand-300" />
+                  </Link>
+                  , please do so before continuing to install these components.
+                </p>
+              </div>
+            </div>
           </div>
-        </CodeBlockWrapper>
+        </div>
       </StepItem>
 
       {/* Step 2: Create file and paste code */}
@@ -189,10 +162,21 @@ export async function CodeBlockCommand({ component }: { component: string }) {
         </StepItem>
       )}
 
-      {/* Step 3: Update import paths */}
+      {/* Step 3: Copy example code */}
       <StepItem
         stepNumber={3}
-        title="Update the import paths to match your project setup."
+        title={
+          <>
+            Finally, Choose any example you like and add it to your project.
+            <br />
+            For instance, create a new file at{" "}
+            <code className="relative rounded-lg bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">
+              {"components/shared/{example-component-name}.tsx"}
+            </code>
+            , paste the example code into that file, and then import and use the
+            component wherever you need it in your application.
+          </>
+        }
         isLast={true}
       />
     </div>

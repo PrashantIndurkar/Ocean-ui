@@ -1,0 +1,448 @@
+---
+title: Next.js Installation
+description: Step-by-step guide to manually integrate Ocean UI components into your Next.js project
+---
+
+# Next.js Installation
+
+### Prerequisites
+
+<DocText>Before you begin, make sure you have the following:</DocText>
+
+- **Node.js** (v18 or higher)
+- **pnpm** package manager (or npm/yarn)
+- Basic knowledge of **Next.js**, **React**, and **TypeScript**
+- A text editor or IDE
+
+<Note>
+  This guide uses Next.js with the App Router. The steps may vary slightly for
+  Pages Router or other React frameworks.
+</Note>
+
+<Divider className="my-10" />
+
+### Step 1: Create a Next.js Project
+
+<DocText>
+  Start by creating a new Next.js project using the latest version:
+</DocText>
+
+```bash
+pnpm create next-app@latest my-app --yes
+cd my-app
+pnpm dev
+```
+
+<DocText>
+  This creates a new Next.js project with TypeScript and the App Router enabled.
+  Once the project is created, navigate to the project directory and start the
+  development server to verify everything is working.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 2: Install Utility Dependencies
+
+<DocText>
+  Ocean UI components use utility functions for merging Tailwind CSS classes.
+  Install the required dependencies:
+</DocText>
+
+```bash
+pnpm i tailwind-merge clsx
+```
+
+<DocText>
+  These packages help merge and resolve Tailwind CSS class names, preventing
+  conflicts and ensuring proper styling.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 3: Create the CN Utility Function
+
+<DocText>
+  Create a utility function that combines `clsx` and `tailwind-merge` for
+  optimal class name handling. This function is used throughout Ocean UI
+  components.
+</DocText>
+
+Create a new file `lib/utils.ts`:
+
+```tsx
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+<Note>
+  The `cn` function intelligently merges Tailwind classes, ensuring that
+  conflicting classes (like `p-4` and `p-2`) resolve correctly, with the last
+  one taking precedence.
+</Note>
+
+<Divider className="my-10" />
+
+### Step 4: Install Core Dependencies
+
+<DocText>
+  Ocean UI components are built on top of Ark UI primitives and use Lucide React
+  for icons. Install these core dependencies:
+</DocText>
+
+```bash
+pnpm install @ark-ui/react lucide-react
+```
+
+<DocText>
+  - **@ark-ui/react**: Provides accessible, headless UI primitives -
+  **lucide-react**: Icon library used throughout Ocean UI components
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 5: Copy Base Components
+
+<DocText>
+  Base components are the core, reusable components that wrap Ark UI primitives.
+  These are the building blocks for your UI.
+</DocText>
+
+<DocText>
+  Copy the base component you want to use from Ocean UI's component library. For
+  example, to use the Accordion component:
+</DocText>
+
+Create `components/ui/accordion.tsx`:
+
+```tsx
+"use client";
+
+import { cn } from "@/lib/utils";
+import { Accordion as AccordionPrimitive } from "@ark-ui/react/accordion";
+import { ChevronDownIcon } from "lucide-react";
+import type { ComponentProps, ReactNode } from "react";
+
+function Accordion({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Root>) {
+  return (
+    <AccordionPrimitive.Root className={cn("w-full", className)} {...props} />
+  );
+}
+
+function AccordionItem({
+  className,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.Item>) {
+  return (
+    <AccordionPrimitive.Item
+      className={cn(
+        "border-b border-border-secondary last:border-b-0",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+interface AccordionTriggerProps
+  extends ComponentProps<typeof AccordionPrimitive.ItemTrigger> {
+  /**
+   * Optional icon or content to display on the left side
+   */
+  leftIcon?: ReactNode;
+  /**
+   * Optional icon or content to display on the right side
+   * If not provided, defaults to ChevronDownIcon
+   */
+  rightIcon?: ReactNode;
+}
+
+function AccordionTrigger({
+  className,
+  children,
+  leftIcon,
+  rightIcon,
+  ...props
+}: AccordionTriggerProps) {
+  return (
+    <AccordionPrimitive.ItemTrigger
+      className={cn(
+        "group flex w-full items-center gap-4 py-4 text-left cursor-pointer text-sm font-medium transition-all outline-none",
+        "hover:underline",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "disabled:pointer-events-none disabled:opacity-50",
+        "[&[data-state=open]>.accordion-chevron]:rotate-180",
+        "data-[state=closed]:text-primary/60 data-[state=closed]:hover:text-primary data-[state=open]:text-primary",
+        className
+      )}
+      {...props}
+    >
+      {/* Left Icon Slot */}
+      {leftIcon}
+
+      {/* Title/Content */}
+      <span className="flex-1">{children}</span>
+
+      {/* Right Icon Slot */}
+      {rightIcon ? (
+        <span className="ml-auto">{rightIcon}</span>
+      ) : (
+        <ChevronDownIcon className="accordion-chevron text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 ml-auto" />
+      )}
+    </AccordionPrimitive.ItemTrigger>
+  );
+}
+
+function AccordionContent({
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof AccordionPrimitive.ItemContent>) {
+  return (
+    <AccordionPrimitive.ItemContent
+      className={cn(
+        "overflow-hidden text-sm",
+        // Ark UI recommended animations
+        "data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
+        "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
+        className
+      )}
+      {...props}
+    >
+      <div className={cn("pb-4", className)}>{children}</div>
+    </AccordionPrimitive.ItemContent>
+  );
+}
+
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+```
+
+<Note>
+  Base components are reusable and can be customized. They handle the core
+  functionality and styling, but you can extend them with additional props or
+  styling as needed.
+</Note>
+
+<Divider className="my-10" />
+
+### Step 6: Set Up Token CSS
+
+<DocText>
+  Ocean UI uses a comprehensive design token system for consistent styling. The
+  `token.css` file contains all color variables, spacing, typography, shadows,
+  and animations used throughout the components.
+</DocText>
+
+<DocText>
+  Copy the `token.css` file from Ocean UI and add it to your project. Create
+  `app/token.css` with the following content:
+</DocText>
+
+Create `app/token.css`:
+
+<CodeBlockFromFile
+  filePath="content/reference/token.css"
+  filename="app/token.css"
+  lang="css"
+  showLineNumbers={true}
+/>
+@import "tailwindcss"; @import "./token.css"; ```
+
+<Note>
+  The token.css file is essential for Ocean UI components to look and function
+  correctly. It includes: - Color system (light and dark mode variables) -
+  Typography scales - Spacing system - Border radius values - Shadow definitions
+  - Animation keyframes - Component-specific tokens
+</Note>
+
+<DocText>
+  You can modify `token.css` to customize the design system to match your brand,
+  but ensure you maintain the required CSS variable names that components depend
+  on.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 7: Create Example Components
+
+<DocText>
+  Example components (also called "shared" or "demo" components) are complete,
+  ready-to-use implementations that demonstrate how to use base components in
+  real scenarios.
+</DocText>
+
+<DocText>
+  Create an example component that uses your base component. For instance,
+  create `components/shared/faq-accordion.tsx`:
+</DocText>
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const accordionItems = [
+  {
+    value: "item-1",
+    title: "How do I update my account information?",
+    content:
+      'You can update your account information by navigating to your profile settings. Click on your profile icon in the top right corner, then select "Account Settings" from the dropdown menu. From there, you can edit your name, email, password, and other personal details.',
+  },
+  {
+    value: "item-2",
+    title: "What payment methods are accepted?",
+    content:
+      "We accept all major credit cards (Visa, Mastercard, American Express), debit cards, PayPal, Apple Pay, and Google Pay. All transactions are processed securely through our encrypted payment gateway to ensure your financial information is protected.",
+  },
+  {
+    value: "item-3",
+    title: "How can I track my order?",
+    content:
+      "Once your order has been shipped, you'll receive a tracking number via email. You can use this tracking number on our website's tracking page or on the carrier's website to monitor your package's journey in real-time. You'll receive updates at each stage of the delivery process.",
+  },
+];
+
+export default function AccordionDemo() {
+  return (
+    <Accordion className="w-full max-w-lg mx-auto" defaultValue={[]}>
+      {accordionItems.map((item) => (
+        <AccordionItem key={item.value} value={item.value}>
+          <AccordionTrigger>{item.title}</AccordionTrigger>
+          <AccordionContent className="text-tertiary">
+            {item.content}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  );
+}
+```
+
+<DocText>
+  Example components show practical usage patterns and can be used directly in
+  your application or serve as templates for your own implementations.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 8: Use Components in Your App
+
+<DocText>
+  Now you can import and use your example component in your Next.js pages or
+  components:
+</DocText>
+
+Update `app/page.tsx`:
+
+```tsx
+import AccordionDemo from "@/components/shared/faq-accordion";
+
+export default function Home() {
+  return (
+    <div>
+      <AccordionDemo />
+    </div>
+  );
+}
+```
+
+<DocText>
+  Your Ocean UI component should now be working in your Next.js application!
+</DocText>
+
+<Divider className="my-10" />
+
+### Understanding the Component Structure
+
+<DocText>
+  It's important to understand the difference between base components and
+  example components:
+</DocText>
+
+### Base Components (`components/ui/`)
+
+<DocText>Base components are the core, reusable building blocks:</DocText>
+
+- Located in `components/ui/`
+- Wrap Ark UI primitives with Ocean UI styling
+- Highly reusable and customizable
+- Export multiple sub-components (e.g., `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionContent`)
+
+### Example Components (`components/shared/`)
+
+<DocText>Example components are complete implementations:</DocText>
+
+- Located in `components/shared/` (or `components/demos/`)
+- Use base components to create real-world examples
+- Show practical usage patterns
+- Can be used directly or as templates
+
+<Divider className="my-10" />
+
+<details className="group my-6">
+  <summary className="cursor-pointer list-none flex items-center gap-2 text-lg font-semibold py-2 hover:text-primary transition-colors select-none">
+    <span className="inline-block transition-transform duration-200 text-muted-foreground group-open:rotate-90">›</span>
+    <span>Troubleshooting</span>
+  </summary>
+
+  <div className="ml-6 mt-4 space-y-6">
+    ### Components Not Styling Correctly
+
+    <DocText>If components don't look right, ensure:</DocText>
+
+    - `token.css` is properly imported in `globals.css`
+    - Tailwind CSS is configured correctly
+    - All CSS variables from `token.css` are available
+
+    ### Import Errors
+
+    <DocText>If you see import errors:</DocText>
+
+    - Verify all dependencies are installed (`@ark-ui/react`, `lucide-react`)
+    - Check that the `cn` utility is in `lib/utils.ts`
+    - Ensure TypeScript path aliases are configured (`@/` should resolve to your project root)
+
+    ### Animation Not Working
+
+    <DocText>If animations aren't working:</DocText>
+
+    - Ensure `token.css` includes the accordion animation keyframes
+    - Check that Tailwind CSS animations are enabled
+    - Verify the animation classes are defined in your Tailwind config
+
+    ### Dark Mode Issues
+
+    <DocText>If dark mode isn't working:</DocText>
+
+    - Ensure `token.css` includes dark mode variables (inside `.dark` class)
+    - Verify your Next.js app has dark mode configured
+    - Check that the `dark` class is applied to your root element
+
+  </div>
+</details>
+
+<Divider className="my-10" />
+
+### Next Steps
+
+<DocText>Now that you have Ocean UI set up manually, you can:</DocText>
+
+- Explore other base components from Ocean UI
+- Customize the `token.css` to match your brand
+- Create your own example components
+- Extend base components with additional functionality
+- Check out component-specific documentation for advanced usage
+
+<DocText>
+  For more information about specific components, visit their individual
+  documentation pages.
+</DocText>

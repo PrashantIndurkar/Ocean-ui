@@ -21,7 +21,10 @@ function AccordionItem({
 }: ComponentProps<typeof AccordionPrimitive.Item>) {
   return (
     <AccordionPrimitive.Item
-      className={cn("border-b border-border last:border-b-0", className)}
+      className={cn(
+        "border-b border-border-secondary last:border-b-0",
+        className
+      )}
       {...props}
     />
   );

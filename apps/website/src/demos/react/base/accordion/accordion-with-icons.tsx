@@ -7,7 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@ocean-ui/react";
+} from "@/components/library/react/base/accordion";
 
 /**
  * Shows a plus icon when the accordion is closed

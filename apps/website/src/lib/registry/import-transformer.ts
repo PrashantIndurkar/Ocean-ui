@@ -55,6 +55,29 @@ export function transformRelativeUtilsImports(code: string): string {
 }
 
 /**
+ * Transform @/components/library/react/base/{component} imports to @/components/ui/{componentSlug} imports
+ * Handles patterns like: @/components/library/react/base/accordion → @/components/ui/accordion
+ *
+ * @param code - Source code to transform
+ * @param componentSlug - Component slug (e.g., "accordion")
+ * @returns Transformed code with local component import paths
+ */
+function transformLibraryComponentImports(
+  code: string,
+  componentSlug: string
+): string {
+  // Pattern to match: from "@/components/library/react/base/{component}" or similar
+  // Handles both single and double quotes
+  const importPattern =
+    /from\s+["']@\/components\/library\/react\/base\/[\w-]+["']/g;
+
+  // Replace with local component path
+  const replacement = `from "@/components/ui/${componentSlug}"`;
+
+  return code.replace(importPattern, replacement);
+}
+
+/**
  * Transform @ocean-ui/react imports to @/components/ui/{componentSlug} imports
  *
  * @param code - Source code to transform
@@ -74,6 +97,9 @@ export function transformImportsForDisplay(
 ): string {
   // First transform relative component imports
   let transformed = transformRelativeComponentImports(code, componentSlug);
+
+  // Then transform @/components/library/react/base/ imports
+  transformed = transformLibraryComponentImports(transformed, componentSlug);
 
   // Then transform relative utils imports
   transformed = transformRelativeUtilsImports(transformed);

@@ -9,7 +9,6 @@ import Link from "next/link";
 
 import { Menu, X, GitFork } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { WavesIcon } from "@/components/icons/waves-icon";
 import { GithubIcon } from "@/components/icons/github-icon";
 
 const Navbar1 = () => {
@@ -60,16 +59,8 @@ const Navbar1 = () => {
     <div className="fixed top-0 left-0 right-0 flex justify-center w-full py-6 px-4 z-50">
       <div className="flex items-center justify-between px-6 py-3 bg-bg-primary rounded-full shadow-lg w-full max-w-3xl relative z-10 border border-border-primary">
         <div className="flex items-center">
-          <motion.div
-            className="mr-4"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            whileHover={{ rotate: 10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <WavesIcon size={25} className="text-fg-primary" />
-          </motion.div>
-          <span className="text-lg font-bold text-fg-primary tracking-tight">
+          🌴{" "}
+          <span className="text-lg font-bold text-fg-primary tracking-tight ml-2">
             Ocean UI
           </span>
         </div>

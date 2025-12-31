@@ -3,18 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "fumadocs-mdx:collections/*": [
-        ".source/*"
-      ],
-      "@ocean-ui/react": [
-        "../../packages/ui-react/src/index.ts"
-      ],
-      "@ocean-ui/react/*": [
-        "../../packages/ui-react/src/*"
-      ]
+      "@/*": ["./src/*"],
+      "fumadocs-mdx:collections/*": [".source/*"]
     },
     "plugins": [
       {
@@ -31,7 +21,5 @@
     ".source/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@source "../../../packages/ui-react/src/**/*.{js,ts,jsx,tsx}";
+@source "../../components/library/react/**/*.{js,ts,jsx,tsx}";
 
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";

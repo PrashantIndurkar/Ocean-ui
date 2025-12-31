@@ -44,7 +44,6 @@ apps/website/public/registry/
     └── [component].json
 ```
 
-
 ## 🛠️ Development
 
 ### Prerequisites
@@ -81,7 +80,6 @@ Ocean-ui/
 │           └── lib/       # Utilities & shared code
 ├── packages/
 │   ├── tokens/            # Design tokens
-│   ├── ui-react/          # React component implementations
 │   └── ui-solid/          # SolidJS component implementations
 └── README.md
 ```
@@ -90,16 +88,18 @@ Ocean-ui/
 
 ### Adding New Components
 
-1. Create component files in `packages/ui-react/src/components/` or `packages/ui-solid/src/components/`
-2. Add component metadata and dependencies
+1. Create React component files in `apps/website/src/components/library/react/base/`
+2. Create SolidJS component files in `packages/ui-solid/src/components/`
+3. Add component metadata and dependencies
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed contribution guidelines.
 
 ## 📦 Packages
 
 - **@ocean-ui/tokens** - Design tokens and CSS variables
-- **@ocean-ui/ui-react** - React component implementations
 - **@ocean-ui/ui-solid** - SolidJS component implementations
+
+Note: React components are now located in `apps/website/src/components/library/react/` instead of a separate package.
 
 ## 🤝 Contributing
 

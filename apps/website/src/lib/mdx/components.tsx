@@ -5,6 +5,7 @@ import type { MDXComponents } from "mdx/types";
 
 import { BadgeLink } from "../../components/mdx/badge-link";
 import { CodeBlockCommand } from "../../components/code/code-block-command";
+import { CodeBlockFromFile } from "../../components/code/code-block-from-file";
 import ComponentPreview from "../../components/preview/component-preview";
 import { Description } from "../../components/mdx/description";
 import { Divider } from "../../components/mdx/divider";
@@ -12,6 +13,7 @@ import { DocText } from "../../components/mdx/doc-text";
 import { MDXCodeBlockClient } from "../../components/code/mdx-code-block-client";
 import { Note } from "../../components/mdx/note";
 import { TechStackCard } from "../../components/mdx/tech-stack-card";
+import { FrameworkCard } from "../../components/mdx/framework-card";
 import { ThemeImage } from "../../components/theme/theme-image";
 import { DocImage } from "../../components/mdx/doc-image";
 import { ArkUiIcon } from "../../components/icons/ark-ui-icon";
@@ -60,12 +62,14 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ),
     BadgeLink,
     CodeBlockCommand,
+    CodeBlockFromFile,
     ComponentPreview,
     Description,
     Divider,
     DocText,
     Note,
     TechStackCard,
+    FrameworkCard,
     ThemeImage,
     DocImage,
     ArkUiIcon,

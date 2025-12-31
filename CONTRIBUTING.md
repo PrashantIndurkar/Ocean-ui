@@ -54,7 +54,7 @@ Create your component in the appropriate framework directory:
 **For React:**
 
 ```
-packages/ui-react/src/components/[component-name].tsx
+apps/website/src/components/library/react/base/[component-name].tsx
 ```
 
 **For SolidJS:**

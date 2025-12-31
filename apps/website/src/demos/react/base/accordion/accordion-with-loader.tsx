@@ -7,7 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@ocean-ui/react";
+} from "@/components/library/react/base/accordion";
 
 /**
  * Renders a loader icon that spins when the accordion is open.

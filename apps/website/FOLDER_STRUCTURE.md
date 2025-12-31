@@ -21,6 +21,7 @@ apps/website/
 ## 📄 Root Files
 
 ### `source.config.ts`
+
 **Purpose**: Fumadocs configuration for MDX content  
 **What goes here**: Content source paths, MDX settings  
 **When to edit**: When changing content structure or adding new content sources
@@ -46,15 +47,18 @@ content/
 ```
 
 ### What goes here:
+
 - **MDX files** (`.mdx`): Documentation pages written in Markdown + React
 - **meta.json**: Navigation structure and page metadata
 
 ### When to add files:
+
 - Adding new component documentation → `content/docs/base-components/{component}.mdx`
 - Adding general docs → `content/docs/documentation/{page}.mdx`
 - Updating navigation → Edit `meta.json` files
 
 ### Example MDX Structure:
+
 ```mdx
 ---
 title: Accordion
@@ -63,9 +67,7 @@ description: A collapsible content component
 
 # Accordion
 
-<Description>
-  Component description here
-</Description>
+<Description>Component description here</Description>
 
 <ComponentPreview name="accordion" />
 ```
@@ -89,12 +91,14 @@ public/
 ```
 
 ### What goes here:
+
 - **Images**: Component screenshots, logos, etc.
 - **Registry JSON**: Generated component registry files (auto-generated)
 - **Audio**: UI sound effects
 - **Schemas**: JSON schema files for validation
 
 ### When to add files:
+
 - Adding images → `public/images/`
 - Registry files are **auto-generated** (don't edit manually)
 - Adding schemas → `public/schema/`
@@ -121,17 +125,20 @@ src/app/
 ```
 
 ### What goes here:
+
 - **API Routes**: Server-side API endpoints (`route.ts` files)
 - **Pages**: React Server Components (`.tsx` files)
 - **Layouts**: Layout components that wrap pages
 - **Styles**: Global CSS files
 
 ### When to add files:
+
 - Adding API endpoint → `src/app/api/{route}/route.ts`
 - Adding new page → `src/app/{route}/page.tsx`
 - Adding layout → `src/app/{route}/layout.tsx`
 
 ### Key Files:
+
 - `src/app/layout.tsx`: Root layout (wraps entire app)
 - `src/app/docs/[[...slug]]/page.tsx`: Dynamic docs pages (renders MDX content)
 - `src/app/api/registry/`: Serves registry JSON files
@@ -160,10 +167,16 @@ src/components/
 │   ├── navbar.tsx
 │   ├── footer.tsx
 │   └── ...
-├── ui/                # Reusable UI components
+├── ui/                # Website-specific UI components
 │   ├── tabs.tsx
 │   ├── theme-toggle.tsx
 │   └── ...
+├── library/           # Library components (documented components)
+│   ├── react/         # React library components
+│   │   ├── base/
+│   │   │   └── accordion.tsx
+│   │   └── index.ts
+│   └── solid/         # SolidJS library components (future)
 ├── icons/             # Icon components
 │   ├── react-icon.tsx
 │   └── ...
@@ -176,41 +189,49 @@ src/components/
 ### Component Categories:
 
 #### `code/` - Code Display Components
+
 **Purpose**: Display and interact with code blocks  
 **Examples**: Code highlighting, copy buttons, code block wrappers  
 **When to add**: Creating new code display features
 
 #### `mdx/` - MDX Components
+
 **Purpose**: Custom components used in MDX documentation  
 **Examples**: `<Note>`, `<Description>`, `<BadgeLink>`  
 **When to add**: Adding new MDX components for docs
 
 #### `preview/` - Component Previews
+
 **Purpose**: Display live component demos  
 **Examples**: Component preview tabs, framework switcher  
 **When to add**: Enhancing component preview functionality
 
 #### `layout/` - Layout Components
+
 **Purpose**: Page structure components  
 **Examples**: Navbar, footer, sidebar  
 **When to add**: Adding/changing site layout
 
 #### `ui/` - Reusable UI Components
+
 **Purpose**: Generic UI components used throughout the site  
 **Examples**: Tabs, buttons, tooltips  
 **When to add**: Creating reusable UI elements
 
 #### `icons/` - Icon Components
+
 **Purpose**: SVG icon components  
 **Examples**: Framework icons, brand icons  
 **When to add**: Adding new icons
 
 #### `theme/` - Theme Components
+
 **Purpose**: Theme-related functionality  
 **Examples**: Theme provider, theme toggle  
 **When to add**: Theme-related features
 
 #### `graphics/` - Graphics/Animations
+
 **Purpose**: Visual effects and animations  
 **Examples**: Background graphics, animations  
 **When to add**: Adding visual effects
@@ -235,14 +256,17 @@ src/demos/
 ```
 
 ### What goes here:
+
 - **Manifests** (`manifest/`): Define which examples exist and their metadata
 - **Demo Components** (`react/`, `solid/`, etc.): Actual demo component code
 
 ### When to add files:
+
 - Adding new component demo → `src/demos/react/{category}/{component}/{example-name}.tsx`
 - Adding manifest → `src/demos/manifest/{category}/{component}.ts`
 
 ### Example Manifest:
+
 ```typescript
 // src/demos/manifest/base/accordion.ts
 import type { ComponentManifest } from "@/lib/registry/registry";
@@ -258,6 +282,7 @@ export default manifest;
 ```
 
 ### Example Demo Component:
+
 ```tsx
 // src/demos/react/base/accordion/accordion-demo.tsx
 "use client";
@@ -265,11 +290,7 @@ export default manifest;
 import { Accordion } from "@ocean-ui/react";
 
 export default function AccordionDemo() {
-  return (
-    <Accordion>
-      {/* Demo code */}
-    </Accordion>
-  );
+  return <Accordion>{/* Demo code */}</Accordion>;
 }
 ```
 
@@ -302,14 +323,17 @@ src/lib/
 ### What goes here:
 
 #### Root Level (`lib/`)
+
 - **`utils.ts`**: General utilities like `cn()` (className merge)
 - **`components.ts`**: List of all available components
 - **`source.ts`**: Fumadocs source configuration
 - **`layout.shared.tsx`**: Shared layout components
 
 #### `lib/registry/` - Registry Utilities
+
 **Purpose**: Code for loading and processing component registry  
 **Files**:
+
 - `registry.ts`: TypeScript types for registry
 - `registry.server.ts`: Server-side functions to load components
 - `registry.utils.ts`: Helper functions for registry operations
@@ -318,15 +342,19 @@ src/lib/
 **When to edit**: When modifying registry loading logic
 
 #### `lib/mdx/` - MDX Utilities
+
 **Purpose**: MDX component configuration  
 **Files**:
+
 - `components.tsx`: Maps MDX components to React components
 
 **When to edit**: When adding/removing MDX components
 
 #### `lib/contexts/` - Context Providers
+
 **Purpose**: React context providers  
 **Files**:
+
 - `framework-context.tsx`: Manages framework selection state
 
 **When to edit**: When adding new context providers
@@ -353,7 +381,7 @@ src/lib/
 
 ### How Component System Works:
 
-1. **Component Source** (`packages/ui-react/`) → Actual component code
+1. **Component Source** (`src/components/library/react/`) → React library component code
 2. **Component Metadata** (`src/lib/components.ts`) → Component list and metadata
 3. **Demo Components** (`src/demos/`) → Example implementations
 4. **Manifests** (`src/demos/manifest/`) → Define available examples
@@ -363,39 +391,43 @@ src/lib/
 
 ## 📝 Quick Reference: Where to Put What
 
-| What You're Adding | Where It Goes |
-|---------------------|---------------|
-| New component documentation page | `content/docs/base-components/{component}.mdx` |
-| New demo component | `src/demos/react/{category}/{component}/{example}.tsx` |
-| New MDX component (like `<Note>`) | `src/components/mdx/{component}.tsx` |
-| New API endpoint | `src/app/api/{route}/route.ts` |
-| New page | `src/app/{route}/page.tsx` |
-| New layout component | `src/components/layout/{component}.tsx` |
-| New utility function | `src/lib/utils.ts` or `src/lib/{category}/` |
-| New icon | `src/components/icons/{icon}.tsx` |
-| New image | `public/images/{image}.png` |
+| What You're Adding                | Where It Goes                                          |
+| --------------------------------- | ------------------------------------------------------ |
+| New component documentation page  | `content/docs/base-components/{component}.mdx`         |
+| New demo component                | `src/demos/react/{category}/{component}/{example}.tsx` |
+| New MDX component (like `<Note>`) | `src/components/mdx/{component}.tsx`                   |
+| New API endpoint                  | `src/app/api/{route}/route.ts`                         |
+| New page                          | `src/app/{route}/page.tsx`                             |
+| New layout component              | `src/components/layout/{component}.tsx`                |
+| New utility function              | `src/lib/utils.ts` or `src/lib/{category}/`            |
+| New icon                          | `src/components/icons/{icon}.tsx`                      |
+| New image                         | `public/images/{image}.png`                            |
 
 ---
 
 ## 🎓 Best Practices
 
 ### File Naming
+
 - **Components**: PascalCase (`ComponentName.tsx`)
 - **Utilities**: camelCase (`utilityFunction.ts`)
 - **Pages**: lowercase (`page.tsx`, `layout.tsx`)
 - **Routes**: lowercase with hyphens (`[framework]/route.ts`)
 
 ### Import Paths
+
 - Use `@/` alias for `src/` directory
 - Example: `import { cn } from "@/lib/utils"`
 - Example: `import { Button } from "@/components/ui/button"`
 
 ### Component Organization
+
 - Keep components small and focused
 - Group related components in folders
 - Use index files for clean imports (if needed)
 
 ### Documentation
+
 - Write clear component descriptions
 - Include usage examples
 - Document props and types
@@ -446,4 +478,3 @@ If you're unsure where a file should go:
 6. **Is it a page or API route?** → `src/app/`
 
 When in doubt, check existing similar files to see where they're located!
-
