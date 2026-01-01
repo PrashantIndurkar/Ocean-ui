@@ -1,12 +1,31 @@
-# Ocean UI
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="apps/website/public/images/oceanui-og-dark.png" />
+    <source media="(prefers-color-scheme: light)" srcset="apps/website/public/images/oceanui-og-light.png" />
+    <img src="apps/website/public/images/oceanui-og-light.png" alt="Ocean UI" width="100%" />
+  </picture>
+</div>
 
-A collection of beautiful, production-ready UI components built on top of Ark UI. Skip months of implementation work. We've transformed the entire Ocean UI design system into code blocks you can drop directly into your project. Get pixel-perfect, accessible components without sacrificing customization or control.
+<br />
 
-## 🌊 What is Ocean UI?
+<div align="center">
+  <h1>🌴 Ocean UI</h1>
+  <p>
+    <strong>Beautiful Components for Design Engineers</strong>
+  </p>
+  <p>
+    A collection of copy-&-paste components for quickly building application UIs.<br />
+    It's open-source and built with Tailwind CSS and Ark UI.
+  </p>
+  
+  <p>
+    <a href="https://components.prashantindurkar.in">Documentation</a> •
+    <a href="./CONTRIBUTING.md">Contributing</a> •
+    <a href="./LICENSE">License</a>
+  </p>
+</div>
 
-Ocean UI is a collection of production-ready UI components built on top of **Ark UI** and powered by **Zag.js**. It combines the flexibility of copy-paste components with the robustness of a headless UI foundation, giving you the best of both worlds.
-
-Built with **Tailwind CSS v4**, **TypeScript**, and designed to work across multiple JavaScript frameworks, Ocean UI is the perfect starting point for any project. Everything you need to design and build modern, beautiful interfaces and websites is right here.
+---
 
 ## ✨ Features
 
@@ -18,37 +37,29 @@ Built with **Tailwind CSS v4**, **TypeScript**, and designed to work across mult
 - 🎯 **TypeScript** - Full type safety out of the box
 - 🎨 **Tailwind CSS v4** - Modern utility-first styling
 
+## 🚀 Quick Start
+
+Visit our [documentation site](https://components.prashantindurkar.in) to browse components and copy code directly into your project.
+
+Each component is:
+
+- ✅ Production-ready
+- ✅ Fully accessible
+- ✅ TypeScript typed
+- ✅ Customizable via props and className
+- ✅ Framework compatible
+
 ## 📚 Documentation
 
-- [Component Documentation](https://components.prashantindurkar.in) - Browse all available components
+Browse all available components, view live demos, and copy code directly from our documentation:
 
-## 🏗️ Architecture
-
-### Registry System
-
-Ocean UI uses a registry system for component distribution. This approach provides several benefits:
-
-- **Component Discovery**: Registry provides metadata and source code for all components
-- **Framework Support**: Components available for multiple frameworks (React, SolidJS, and more)
-- **Always Up-to-Date**: Components are served from the registry, ensuring you get the latest versions
-
-### Registry Structure
-
-```
-apps/website/public/registry/
-├── react/
-│   ├── index.json          # Component index
-│   └── [component].json    # Individual component files
-└── solid/
-    ├── index.json
-    └── [component].json
-```
+**[→ View Documentation](https://components.prashantindurkar.in)**
 
 ## 🛠️ Development
 
 ### Prerequisites
 
-- Node.js 18+ (for native `fetch` API)
+- Node.js 18+
 - pnpm (recommended) or npm
 - TypeScript 5+
 
@@ -65,73 +76,39 @@ pnpm build
 pnpm --filter @ocean-ui/website dev
 ```
 
-### Project Structure
+For detailed development guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-```
-Ocean-ui/
-├── apps/
-│   └── website/           # Documentation site (Next.js)
-│       ├── content/       # MDX documentation content
-│       ├── public/        # Static assets & registry JSON files
-│       └── src/           # Source code
-│           ├── app/       # Next.js App Router (pages & API)
-│           ├── components/# Website UI components
-│           ├── demos/     # Component demo/example files
-│           └── lib/       # Utilities & shared code
-├── packages/
-│   ├── tokens/            # Design tokens
-│   └── ui-solid/          # SolidJS component implementations
-└── README.md
-```
+## 🤝 Contributing
 
-📖 **For detailed folder structure documentation**, see [`apps/website/FOLDER_STRUCTURE.md`](./apps/website/FOLDER_STRUCTURE.md)
+We welcome contributions! Whether it's adding new components, improving existing ones, or fixing bugs, your help makes Ocean UI better for everyone.
 
-### Adding New Components
-
-1. Create React component files in `apps/website/src/components/library/react/base/`
-2. Create SolidJS component files in `packages/ui-solid/src/components/`
-3. Add component metadata and dependencies
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed contribution guidelines.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ## 📦 Packages
 
 - **@ocean-ui/tokens** - Design tokens and CSS variables
 - **@ocean-ui/ui-solid** - SolidJS component implementations
+- **@ocean-ui/ui-react** - React component implementations
 
-Note: React components are now located in `apps/website/src/components/library/react/` instead of a separate package.
+## 🙏 Built With
 
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on:
-
-- Adding new components
-- Updating existing components
-- Registry generation process
-- Testing procedures
-- Code style and conventions
-
-## 📄 License
-
-See the [LICENSE](./LICENSE) file for details.
-
-## 🔗 Links
-
-- [Documentation](https://components.prashantindurkar.in)
-- [Contributing Guide](./CONTRIBUTING.md)
-
-## 🙏 Acknowledgments
-
-Ocean UI is built on top of:
+Ocean UI is built on top of amazing open-source projects:
 
 - [Ark UI](https://ark-ui.com) - Headless UI components
 - [Zag.js](https://zagjs.com) - State machine primitives
 - [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
 
+## 📄 License
+
+See the [LICENSE](./LICENSE) file for details.
+
 ---
 
-**Memory Trick**: Think of Ocean UI as an "ocean" of components - vast, accessible, and always flowing with updates through the registry system.
-
-## Summary
-
-Ocean UI is a modern component system built on Ark UI that provides copy-paste components for React and SolidJS. The system supports multiple frameworks and follows a copy-paste philosophy that gives developers full ownership of their code. Components are displayed on the documentation website with code blocks that can be copied directly into your project.
+<div align="center">
+  <p>Made with ❤️ by the Ocean UI community</p>
+  <p>
+    <a href="https://components.prashantindurkar.in">Documentation</a> •
+    <a href="./CONTRIBUTING.md">Contributing</a> •
+    <a href="./LICENSE">License</a>
+  </p>
+</div>
