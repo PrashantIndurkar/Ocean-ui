@@ -41,11 +41,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/",
+    url: "https://components.prashantindurkar.in/",
     siteName: "Ocean UI",
     title: "Ocean UI - Beautiful Components for Design Engineers",
     description:
       "A collection of beautiful, copy-&-paste components for quickly building application UIs. Open-source design system built with Tailwind CSS and Ark UI.",
+    images: [
+      {
+        url: "https://components.prashantindurkar.in/images/oceanui-og-light.png",
+        width: 1200,
+        height: 630,
+        alt: "Ocean UI - Beautiful Components for Design Engineers",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -53,6 +61,7 @@ export const metadata: Metadata = {
     description:
       "A collection of beautiful, copy-&-paste components for quickly building application UIs.",
     creator: "@prashant2weet",
+    images: ["https://components.prashantindurkar.in/images/oceanui-og-light.png"],
   },
   icons: {
     icon: "/icon.svg",
