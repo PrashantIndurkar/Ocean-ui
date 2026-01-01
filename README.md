@@ -1,8 +1,8 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="apps/website/public/images/oceanui-og-dark.png" />
-    <source media="(prefers-color-scheme: light)" srcset="apps/website/public/images/oceanui-og-light.png" />
-    <img src="apps/website/public/images/oceanui-og-light.png" alt="Ocean UI" width="100%" />
+    <source media="(prefers-color-scheme: dark)" srcset="apps/website/public/images/oceanui-og-dark.gif" />
+    <source media="(prefers-color-scheme: light)" srcset="apps/website/public/images/oceanui-og-light.gif" />
+    <img src="apps/website/public/images/oceanui-og-light.gif" alt="Ocean UI" width="100%" />
   </picture>
 </div>
 

@@ -48,10 +48,18 @@ export const metadata: Metadata = {
       "A collection of beautiful, copy-&-paste components for quickly building application UIs. Open-source design system built with Tailwind CSS and Ark UI.",
     images: [
       {
-        url: "https://components.prashantindurkar.in/images/oceanui-og-dark.png",
+        url: "https://components.prashantindurkar.in/images/oceanui-og-light.gif",
         width: 1200,
         height: 630,
         alt: "Ocean UI - Beautiful Components for Design Engineers",
+        type: "image/gif",
+      },
+      {
+        url: "https://components.prashantindurkar.in/images/oceanui-og-dark.gif",
+        width: 1200,
+        height: 630,
+        alt: "Ocean UI - Beautiful Components for Design Engineers",
+        type: "image/gif",
       },
     ],
   },
@@ -62,7 +70,7 @@ export const metadata: Metadata = {
       "A collection of beautiful, copy-&-paste components for quickly building application UIs.",
     creator: "@prashant2weet",
     images: [
-      "https://components.prashantindurkar.in/images/oceanui-og-dark.png",
+      "https://components.prashantindurkar.in/images/oceanui-og-light.gif",
     ],
   },
   icons: {
