@@ -5,20 +5,503 @@ description: Step-by-step guide to manually integrate Ocean UI components into y
 
 # SolidJS Installation
 
-<Description>
-  Learn how to manually integrate Ocean UI components into your SolidJS project.
-  This guide will walk you through copying components, setting up dependencies,
-  and configuring styling to get Ocean UI working in your SolidJS application.
-</Description>
+### Prerequisites
 
-<DocText>
-  SolidJS support is coming soon! Check back later for installation instructions
-  and setup guides for SolidJS projects.
-</DocText>
+<DocText>Before you begin, make sure you have the following:</DocText>
+
+- **Node.js** (v18 or higher)
+- **pnpm** package manager (or npm/yarn)
+- Basic knowledge of **SolidJS**, **Vite**, and **TypeScript**
+- A text editor or IDE
 
 <Note>
-  SolidJS components are currently in development. Once available, you'll be
-  able to use Ocean UI components in your SolidJS projects with the same ease
-  and flexibility as Next.js.
+  This guide uses Vite with SolidJS. The steps may vary slightly for other build
+  tools or SolidJS meta-frameworks like SolidStart.
 </Note>
 
+<Divider className="my-10" />
+
+### Step 1: Create a SolidJS Project
+
+<DocText>
+  Start by creating a new SolidJS project using the official SolidJS template:
+</DocText>
+
+```bash
+pnpm create solid
+cd solid-project
+pnpm dev
+```
+
+<DocText>
+  This creates a new SolidJS project with TypeScript and Vite enabled. Once the
+  project is created, navigate to the project directory and start the
+  development server to verify everything is working.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 2: Install Utility Dependencies
+
+<DocText>
+  Ocean UI components use utility functions for merging Tailwind CSS classes.
+  Install the required dependencies:
+</DocText>
+
+```bash
+pnpm i tailwind-merge clsx
+```
+
+<DocText>
+  These packages help merge and resolve Tailwind CSS class names, preventing
+  conflicts and ensuring proper styling.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 3: Create the CN Utility Function
+
+<DocText>
+  Create a utility function that combines `clsx` and `tailwind-merge` for
+  optimal class name handling. This function is used throughout Ocean UI
+  components.
+</DocText>
+
+Create a new file `src/lib/utils.ts`:
+
+```tsx
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+<Note>
+  The `cn` function intelligently merges Tailwind classes, ensuring that
+  conflicting classes (like `p-4` and `p-2`) resolve correctly, with the last
+  one taking precedence.
+</Note>
+
+<Divider className="my-10" />
+
+### Step 4: Install Core Dependencies
+
+<DocText>
+  Ocean UI components are built on top of Ark UI primitives and use Lucide Solid
+  for icons. Install these core dependencies:
+</DocText>
+
+```bash
+pnpm install @ark-ui/solid lucide-solid
+```
+
+<DocText>
+  - **@ark-ui/solid**: Provides accessible, headless UI primitives for SolidJS -
+  **lucide-solid**: Icon library used throughout Ocean UI components
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 5: Copy Base Components
+
+<DocText>
+  Base components are the core, reusable components that wrap Ark UI primitives.
+  These are the building blocks for your UI.
+</DocText>
+
+<DocText>
+  Copy the base component you want to use from Ocean UI's component library. For
+  example, to use the Accordion component:
+</DocText>
+
+Create `src/components/ui/accordion.tsx`:
+
+```tsx
+import {
+  AccordionRoot,
+  AccordionItem as AccordionItemPrimitive,
+  AccordionItemTrigger as AccordionItemTriggerPrimitive,
+  AccordionItemContent as AccordionItemContentPrimitive,
+  type AccordionRootProps,
+  type AccordionItemProps,
+  type AccordionItemTriggerProps,
+  type AccordionItemContentProps,
+} from "@ark-ui/solid/accordion";
+import { ChevronDownIcon } from "lucide-solid";
+import type { JSX, ParentComponent } from "solid-js";
+import { splitProps } from "solid-js";
+
+import { cn } from "@/lib/utils";
+
+export interface AccordionProps extends AccordionRootProps {}
+
+export const Accordion: ParentComponent<AccordionProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "children"]);
+  return (
+    <AccordionRoot class={cn("w-full", local.class)} {...rest}>
+      {local.children}
+    </AccordionRoot>
+  );
+};
+
+export interface AccordionItemComponentProps extends AccordionItemProps {}
+
+export const AccordionItemComponent: ParentComponent<
+  AccordionItemComponentProps
+> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "children"]);
+  return (
+    <AccordionItemPrimitive
+      class={cn("border-b border-border last:border-b-0", local.class)}
+      {...rest}
+    >
+      {local.children}
+    </AccordionItemPrimitive>
+  );
+};
+
+export interface AccordionTriggerComponentProps
+  extends AccordionItemTriggerProps {
+  /**
+   * Optional icon or content to display on the left side
+   */
+  leftIcon?: JSX.Element;
+  /**
+   * Optional icon or content to display on the right side
+   * If not provided, defaults to ChevronDownIcon
+   */
+  rightIcon?: JSX.Element;
+}
+
+export const AccordionTriggerComponent: ParentComponent<
+  AccordionTriggerComponentProps
+> = (props) => {
+  const [local, rest] = splitProps(props, [
+    "class",
+    "children",
+    "leftIcon",
+    "rightIcon",
+  ]);
+  return (
+    <AccordionItemTriggerPrimitive
+      class={cn(
+        "group flex w-full items-center gap-4 py-4 text-left cursor-pointer text-sm font-medium transition-all outline-none",
+        "hover:underline",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "disabled:pointer-events-none disabled:opacity-50",
+        "[&[data-state=open]>.accordion-chevron]:rotate-180",
+        "data-[state=closed]:text-primary/60 data-[state=closed]:hover:text-primary data-[state=open]:text-primary",
+        local.class
+      )}
+      {...rest}
+    >
+      {/* Left Icon Slot */}
+      {local.leftIcon}
+
+      {/* Title/Content */}
+      <span class="flex-1">{local.children}</span>
+
+      {/* Right Icon Slot */}
+      {local.rightIcon ? (
+        <span class="ml-auto">{local.rightIcon}</span>
+      ) : (
+        <ChevronDownIcon class="accordion-chevron text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 ml-auto" />
+      )}
+    </AccordionItemTriggerPrimitive>
+  );
+};
+
+export interface AccordionContentComponentProps
+  extends AccordionItemContentProps {}
+
+export const AccordionContentComponent: ParentComponent<
+  AccordionContentComponentProps
+> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "children"]);
+  return (
+    <AccordionItemContentPrimitive
+      class={cn(
+        "overflow-hidden text-sm",
+        // Ark UI recommended animations
+        "data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
+        "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
+        // Ark UI recommended data selectors for custom animations:
+        "[data-scope=accordion][data-part=item-content][data-state=open]:animate-[slideDown_250ms_ease-in-out]",
+        "[data-scope=accordion][data-part=item-content][data-state=closed]:animate-[slideUp_200ms_ease-in-out]",
+        local.class
+      )}
+      {...rest}
+    >
+      <div class="pb-4">{local.children}</div>
+    </AccordionItemContentPrimitive>
+  );
+};
+
+// Export with cleaner names
+export {
+  AccordionItemComponent as AccordionItem,
+  AccordionTriggerComponent as AccordionTrigger,
+  AccordionContentComponent as AccordionContent,
+};
+```
+
+<Note>
+  Base components are reusable and can be customized. They handle the core
+  functionality and styling, but you can extend them with additional props or
+  styling as needed. Note that SolidJS uses `class` instead of `className`, and
+  components use `ParentComponent` with `splitProps` for prop handling.
+</Note>
+
+<Divider className="my-10" />
+
+### Step 6: Set Up Token CSS
+
+<DocText>
+  Ocean UI uses a comprehensive design token system for consistent styling. The
+  `token.css` file contains all color variables, spacing, typography, shadows,
+  and animations used throughout the components.
+</DocText>
+
+<DocText>
+  Copy the `token.css` file from Ocean UI and add it to your project. Create
+  `src/token.css` with the following content:
+</DocText>
+
+Create `src/token.css`:
+
+<CodeBlockFromFile
+  filePath="content/reference/token.css"
+  filename="src/token.css"
+  lang="css"
+  showLineNumbers={true}
+/>
+
+<DocText>
+  Then import it in your main entry file (typically `src/index.css` or
+  `src/app.css`):
+</DocText>
+
+```css
+@import "tailwindcss";
+@import "./token.css";
+```
+
+<Note>
+  The token.css file is essential for Ocean UI components to look and function
+  correctly. It includes: - Color system (light and dark mode variables) -
+  Typography scales - Spacing system - Border radius values - Shadow definitions
+  - Animation keyframes - Component-specific tokens
+</Note>
+
+<DocText>
+  You can modify `token.css` to customize the design system to match your brand,
+  but ensure you maintain the required CSS variable names that components depend
+  on.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 7: Create Example Components
+
+<DocText>
+  Example components (also called "shared" or "demo" components) are complete,
+  ready-to-use implementations that demonstrate how to use base components in
+  real scenarios.
+</DocText>
+
+<DocText>
+  Create an example component that uses your base component. For instance,
+  create `src/components/shared/faq-accordion.tsx`:
+</DocText>
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { For } from "solid-js";
+
+const accordionItems = [
+  {
+    value: "item-1",
+    title: "How do I update my account information?",
+    content:
+      'You can update your account information by navigating to your profile settings. Click on your profile icon in the top right corner, then select "Account Settings" from the dropdown menu. From there, you can edit your name, email, password, and other personal details.',
+  },
+  {
+    value: "item-2",
+    title: "What payment methods are accepted?",
+    content:
+      "We accept all major credit cards (Visa, Mastercard, American Express), debit cards, PayPal, Apple Pay, and Google Pay. All transactions are processed securely through our encrypted payment gateway to ensure your financial information is protected.",
+  },
+  {
+    value: "item-3",
+    title: "How can I track my order?",
+    content:
+      "Once your order has been shipped, you'll receive a tracking number via email. You can use this tracking number on our website's tracking page or on the carrier's website to monitor your package's journey in real-time. You'll receive updates at each stage of the delivery process.",
+  },
+];
+
+export default function AccordionDemo() {
+  return (
+    <Accordion class="w-full max-w-lg mx-auto" defaultValue={[]}>
+      <For each={accordionItems}>
+        {(item) => (
+          <AccordionItem value={item.value}>
+            <AccordionTrigger>{item.title}</AccordionTrigger>
+            <AccordionContent class="text-tertiary">
+              {item.content}
+            </AccordionContent>
+          </AccordionItem>
+        )}
+      </For>
+    </Accordion>
+  );
+}
+```
+
+<Note>
+  In SolidJS, use the `<For>` component instead of `.map()` for rendering lists.
+  This is the idiomatic SolidJS pattern for reactive list rendering.
+</Note>
+
+<DocText>
+  Example components show practical usage patterns and can be used directly in
+  your application or serve as templates for your own implementations.
+</DocText>
+
+<Divider className="my-10" />
+
+### Step 8: Use Components in Your App
+
+<DocText>
+  Now you can import and use your example component in your SolidJS pages or
+  components:
+</DocText>
+
+Update `src/App.tsx` (or your main component file):
+
+```tsx
+import AccordionDemo from "@/components/shared/faq-accordion";
+
+export default function App() {
+  return (
+    <div>
+      <AccordionDemo />
+    </div>
+  );
+}
+```
+
+<DocText>
+  Your Ocean UI component should now be working in your SolidJS application!
+</DocText>
+
+<Divider className="my-10" />
+
+### Understanding the Component Structure
+
+<DocText>
+  It's important to understand the difference between base components and
+  example components:
+</DocText>
+
+### Base Components (`components/ui/`)
+
+<DocText>Base components are the core, reusable building blocks:</DocText>
+
+- Located in `components/ui/`
+- Wrap Ark UI primitives with Ocean UI styling
+- Highly reusable and customizable
+- Export multiple sub-components (e.g., `Accordion`, `AccordionItem`, `AccordionTrigger`, `AccordionContent`)
+- Use SolidJS patterns: `ParentComponent`, `splitProps`, and `class` prop
+
+### Example Components (`components/shared/`)
+
+<DocText>Example components are complete implementations:</DocText>
+
+- Located in `components/shared/` (or `components/demos/`)
+- Use base components to create real-world examples
+- Show practical usage patterns
+- Can be used directly or as templates
+- Use SolidJS patterns like `<For>` for list rendering
+
+<Divider className="my-10" />
+
+<details className="group my-6">
+  <summary className="cursor-pointer list-none flex items-center gap-2 text-lg font-semibold py-2 hover:text-primary transition-colors select-none">
+    <span className="inline-block transition-transform duration-200 text-muted-foreground group-open:rotate-90">›</span>
+    <span>Troubleshooting</span>
+  </summary>
+
+  <div className="ml-6 mt-4 space-y-6">
+    ### Components Not Styling Correctly
+
+    <DocText>If components don't look right, ensure:</DocText>
+
+    - `token.css` is properly imported in your main CSS file
+    - Tailwind CSS is configured correctly in your Vite project
+    - All CSS variables from `token.css` are available
+    - The `@import "tailwindcss"` directive is included before importing `token.css`
+
+    ### Import Errors
+
+    <DocText>If you see import errors:</DocText>
+
+    - Verify all dependencies are installed (`@ark-ui/solid`, `lucide-solid`)
+    - Check that the `cn` utility is in `src/lib/utils.ts`
+    - Ensure TypeScript path aliases are configured in `tsconfig.json` (`@/` should resolve to your `src/` directory)
+    - Verify Vite is configured to resolve the `@/` alias (check `vite.config.ts`)
+
+    ### Animation Not Working
+
+    <DocText>If animations aren't working:</DocText>
+
+    - Ensure `token.css` includes the accordion animation keyframes
+    - Check that Tailwind CSS animations are enabled
+    - Verify the animation classes are defined in your Tailwind config
+    - Make sure Tailwind CSS v4 is properly configured in your Vite project
+
+    ### Dark Mode Issues
+
+    <DocText>If dark mode isn't working:</DocText>
+
+    - Ensure `token.css` includes dark mode variables (inside `.dark` class)
+    - Verify your SolidJS app has dark mode configured (you may need to add a dark mode toggle)
+    - Check that the `dark` class is applied to your root element (typically `<html>` or `<body>`)
+    - Consider using a library like `solid-js/store` or a theme provider for dark mode management
+
+    ### SolidJS-Specific Issues
+
+    <DocText>If you encounter SolidJS-specific issues:</DocText>
+
+    - Ensure you're using `class` instead of `className` for styling
+    - Use `<For>` component instead of `.map()` for list rendering
+    - Remember to use `splitProps` when destructuring props in components
+    - Verify that components are using `ParentComponent` type for proper typing
+    - Check that reactive primitives (signals, stores) are used correctly if needed
+
+  </div>
+</details>
+
+<Divider className="my-10" />
+
+### Next Steps
+
+<DocText>Now that you have Ocean UI set up manually, you can:</DocText>
+
+- Explore other base components from Ocean UI
+- Customize the `token.css` to match your brand
+- Create your own example components
+- Extend base components with additional functionality
+- Check out component-specific documentation for advanced usage
+- Learn more about SolidJS reactivity patterns and best practices
+
+<DocText>
+  For more information about specific components, visit their individual
+  documentation pages.
+</DocText>
