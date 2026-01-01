@@ -33,7 +33,10 @@ export const AccordionItemComponent: ParentComponent<
   const [local, rest] = splitProps(props, ["class", "children"]);
   return (
     <AccordionItemPrimitive
-      class={cn("border-b border-border last:border-b-0", local.class)}
+      class={cn(
+        "border-b border-border-secondary last:border-b-0",
+        local.class
+      )}
       {...rest}
     >
       {local.children}
