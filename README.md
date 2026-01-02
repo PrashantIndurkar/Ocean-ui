@@ -37,6 +37,18 @@
 - 🎯 **TypeScript** - Full type safety out of the box
 - 🎨 **Tailwind CSS v4** - Modern utility-first styling
 
+## 🎯 Supported Frameworks
+
+Ocean UI currently supports the following frameworks with official integration guides:
+
+<div align="center">
+  
+| [<img src="apps/website/public/images/next.png" alt="Next.js" width="80" height="32" />](https://components.prashantindurkar.in/docs/documentation/integration/nextjs)<br />**Next.js** | [<img src="apps/website/public/images/solid.png" alt="SolidJS" width="40" height="40" />](https://components.prashantindurkar.in/docs/documentation/integration/solidjs)<br />**SolidJS** |
+|:---:|:---:|
+| Next.js integration | SolidJS integration |
+
+</div>
+
 ## 🚀 Quick Start
 
 Visit our [documentation site](https://components.prashantindurkar.in) to browse components and copy code directly into your project.
@@ -83,12 +95,6 @@ For detailed development guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 We welcome contributions! Whether it's adding new components, improving existing ones, or fixing bugs, your help makes Ocean UI better for everyone.
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
-
-## 📦 Packages
-
-- **@ocean-ui/tokens** - Design tokens and CSS variables
-- **@ocean-ui/ui-solid** - SolidJS component implementations
-- **@ocean-ui/ui-react** - React component implementations
 
 ## 🙏 Built With
 
