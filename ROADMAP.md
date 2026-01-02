@@ -1,30 +1,59 @@
 # 🗺️ Ocean UI Component Roadmap
 
-This roadmap tracks the development progress of all ARK UI components in Ocean UI. Components are organized by category and prioritized for fast shipping.
+This roadmap tracks the development progress of all ARK UI and Align UI components in Ocean UI. Components are organized by category (matching Align UI structure) and prioritized for fast shipping.
 
 ## 📊 Progress Overview
 
-**Total Components:** 35  
-**Completed:** 1 (3%)  
+**Total Components:** 60+  
+**Completed:** 1 (2%)  
 **In Progress:** 0  
-**Planned:** 34
+**Planned:** 59+
 
 ---
 
 ## 📦 Component Categories
 
-### 🔘 Form Controls (20 components)
+### 🎯 Actions (6 components)
+
+Components for user actions and interactions.
+
+#### Phase 1 - Quick Wins (High Priority)
+
+- [ ] **Button** - Primary action button component (Easy, 2-3h, Very High Usage)
+- [ ] **Button Group** - Group of related buttons (Easy, 2-3h, High Usage)
+- [ ] **Link Button** - Button styled as a link (Easy, 1-2h, High Usage)
+
+#### Phase 2 - Button Variants
+
+- [ ] **Compact Button** - Smaller button variant (Easy, 1-2h, Medium Usage)
+- [ ] **Fancy Button** - Enhanced button with effects (Medium, 3-4h, Low Usage)
+
+---
+
+### 📝 Form (25 components)
 
 Essential input and form interaction components.
 
 #### Phase 1 - Quick Wins (High Priority)
 
-- [ ] **Toggle** - Simple on/off toggle switch (Easy, 2-3h, Very High Usage)
-- [ ] **Slider** - Range input slider (Easy, 3-4h, Very High Usage)
+- [ ] **Input** - Basic text input field (Easy, 2-3h, Very High Usage)
 - [ ] **Number Input** - Numeric input with increment/decrement (Easy, 2-3h, Very High Usage)
 - [ ] **Password Input** - Password field with show/hide toggle (Easy, 2-3h, Very High Usage)
 - [ ] **Field** - Form field wrapper with label and error handling (Easy, 2-3h, Very High Usage)
 - [ ] **Fieldset** - Grouping container for form fields (Easy, 1-2h, High Usage)
+- [ ] **Label** - Form label component (Easy, 1h, Very High Usage)
+- [ ] **Hint** - Helper text for form fields (Easy, 1h, High Usage)
+
+#### Phase 1 - Form Controls
+
+- [ ] **Checkbox** - Checkbox input (Easy, 2-3h, Very High Usage)
+- [ ] **Radio** - Radio button input (Easy, 2-3h, Very High Usage)
+- [ ] **Radio Group** - Group of radio buttons (Easy, 2-3h, High Usage)
+- [ ] **Switch** - Toggle switch (Easy, 2-3h, Very High Usage)
+- [ ] **Toggle** - Simple on/off toggle switch (Easy, 2-3h, Very High Usage)
+- [ ] **Textarea** - Multi-line text input (Easy, 2-3h, Very High Usage)
+- [ ] **Slider** - Range input slider (Easy, 3-4h, Very High Usage)
+- [ ] **Select** - Dropdown select component (Easy, 3-4h, Very High Usage)
 - [ ] **Toggle Group** - Group of toggle buttons (Easy, 3-4h, High Usage)
 - [ ] **Segment Group** - Segmented control for multiple options (Easy, 3-4h, High Usage)
 
@@ -36,6 +65,7 @@ Essential input and form interaction components.
 - [ ] **Tags Input** - Multi-tag input field (Medium, 4-5h, High Usage)
 - [ ] **Editable** - Inline editable text component (Medium, 4-5h, Medium Usage)
 - [ ] **Rating Group** - Star rating input (Medium, 3-4h, Medium Usage)
+- [ ] **Digit Input** - Numeric digit input (Medium, 3-4h, Medium Usage)
 
 #### Phase 5 - Complex Form Controls
 
@@ -47,32 +77,30 @@ Essential input and form interaction components.
 
 ---
 
-### 📂 Disclosure (1 component)
+### 📊 Displaying Data (12 components)
 
-Components for showing/hiding content.
-
-- [x] **Accordion** - Collapsible content sections ✓
-- [ ] **Collapsible** - Simple show/hide content (Medium, 3-4h, High Usage)
-
----
-
-### 🎭 Overlay (2 components)
-
-Components that overlay content on the page.
+Components for displaying data and content.
 
 #### Phase 1 - Quick Wins
 
-- [ ] **Hover Card** - Card that appears on hover (Easy, 3-4h, Medium Usage)
+- [ ] **Avatar** - User avatar component (Easy, 2-3h, Very High Usage)
+- [ ] **Badge** - Status badge component (Easy, 1-2h, Very High Usage)
+- [ ] **Card** - Content card container (Easy, 2-3h, Very High Usage)
+- [ ] **Divider** - Visual separator (Easy, 1h, High Usage)
+- [ ] **Tag** - Tag/label component (Easy, 1-2h, High Usage)
 
-#### Phase 4 - Advanced Overlays
+#### Phase 2 - Data Display
 
-- [ ] **Floating Panel** - Floating panel overlay (Medium, 5-6h, Medium Usage)
+- [ ] **Avatar Group** - Group of avatars (Easy, 2-3h, Medium Usage)
+- [ ] **Status Badge** - Status indicator badge (Easy, 1-2h, Medium Usage)
+- [ ] **Kbd** - Keyboard key display (Easy, 1-2h, Low Usage)
+- [ ] **Banner** - Banner/alert banner (Medium, 3-4h, Medium Usage)
 
----
+#### Phase 3 - Advanced Data Display
 
-### 📊 Data Display (2 components)
-
-Components for displaying data and content.
+- [ ] **Data Table** - Table component with sorting/filtering (Hard, 8-10h, High Usage)
+- [ ] **Progress Bar** - Linear progress indicator (Easy, 1-2h, High Usage)
+- [ ] **Progress Circle** - Circular progress indicator (Easy, 2-3h, High Usage)
 
 #### Phase 4 - Utilities
 
@@ -84,30 +112,90 @@ Components for displaying data and content.
 
 ---
 
-### 🧭 Navigation (3 components)
+### 💬 Feedback (5 components)
+
+Components that provide user feedback.
+
+#### Phase 1 - Quick Wins
+
+- [ ] **Toast** - Toast notification component (Easy, 3-4h, Very High Usage)
+- [ ] **Tooltip** - Tooltip component (Easy, 2-3h, Very High Usage)
+
+#### Phase 2 - Feedback Components
+
+- [ ] **Alert** - Alert/notification component (Easy, 2-3h, High Usage)
+- [ ] **Notification** - Notification system (Medium, 4-5h, High Usage)
+- [ ] **Progress** - Progress indicator (base component) (Easy, 2-3h, High Usage)
+
+---
+
+### 📐 Layout (6 components)
+
+Components for organizing and structuring content.
+
+#### Phase 1 - Quick Wins
+
+- [x] **Accordion** - Collapsible content sections ✓
+
+#### Phase 2 - Layout Components
+
+- [ ] **Collapsible** - Simple show/hide content (Medium, 3-4h, High Usage)
+- [ ] **Breadcrumb** - Breadcrumb navigation (Easy, 2-3h, High Usage)
+
+#### Phase 3 - Layout Structure
+
+- [ ] **Segmented Control** - Segmented button group (Easy, 3-4h, High Usage)
+- [ ] **Tabs (Horizontal)** - Horizontal tab navigation (Easy, 3-4h, Very High Usage)
+- [ ] **Tabs (Vertical)** - Vertical tab navigation (Easy, 3-4h, Medium Usage)
+
+---
+
+### 🧭 Navigation (5 components)
 
 Components for navigating through content.
+
+#### Phase 1 - Quick Wins
+
+- [ ] **Menu** - Dropdown menu component (Easy, 3-4h, Very High Usage)
 
 #### Phase 3 - Navigation & Structure
 
 - [ ] **Pagination** - Page navigation controls (Medium, 4-5h, High Usage)
 - [ ] **Steps** - Step indicator/wizard component (Medium, 5-6h, Medium Usage)
+- [ ] **Horizontal Stepper** - Horizontal step indicator (Medium, 4-5h, Medium Usage)
+- [ ] **Vertical Stepper** - Vertical step indicator (Medium, 4-5h, Medium Usage)
+- [ ] **Dot Stepper** - Dot-based step indicator (Easy, 2-3h, Medium Usage)
 - [ ] **Tree View** - Hierarchical tree navigation (Hard, 8-10h, Medium Usage)
 
 ---
 
-### 💬 Feedback (2 components)
+### 🎭 Overlays (7 components)
 
-Components that provide user feedback.
+Components that overlay content on the page.
 
-#### Phase 2 - Essential Form Controls
+#### Phase 1 - Quick Wins
 
-- [ ] **Progress (Circular)** - Circular progress indicator (Easy, 2-3h, High Usage)
-- [ ] **Progress (Linear)** - Linear progress bar (Easy, 1-2h, High Usage)
+- [ ] **Popover** - Popover component (Easy, 3-4h, Very High Usage)
+- [ ] **Hover Card** - Card that appears on hover (Easy, 3-4h, Medium Usage)
+
+#### Phase 2 - Overlay Components
+
+- [ ] **Dialog** - Modal dialog component (Easy, 3-4h, Very High Usage)
+- [ ] **Dropdown** - Dropdown menu overlay (Easy, 2-3h, High Usage)
+
+#### Phase 3 - Advanced Overlays
+
+- [ ] **Drawer** - Slide-out drawer panel (Medium, 4-5h, High Usage)
+- [ ] **Modal** - Modal dialog overlay (Medium, 4-5h, High Usage)
+- [ ] **Command Menu** - Command palette/search menu (Medium, 5-6h, Medium Usage)
+
+#### Phase 4 - Advanced Overlays
+
+- [ ] **Floating Panel** - Floating panel overlay (Medium, 5-6h, Medium Usage)
 
 ---
 
-### 🛠️ Utility (5 components)
+### 🛠️ Utility (6 components)
 
 Specialized utility components.
 
@@ -135,21 +223,36 @@ Specialized utility components.
 
 ### Phase 1: Quick Wins (Week 1-2)
 
-**Goal:** Ship 10 components fast to build momentum
+**Goal:** Ship 20+ components fast to build momentum
 
-**Components:** Toggle, Slider, Number Input, Password Input, Field, Fieldset, Toggle Group, Segment Group, Scroll Area, Hover Card
+**Components:**
 
-**Estimated Time:** 25-35 hours
+- Actions: Button, Button Group, Link Button
+- Form: Input, Number Input, Password Input, Field, Fieldset, Label, Hint, Checkbox, Radio, Radio Group, Switch, Toggle, Textarea, Slider, Select, Toggle Group, Segment Group
+- Displaying Data: Avatar, Badge, Card, Divider, Tag
+- Feedback: Toast, Tooltip
+- Layout: Accordion ✓
+- Navigation: Menu
+- Overlays: Popover, Hover Card
+- Utility: Scroll Area
+
+**Estimated Time:** 50-70 hours
 
 ---
 
-### Phase 2: Essential Form Controls (Week 3-4)
+### Phase 2: Essential Components (Week 3-4)
 
-**Goal:** Complete core form functionality
+**Goal:** Complete core functionality
 
-**Components:** Combobox, Listbox, Pin Input, Tags Input, Editable, Rating Group, Progress (Circular), Progress (Linear)
+**Components:**
 
-**Estimated Time:** 25-32 hours
+- Actions: Compact Button, Fancy Button
+- Form: Combobox, Listbox, Pin Input, Tags Input, Editable, Rating Group, Digit Input
+- Displaying Data: Avatar Group, Status Badge, Kbd, Banner, Progress Bar, Progress Circle
+- Feedback: Alert, Notification, Progress
+- Layout: Collapsible, Breadcrumb
+
+**Estimated Time:** 40-55 hours
 
 ---
 
@@ -157,9 +260,14 @@ Specialized utility components.
 
 **Goal:** Complete navigation patterns
 
-**Components:** Pagination, Steps, Tree View, Splitter
+**Components:**
 
-**Estimated Time:** 23-29 hours
+- Layout: Segmented Control, Tabs (Horizontal), Tabs (Vertical)
+- Navigation: Pagination, Steps, Horizontal Stepper, Vertical Stepper, Dot Stepper, Tree View
+- Overlays: Drawer, Modal, Command Menu
+- Utility: Splitter
+
+**Estimated Time:** 45-60 hours
 
 ---
 
@@ -167,7 +275,11 @@ Specialized utility components.
 
 **Goal:** Complete overlay patterns and utilities
 
-**Components:** Floating Panel, Clipboard, Marquee, QR Code, Timer
+**Components:**
+
+- Displaying Data: QR Code
+- Overlays: Floating Panel
+- Utility: Clipboard, Marquee, Timer
 
 **Estimated Time:** 17-22 hours
 
@@ -177,7 +289,9 @@ Specialized utility components.
 
 **Goal:** Advanced input components
 
-**Components:** Color Picker, Date Picker, File Upload, Angle Slider, Signature Pad
+**Components:**
+
+- Form: Color Picker, Date Picker, File Upload, Angle Slider, Signature Pad
 
 **Estimated Time:** 37-46 hours
 
@@ -187,20 +301,23 @@ Specialized utility components.
 
 **Goal:** Complex, specialized components
 
-**Components:** Carousel, Tour
+**Components:**
 
-**Estimated Time:** 20-24 hours
+- Displaying Data: Data Table, Carousel
+- Utility: Tour
+
+**Estimated Time:** 28-34 hours
 
 ---
 
 ## 📈 Success Metrics
 
-- **Phase 1 Completion:** 11 total components (10 new + Accordion) shipped in 2 weeks
-- **Phase 2 Completion:** 19 total components (8 new) in 4 weeks
-- **Phase 3 Completion:** 23 total components (4 new) in 6 weeks
-- **Phase 4 Completion:** 28 total components (5 new) in 8 weeks
-- **Phase 5 Completion:** 33 total components (5 new) in 10 weeks
-- **Phase 6 Completion:** 35 total components (2 new) in 12 weeks
+- **Phase 1 Completion:** 21 total components (20 new + Accordion) shipped in 2 weeks
+- **Phase 2 Completion:** 38 total components (17 new) in 4 weeks
+- **Phase 3 Completion:** 50 total components (12 new) in 6 weeks
+- **Phase 4 Completion:** 54 total components (4 new) in 8 weeks
+- **Phase 5 Completion:** 59 total components (5 new) in 10 weeks
+- **Phase 6 Completion:** 62 total components (3 new) in 12 weeks
 
 ---
 
@@ -212,13 +329,17 @@ Components are prioritized based on:
 2. **Complexity** - Easy components before hard ones
 3. **Development Time** - Quick wins to build momentum
 4. **Dependencies** - Components that others depend on
+5. **Category Balance** - Ensuring all categories have foundational components
 
 ---
 
 ## 📝 Notes
 
-- Progress variants (Circular/Linear) can be added as examples/variants of existing Progress component
-- SolidJS versions can be developed in parallel or after React versions
+- **Button Component**: Placed in Actions category (not Form) as it's primarily for user actions
+- **Progress Variants**: Progress Bar and Progress Circle are separate components in Displaying Data; base Progress is in Feedback
+- **Tabs**: Split into Horizontal and Vertical variants in Layout category
+- **SolidJS Support**: Can be developed in parallel or after React versions
+- **Component Sources**: Mix of ARK UI primitives and Align UI patterns
 - Each component includes: implementation, demos, documentation, and registry updates
 - See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines
 
