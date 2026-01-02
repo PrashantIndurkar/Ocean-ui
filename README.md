@@ -20,6 +20,7 @@
   
   <p>
     <a href="https://components.prashantindurkar.in">Documentation</a> •
+    <a href="./ROADMAP.md">Roadmap</a> •
     <a href="./CONTRIBUTING.md">Contributing</a> •
     <a href="./LICENSE">License</a>
   </p>
@@ -66,6 +67,18 @@ Each component is:
 Browse all available components, view live demos, and copy code directly from our documentation:
 
 **[→ View Documentation](https://components.prashantindurkar.in)**
+
+## 🗺️ Component Roadmap
+
+Track our progress and see what's coming next! We're building a comprehensive set of ARK UI components, organized by category and prioritized for fast shipping.
+
+**[→ View Roadmap](./ROADMAP.md)**
+
+**Current Status:**
+
+- ✅ **1 component** completed (Accordion)
+- 🚧 **34 components** planned across 6 development phases
+- 🎯 Focus on high-usage, low-complexity components first
 
 ## 🛠️ Development
 
@@ -114,6 +127,7 @@ See the [LICENSE](./LICENSE) file for details.
   <p>Made with ❤️ by the Ocean UI community</p>
   <p>
     <a href="https://components.prashantindurkar.in">Documentation</a> •
+    <a href="./ROADMAP.md">Roadmap</a> •
     <a href="./CONTRIBUTING.md">Contributing</a> •
     <a href="./LICENSE">License</a>
   </p>
