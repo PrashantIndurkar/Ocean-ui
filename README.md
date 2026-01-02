@@ -44,7 +44,7 @@ Ocean UI currently supports the following frameworks with official integration g
 
 <div align="center">
   
-| [<img src="apps/website/public/images/next.png" alt="Next.js" width="80" height="32" />](https://components.prashantindurkar.in/docs/documentation/integration/nextjs)<br />**Next.js** | [<img src="apps/website/public/images/solid.png" alt="SolidJS" width="40" height="40" />](https://components.prashantindurkar.in/docs/documentation/integration/solidjs)<br />**SolidJS** |
+| [<picture><source media="(prefers-color-scheme: dark)" srcset="apps/website/public/images/next-dark.png" /><source media="(prefers-color-scheme: light)" srcset="apps/website/public/images/next.png" /><img src="apps/website/public/images/next.png" alt="Next.js" width="80" height="32" /></picture>](https://components.prashantindurkar.in/docs/documentation/integration/nextjs)<br />**Next.js** | [<picture><source media="(prefers-color-scheme: dark)" srcset="apps/website/public/images/solid-dark.png" /><source media="(prefers-color-scheme: light)" srcset="apps/website/public/images/solid.png" /><img src="apps/website/public/images/solid.png" alt="SolidJS" width="40" height="40" /></picture>](https://components.prashantindurkar.in/docs/documentation/integration/solidjs)<br />**SolidJS** |
 |:---:|:---:|
 | Next.js integration | SolidJS integration |
 
