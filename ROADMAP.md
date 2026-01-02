@@ -1,6 +1,6 @@
 # 🗺️ Ocean UI Component Roadmap
 
-This roadmap tracks the development progress of all ARK UI and Align UI components in Ocean UI. Components are organized by category (matching Align UI structure) and prioritized for fast shipping.
+This roadmap tracks the development progress of all components in Ocean UI. Components are organized by category and prioritized for fast shipping.
 
 ## 📊 Progress Overview
 
@@ -332,17 +332,3 @@ Components are prioritized based on:
 5. **Category Balance** - Ensuring all categories have foundational components
 
 ---
-
-## 📝 Notes
-
-- **Button Component**: Placed in Actions category (not Form) as it's primarily for user actions
-- **Progress Variants**: Progress Bar and Progress Circle are separate components in Displaying Data; base Progress is in Feedback
-- **Tabs**: Split into Horizontal and Vertical variants in Layout category
-- **SolidJS Support**: Can be developed in parallel or after React versions
-- **Component Sources**: Mix of ARK UI primitives and Align UI patterns
-- Each component includes: implementation, demos, documentation, and registry updates
-- See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines
-
----
-
-**Last Updated:** 2024
