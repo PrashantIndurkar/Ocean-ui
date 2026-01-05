@@ -8,80 +8,27 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  [
-    // Base styles
-    "group relative inline-flex items-center justify-center whitespace-nowrap",
-    "border-0 outline-none transition-all duration-100 ease-linear",
-    "cursor-pointer", // Ensure pointer cursor for buttons
-    "disabled:pointer-events-none disabled:cursor-not-allowed",
-    // Icon styles
-    "[&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:transition-inherit-all",
-  ],
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary: [
-          "bg-primary text-primary-foreground shadow-xs-skeumorphic",
-          "hover:bg-primary/90 data-loading:bg-primary/90",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:bg-muted disabled:text-muted-foreground disabled:shadow-xs",
-          // Icon styles
-          "*:data-icon:text-primary-foreground/90 hover:*:data-icon:text-primary-foreground",
-        ],
-        secondary: [
-          "bg-secondary text-secondary-foreground shadow-xs",
-          "hover:bg-secondary/80 hover:text-secondary-foreground data-loading:bg-secondary/80",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:bg-muted disabled:text-muted-foreground disabled:shadow-xs",
-          // Icon styles
-          "*:data-icon:text-muted-foreground hover:*:data-icon:text-secondary-foreground",
-        ],
-        tertiary: [
-          "text-muted-foreground",
-          "hover:bg-muted hover:text-foreground data-loading:bg-muted",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:text-muted-foreground",
-          // Icon styles
-          "*:data-icon:text-muted-foreground hover:*:data-icon:text-foreground",
-        ],
-        outline: [
-          "border border-border bg-transparent text-foreground",
-          "hover:bg-muted hover:text-foreground data-loading:bg-muted",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:border-border/50 disabled:text-muted-foreground",
-          // Icon styles
-          "*:data-icon:text-muted-foreground hover:*:data-icon:text-foreground",
-        ],
-        ghost: [
-          "text-foreground",
-          "hover:bg-muted hover:text-foreground data-loading:bg-muted",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:text-muted-foreground",
-          // Icon styles
-          "*:data-icon:text-muted-foreground hover:*:data-icon:text-foreground",
-        ],
-        destructive: [
-          "bg-destructive text-destructive-foreground shadow-xs",
-          "hover:bg-destructive/90 data-loading:bg-destructive/90",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:bg-muted disabled:text-muted-foreground disabled:shadow-xs",
-          // Icon styles
-          "*:data-icon:text-destructive-foreground/90 hover:*:data-icon:text-destructive-foreground",
-        ],
-        link: [
-          "text-primary underline-offset-4",
-          "hover:underline hover:text-primary/80",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:text-muted-foreground disabled:no-underline",
-          // Icon styles
-          "*:data-icon:text-primary/80 hover:*:data-icon:text-primary",
-        ],
+        primary:
+          "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+        secondary:
+          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+        tertiary: "text-muted-foreground hover:bg-muted hover:text-foreground",
+        outline:
+          "border border-border bg-transparent text-foreground hover:bg-muted",
+        ghost: "text-foreground hover:bg-muted",
+        destructive:
+          "bg-destructive text-white shadow-xs hover:bg-destructive/90",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-8 gap-1 rounded-lg px-3 py-2 text-sm font-semibold has-[>svg]:px-2.5 data-icon-only:p-2",
-        md: "h-9 gap-1 rounded-lg px-3.5 py-2.5 text-sm font-semibold has-[>svg]:px-3 data-icon-only:p-2.5",
-        lg: "h-10 gap-1.5 rounded-lg px-4 py-2.5 text-md font-semibold has-[>svg]:px-3.5 data-icon-only:p-3",
-        xl: "h-11 gap-1.5 rounded-lg px-4.5 py-3 text-md font-semibold has-[>svg]:px-4 data-icon-only:p-3.5",
+        sm: "h-8 px-3 py-2 has-[>svg]:px-2.5",
+        md: "h-9 px-3.5 py-2.5 has-[>svg]:px-3",
+        lg: "h-10 px-4 py-2.5 has-[>svg]:px-3.5",
+        xl: "h-11 px-4.5 py-3 has-[>svg]:px-4",
       },
     },
     defaultVariants: {
@@ -137,36 +84,21 @@ function Button({
   return (
     <ark.button
       type="button"
-      data-loading={loading ? true : undefined}
-      data-icon-only={isIconOnly ? true : undefined}
       className={cn(
         buttonVariants({ variant, size }),
-        // Loading state - hide content when loading (unless showTextWhileLoading)
-        loading &&
-          (showTextWhileLoading
-            ? "[&>*:not([data-icon=loading]):not([data-text])]:hidden"
-            : "[&>*:not([data-icon=loading])]:invisible"),
-        // Pointer events disabled during loading
-        loading && "pointer-events-none",
-        // Ensure pointer cursor when not disabled or loading
-        !isDisabled && "cursor-pointer",
+        loading && !showTextWhileLoading && "relative",
+        isIconOnly && size === "sm" && "p-2",
+        isIconOnly && size === "md" && "p-2.5",
+        isIconOnly && size === "lg" && "p-3",
+        isIconOnly && size === "xl" && "p-3.5",
         className
       )}
       disabled={isDisabled}
       aria-busy={loading}
       {...props}
     >
-      {/* Leading Icon */}
-      {iconLeading && !loading && (
-        <span data-icon="leading" aria-hidden="true">
-          {iconLeading}
-        </span>
-      )}
-
-      {/* Loading Spinner */}
       {loading && (
         <Loader2
-          data-icon="loading"
           className={cn(
             "animate-spin",
             !showTextWhileLoading &&
@@ -175,20 +107,13 @@ function Button({
           aria-hidden="true"
         />
       )}
-
-      {/* Button Text */}
+      {iconLeading && !loading && iconLeading}
       {children && (
-        <span data-text className="transition-inherit-all">
+        <span className={loading && !showTextWhileLoading ? "invisible" : ""}>
           {loading && loadingText ? loadingText : children}
         </span>
       )}
-
-      {/* Trailing Icon */}
-      {iconTrailing && !loading && (
-        <span data-icon="trailing" aria-hidden="true">
-          {iconTrailing}
-        </span>
-      )}
+      {iconTrailing && !loading && iconTrailing}
     </ark.button>
   );
 }
