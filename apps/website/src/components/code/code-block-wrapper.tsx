@@ -12,7 +12,7 @@ export function CodeBlockWrapper({
 }: CodeBlockWrapperProps) {
   return (
     <div
-      className={cn("bg-brand-100 dark:bg-brand-800 rounded-3xl", className)}
+      className={cn("bg-muted dark:bg-muted rounded-3xl", className)}
       {...rest}
     >
       {children}

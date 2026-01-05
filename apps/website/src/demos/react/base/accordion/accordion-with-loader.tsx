@@ -16,7 +16,7 @@ import {
  */
 function AccordionLoaderLeftIcon() {
   return (
-    <Loader className="size-5 shrink-0 transition-colors duration-200 text-secondary [.group[data-state=open]_&]:animate-spin [.group[data-state=open]_&]:[animation-duration:1.5s] [.group[data-state=open]_&]:text-brand-primary [.group[data-state=closed]_&]:text-brand-quaternary/60" />
+    <Loader className="size-5 shrink-0 transition-colors duration-200 text-muted-foreground [.group[data-state=open]_&]:animate-spin [.group[data-state=open]_&]:[animation-duration:1.5s] [.group[data-state=open]_&]:text-primary [.group[data-state=closed]_&]:text-muted-foreground/60" />
   );
 }
 
@@ -53,7 +53,7 @@ export default function AccordionWithLoader() {
           <AccordionTrigger leftIcon={<AccordionLoaderLeftIcon />}>
             {item.title}
           </AccordionTrigger>
-          <AccordionContent className="pl-5 text-tertiary">
+          <AccordionContent className="pl-5 text-muted-foreground">
             {item.content}
           </AccordionContent>
         </AccordionItem>

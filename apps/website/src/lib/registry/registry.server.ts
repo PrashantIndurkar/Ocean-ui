@@ -14,6 +14,7 @@ const EXAMPLE_NAME_MAP: Record<string, string> = {
   "accordion-with-loader": "AccordionWithLoader",
   "accordion-with-icons": "AccordionWithIcons",
   "accordion-faq": "AccordionFAQ",
+  "button-demo": "ButtonDemo",
 };
 
 /**

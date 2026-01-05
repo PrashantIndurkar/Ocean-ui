@@ -60,7 +60,7 @@ export default function Hero() {
           className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.2] tracking-tight whitespace-pre-wrap bg-clip-text text-transparent mb-6 sm:mb-8 md:mb-10 pb-1"
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, var(--color-fg-primary) 0%, var(--color-fg-primary) 50%, var(--color-text-tertiary) 70%, var(--color-text-tertiary) 100%)",
+              "linear-gradient(to bottom, var(--color-foreground) 0%, var(--color-foreground) 50%, var(--color-muted-foreground) 70%, var(--color-muted-foreground) 100%)",
           }}
           variants={itemVariants}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -68,7 +68,7 @@ export default function Hero() {
           Beautiful Components for Design Engineers
         </motion.h1>
         <motion.p
-          className="text-sm sm:text-base md:text-lg text-text-tertiary leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10"
+          className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10"
           variants={itemVariants}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -94,7 +94,7 @@ export default function Hero() {
         <motion.div className="space-y-8" variants={containerVariants}>
           {/* Use "uppercase" for all caps in Tailwind CSS */}
           <motion.p
-            className="text-sm font-medium text-text-tertiary uppercase tracking-wider"
+            className="text-sm font-medium text-muted-foreground uppercase tracking-wider"
             variants={itemVariants}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
@@ -114,14 +114,14 @@ export default function Hero() {
                     id: 1,
                     name: "React Js Framework",
                     icon: (
-                      <ReactJsIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
+                      <ReactJsIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
                     ),
                   },
                   {
                     id: 2,
                     name: "SolidJs Framework",
                     icon: (
-                      <SolidJsIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
+                      <SolidJsIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
                     ),
                   },
                   {
@@ -129,7 +129,7 @@ export default function Hero() {
                     name: "Vue Js Framework",
                     designation: "Support is coming soon!",
                     icon: (
-                      <VueJsIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
+                      <VueJsIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
                     ),
                   },
 
@@ -138,7 +138,7 @@ export default function Hero() {
                     name: "Svelte Js Framework",
                     designation: "Support is coming soon!",
                     icon: (
-                      <SvelteJSIcon className="text-fg-primary/90 hover:text-fg-primary transition-colors h-10 w-10" />
+                      <SvelteJSIcon className="text-foreground/90 hover:text-foreground transition-colors h-10 w-10" />
                     ),
                   },
                 ]}

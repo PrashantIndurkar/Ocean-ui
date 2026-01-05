@@ -6,13 +6,13 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full border-t border-border-primary bg-bg-primary/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 text-sm text-text-tertiary">
+    <footer className="relative w-full border-t border-border bg-background/80 backdrop-blur-sm">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 text-sm text-muted-foreground">
         {/* Left: Navigation Links */}
         <nav className="flex items-center gap-2" aria-label="Footer navigation">
           <Link
             href="/components"
-            className="hover:text-fg-primary transition-colors"
+            className="hover:text-foreground transition-colors"
             aria-label="Components"
           >
             /Components
@@ -29,7 +29,7 @@ export function Footer() {
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-fg-primary"
+            className="text-foreground"
             aria-hidden="true"
           >
             <path d="M8 2L14 14H2L8 2Z" fill="currentColor" />
@@ -38,7 +38,7 @@ export function Footer() {
             <span className="text-xs leading-tight">
               © {currentYear} Ocean UI. MIT License
             </span>
-            <span className="text-xs leading-tight text-text-tertiary">
+            <span className="text-xs leading-tight text-muted-foreground">
               Deployed on Vercel
             </span>
           </div>
@@ -52,7 +52,7 @@ export function Footer() {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-text-tertiary"
+            className="text-muted-foreground"
             aria-hidden="true"
           >
             <path
@@ -66,7 +66,7 @@ export function Footer() {
               href="https://x.com/prashant2weet"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-brand-primary hover:text-text-brand-primary/80 underline transition-colors"
+              className="text-primary hover:text-primary/80 underline transition-colors"
               aria-label="Prashant's Twitter profile"
             >
               Prashant

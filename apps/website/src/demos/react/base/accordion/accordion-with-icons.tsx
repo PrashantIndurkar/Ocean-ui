@@ -18,8 +18,8 @@ import {
 function AccordionToggleLeftIcon() {
   return (
     <>
-      <Plus className="accordion-plus-icon size-5 shrink-0 text-secondary transition-opacity duration-200 [.group[data-state=open]_&]:hidden" />
-      <Minus className="accordion-minus-icon size-5 shrink-0 text-secondary transition-opacity duration-200 [.group[data-state=closed]_&]:hidden" />
+      <Plus className="accordion-plus-icon size-5 shrink-0 text-muted-foreground transition-opacity duration-200 [.group[data-state=open]_&]:hidden" />
+      <Minus className="accordion-minus-icon size-5 shrink-0 text-muted-foreground transition-opacity duration-200 [.group[data-state=closed]_&]:hidden" />
     </>
   );
 }
@@ -57,7 +57,7 @@ export default function AccordionWithIcons() {
           <AccordionTrigger leftIcon={<AccordionToggleLeftIcon />}>
             {item.title}
           </AccordionTrigger>
-          <AccordionContent className="pl-5 text-tertiary">
+          <AccordionContent className="pl-5 text-muted-foreground">
             {item.content}
           </AccordionContent>
         </AccordionItem>

@@ -26,7 +26,7 @@ export function FrameworkSelector() {
   const SelectedIcon = selectedFramework?.icon;
 
   return (
-    <div className="relative inline-flex items-center gap-2 h-8 min-w-[100px] rounded-3xl border border-border-primary/50 bg-transparent px-2 transition-all hover:bg-bg-brand-primary hover:text-text-brand-primary dark:hover:bg-bg-brand-primary/50 focus-within:border-border-primary focus-within:ring-border-primary/50 focus-within:ring-[3px]">
+    <div className="relative flex items-center gap-2 h-8 min-w-[100px] rounded-full border px-2 bg-transparent hover:bg-secondary focus-within:ring-2 focus-within:ring-border focus-within:ring-offset-0">
       {SelectedIcon && <SelectedIcon className="size-4 shrink-0" />}
       <select
         value={framework}

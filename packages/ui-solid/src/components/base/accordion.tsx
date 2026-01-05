@@ -33,10 +33,7 @@ export const AccordionItemComponent: ParentComponent<
   const [local, rest] = splitProps(props, ["class", "children"]);
   return (
     <AccordionItemPrimitive
-      class={cn(
-        "border-b border-border-secondary last:border-b-0",
-        local.class
-      )}
+      class={cn("border-b border-border last:border-b-0", local.class)}
       {...rest}
     >
       {local.children}
@@ -106,12 +103,8 @@ export const AccordionContentComponent: ParentComponent<
     <AccordionItemContentPrimitive
       class={cn(
         "overflow-hidden text-sm",
-        // Ark UI recommended animations (matches selection prompt)
-        "data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
+        // Ark UI recommended animations
         "data-[state=closed]:animate-accordion-collapse data-[state=open]:animate-accordion-expand",
-        // Ark UI recommended data selectors for custom animations:
-        "[data-scope=accordion][data-part=item-content][data-state=open]:animate-[slideDown_250ms_ease-in-out]",
-        "[data-scope=accordion][data-part=item-content][data-state=closed]:animate-[slideUp_200ms_ease-in-out]",
         local.class
       )}
       {...rest}

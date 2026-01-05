@@ -41,7 +41,7 @@ export function FrameworkCard({
       className={cn(
         "group relative flex flex-col p-4 rounded-2xl border transition-all duration-200 no-underline",
         disabled
-          ? "border-border-secondary bg-muted/50 opacity-60 cursor-not-allowed"
+          ? "border-border bg-muted/50 opacity-60 cursor-not-allowed "
           : "border-border hover:shadow-md bg-muted hover:bg-muted/80 transition-all duration-200 cursor-pointer"
       )}
       aria-label={

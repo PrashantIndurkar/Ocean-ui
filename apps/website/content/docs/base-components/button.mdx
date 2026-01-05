@@ -1,11 +1,154 @@
 ---
 title: Button
-description: A clickable button component for user interactions.
-status: coming-soon
+description: A versatile button component for triggering actions and navigating interfaces.
 ---
 
 # Button
 
 <Description>
-  This component is currently under development. Check back soon!
+  A flexible button component that supports multiple variants, sizes, and
+  states. Built with Ark UI factory for accessibility and styled using Ocean UI
+  design tokens.
 </Description>
+
+<BadgeLink
+  name="@ark-ui/react/factory"
+  href="https://ark-ui.com/docs/overview/introduction"
+/>
+
+<Divider />
+
+### Example
+
+<ComponentPreview name="button" />
+
+## How to install and use
+
+<CodeBlockCommand component="button" registry="@ocean-ui" />
+
+<Note>
+  The Button component uses Ark UI's factory function (`ark.button`) for
+  built-in accessibility. It's styled with Tailwind CSS using Ocean UI design
+  tokens from `tokens.css`.
+</Note>
+
+<Divider />
+
+## Overview
+
+The Button component is a fundamental UI element for triggering actions. It supports
+multiple visual styles, sizes, loading states, and icon placement. Built on top of
+Ark UI's factory function, it provides native button accessibility out of the box.
+
+## Variants
+
+The Button component supports seven visual variants:
+
+- **primary**: Main action button with brand color background
+- **secondary**: Secondary action with subtle background and border
+- **tertiary**: Tertiary action with tertiary text color and hover background
+- **outline**: Outlined button with transparent background
+- **ghost**: Minimal button with no background, only text
+- **destructive**: For destructive actions (delete, remove)
+- **link**: Text button styled as a link
+
+## Sizes
+
+The Button component supports four sizes:
+
+- **sm**: Small button (height: 32px)
+- **md**: Medium button (height: 36px) - default
+- **lg**: Large button (height: 40px)
+- **xl**: Extra large button (height: 44px)
+
+## Features
+
+- **Icons**: Support for leading and trailing icons
+- **Loading State**: Built-in loading spinner with optional loading text
+- **Disabled State**: Proper disabled styling and behavior
+- **Accessibility**: Full keyboard navigation and ARIA support via Ark UI
+- **Customizable**: All styles can be overridden via `className` prop
+
+<Divider />
+
+## Select Examples
+
+### Primary
+
+Primary variant buttons are used for main actions. They feature a brand color background and are the most prominent buttons in the interface.
+
+<ComponentPreview name="button" example="button-primary" />
+
+<Divider className="my-12" />
+
+### Secondary
+
+Secondary variant buttons are used for secondary actions. They have a subtle background and border, providing a less prominent alternative to primary buttons.
+
+<ComponentPreview name="button" example="button-secondary" />
+
+<Divider className="my-12" />
+
+### Tertiary
+
+Tertiary variant buttons use tertiary text colors and show a background on hover. They're useful for less prominent actions that still need to be visible.
+
+<ComponentPreview name="button" example="button-tertiary" />
+
+<Divider className="my-12" />
+
+### Outline
+
+Outline variant buttons have a transparent background with a border. They're useful for actions that need to be visible but less prominent than primary or secondary buttons.
+
+<ComponentPreview name="button" example="button-outline" />
+
+<Divider className="my-12" />
+
+### Ghost
+
+Ghost variant buttons have no background and minimal styling. They're ideal for subtle actions or when you want the button to blend into the interface.
+
+<ComponentPreview name="button" example="button-ghost" />
+
+<Divider className="my-12" />
+
+### Destructive
+
+Destructive variant buttons are used for dangerous or irreversible actions like deleting or removing content. They use error colors to indicate the severity of the action.
+
+<ComponentPreview name="button" example="button-destructive" />
+
+<Divider className="my-12" />
+
+### Link
+
+Link variant buttons are styled as text links with underline on hover. They're useful for navigation or less prominent actions.
+
+<ComponentPreview name="button" example="button-link" />
+
+<Divider className="my-12" />
+
+### With Icons
+
+Buttons can include icons before or after the text, or both. Icons help communicate the action more clearly and improve visual hierarchy.
+
+<ComponentPreview name="button" example="button-with-icons" />
+
+<Divider className="my-12" />
+
+### Loading
+
+Buttons support loading states with a spinner. You can show the loading spinner alone or keep the text visible while loading.
+
+<ComponentPreview name="button" example="button-loading" />
+
+<Divider className="my-12" />
+
+### Sizes
+
+Buttons come in four sizes: small (sm), medium (md), large (lg), and extra large (xl). Choose the size that best fits your interface and action importance.
+
+<ComponentPreview name="button" example="button-sizes" />
+
+<Divider />

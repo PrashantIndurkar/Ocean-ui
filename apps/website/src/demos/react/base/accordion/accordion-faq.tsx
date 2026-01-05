@@ -42,8 +42,8 @@ function AccordionItemLeftIcon({ icon: Icon }: AccordionItemIconProps) {
 function AccordionToggleRightIcon() {
   return (
     <>
-      <Plus className="accordion-plus-icon size-5 shrink-0 text-secondary transition-opacity duration-200 [.group[data-state=open]_&]:hidden" />
-      <Minus className="accordion-minus-icon size-5 shrink-0 text-secondary transition-opacity duration-200 [.group[data-state=closed]_&]:hidden" />
+      <Plus className="accordion-plus-icon size-5 shrink-0 text-muted-foreground transition-opacity duration-200 [.group[data-state=open]_&]:hidden" />
+      <Minus className="accordion-minus-icon size-5 shrink-0 text-muted-foreground transition-opacity duration-200 [.group[data-state=closed]_&]:hidden" />
     </>
   );
 }
@@ -92,13 +92,13 @@ export default function AccordionFAQ() {
             leftIcon={<AccordionItemLeftIcon icon={item.icon} />}
             rightIcon={<AccordionToggleRightIcon />}
             className={cn(
-              "px-4 bg-muted data-[state=closed]:hover:bg-quaternary/40 data-[state=open]:bg-background",
+              "px-4 data-[state=closed]:hover:bg-muted/30 data-[state=open]:bg-background",
               "data-[state=closed]:text-primary/60 data-[state=open]:text-primary data-[state=closed]:hover:text-primary"
             )}
           >
             {item.title}
           </AccordionTrigger>
-          <AccordionContent className="pl-7 pr-5 text-tertiary">
+          <AccordionContent className="pl-7 pr-5 text-muted-foreground">
             {item.content}
           </AccordionContent>
         </AccordionItem>

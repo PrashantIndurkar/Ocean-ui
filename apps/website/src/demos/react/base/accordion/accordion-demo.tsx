@@ -34,7 +34,7 @@ export default function AccordionDemo() {
       {accordionItems.map((item) => (
         <AccordionItem key={item.value} value={item.value}>
           <AccordionTrigger>{item.title}</AccordionTrigger>
-          <AccordionContent className="text-tertiary">
+          <AccordionContent className="text-muted-foreground">
             {item.content}
           </AccordionContent>
         </AccordionItem>

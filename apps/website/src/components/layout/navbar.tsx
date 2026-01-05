@@ -57,10 +57,10 @@ const Navbar1 = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 flex justify-center w-full py-6 px-4 z-50">
-      <div className="flex items-center justify-between px-6 py-3 bg-bg-primary rounded-full shadow-lg w-full max-w-3xl relative z-10 border border-border-primary">
+      <div className="flex items-center justify-between px-6 py-3 bg-background rounded-full shadow-lg w-full max-w-3xl relative z-10 border border-border">
         <div className="flex items-center">
           🌴{" "}
-          <span className="text-lg font-bold text-fg-primary tracking-tight ml-2">
+          <span className="text-lg font-bold text-foreground tracking-tight ml-2">
             Ocean UI
           </span>
         </div>
@@ -75,7 +75,7 @@ const Navbar1 = () => {
           >
             <Link
               href="/"
-              className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
+              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
             >
               Home
             </Link>
@@ -88,7 +88,7 @@ const Navbar1 = () => {
           >
             <Link
               href="/docs/documentation/introduction"
-              className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
+              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
             >
               Docs
             </Link>
@@ -101,7 +101,7 @@ const Navbar1 = () => {
           >
             <Link
               href="/docs/base-components/accordion"
-              className="text-sm text-fg-primary hover:text-text-tertiary transition-colors font-medium"
+              className="text-sm text-foreground hover:text-muted-foreground transition-colors font-medium"
             >
               Components
             </Link>
@@ -120,7 +120,7 @@ const Navbar1 = () => {
               href="https://github.com/PrashantIndurkar/Ocean-ui"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-fg-primary hover:text-text-tertiary transition-colors"
+              className="inline-flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
               aria-label={
                 showStars
                   ? `View on GitHub - ${formatCount(starCount)} stars`
@@ -155,7 +155,7 @@ const Navbar1 = () => {
               <AnimatePresence mode="wait">
                 <motion.span
                   key={showStars ? "stars" : "forks"}
-                  className="text-sm font-medium text-text-tertiary"
+                  className="text-sm font-medium text-muted-foreground"
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 5 }}
@@ -180,14 +180,14 @@ const Navbar1 = () => {
           onClick={toggleMenu}
           whileTap={{ scale: 0.9 }}
         >
-          <Menu className="h-6 w-6 text-fg-primary" />
+          <Menu className="h-6 w-6 text-foreground" />
         </motion.button>
       </div>
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-bg-primary z-50 pt-24 px-6 md:hidden"
+            className="fixed inset-0 bg-background z-50 pt-24 px-6 md:hidden"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -201,7 +201,7 @@ const Navbar1 = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <X className="h-6 w-6 text-fg-primary" />
+              <X className="h-6 w-6 text-foreground" />
             </motion.button>
             <div className="flex flex-col space-y-6">
               <motion.div
@@ -212,7 +212,7 @@ const Navbar1 = () => {
               >
                 <Link
                   href="/"
-                  className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
+                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
                   onClick={toggleMenu}
                 >
                   Home
@@ -226,7 +226,7 @@ const Navbar1 = () => {
               >
                 <Link
                   href="/docs/documentation/introduction"
-                  className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
+                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
                   onClick={toggleMenu}
                 >
                   Docs
@@ -240,7 +240,7 @@ const Navbar1 = () => {
               >
                 <Link
                   href="/docs/base-components/accordion"
-                  className="text-base text-fg-primary font-medium hover:text-text-tertiary transition-colors"
+                  className="text-base text-foreground font-medium hover:text-muted-foreground transition-colors"
                   onClick={toggleMenu}
                 >
                   Components
@@ -258,7 +258,7 @@ const Navbar1 = () => {
                     href="https://github.com/PrashantIndurkar/Ocean-ui"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-fg-primary hover:text-text-tertiary transition-colors"
+                    className="inline-flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
                     aria-label={
                       showStars
                         ? `View on GitHub - ${formatCount(starCount)} stars`
@@ -294,7 +294,7 @@ const Navbar1 = () => {
                     <AnimatePresence mode="wait">
                       <motion.span
                         key={showStars ? "stars" : "forks"}
-                        className="text-sm font-medium text-text-tertiary"
+                        className="text-sm font-medium text-muted-foreground"
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 5 }}

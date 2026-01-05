@@ -75,18 +75,18 @@ export function LoadComponentButton({
 
   const buttonVariants = {
     idle: {
-      backgroundColor: "var(--color-bg-secondary)",
-      color: "var(--color-text-secondary)",
+      backgroundColor: "var(--color-transparent)",
+      color: "var(--color-secondary-foreground)",
       scale: 1,
     },
     saving: {
-      backgroundColor: "var(--color-bg-brand-solid)",
-      color: "var(--color-text-primary_on-brand)",
+      backgroundColor: "var(--color-primary)",
+      color: "var(--color-primary-foreground)",
       scale: 1,
     },
     saved: {
-      backgroundColor: "var(--color-bg-brand-primary)",
-      color: "var(--color-text-brand-primary)",
+      backgroundColor: "var(--color-primary)",
+      color: "var(--color-primary-foreground)",
       scale: [1, 1.1, 1],
       transition: {
         duration: 0.2,
@@ -144,9 +144,7 @@ export function LoadComponentButton({
         <span
           className={cn(
             "backdrop absolute inset-px rounded-[22px] transition-colors duration-200",
-            status === "idle"
-              ? "bg-bg-secondary group-hover:bg-bg-secondary"
-              : ""
+            status === "idle" ? "bg-secondary" : ""
           )}
         />
 
@@ -154,10 +152,10 @@ export function LoadComponentButton({
           className={cn(
             "relative z-20 flex items-center justify-center gap-2 text-sm font-medium",
             status === "idle"
-              ? "text-text-secondary"
+              ? "text-secondary-foreground"
               : status === "saving"
-                ? "text-text-primary_on-brand"
-                : "text-text-brand-primary"
+                ? "text-primary-foreground"
+                : "text-primary-foreground"
           )}
         >
           <AnimatePresence mode="wait">
