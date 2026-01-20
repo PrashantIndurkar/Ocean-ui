@@ -129,11 +129,43 @@ Link variant buttons are styled as text links with underline on hover. They're u
 
 <Divider className="my-12" />
 
-### With Icons
+### Icon Leading
 
-Buttons can include icons before or after the text, or both. Icons help communicate the action more clearly and improve visual hierarchy.
+Buttons with leading icons display icons before the text. This pattern is useful for emphasizing the action type and improving visual scanning.
 
-<ComponentPreview name="button" example="button-with-icons" />
+<ComponentPreview name="button" example="button-icon-leading" />
+
+<Divider className="my-12" />
+
+### Icon Trailing
+
+Buttons with trailing icons display icons after the text. This pattern is useful for indicating direction, navigation, or additional context.
+
+<ComponentPreview name="button" example="button-icon-trailing" />
+
+<Divider className="my-12" />
+
+### Icon Only
+
+Icon-only buttons contain only an icon without text. They're useful for compact interfaces, toolbars, or when space is limited. Always include an `aria-label` for accessibility.
+
+<ComponentPreview name="button" example="button-icon-only" />
+
+<Divider className="my-12" />
+
+### Disabled
+
+Disabled buttons are non-interactive and visually indicate that an action is currently unavailable. They maintain their visual style but appear faded and cannot be clicked.
+
+<ComponentPreview name="button" example="button-disabled" />
+
+<Divider className="my-12" />
+
+### Shapes
+
+Buttons can have different border radius styles. Use `rounded-none` for rectangular buttons, `rounded-full` for pill-shaped buttons, or keep the default `rounded-lg` for slightly rounded corners.
+
+<ComponentPreview name="button" example="button-shapes" />
 
 <Divider className="my-12" />
 
@@ -142,13 +174,5 @@ Buttons can include icons before or after the text, or both. Icons help communic
 Buttons support loading states with a spinner. You can show the loading spinner alone or keep the text visible while loading.
 
 <ComponentPreview name="button" example="button-loading" />
-
-<Divider className="my-12" />
-
-### Sizes
-
-Buttons come in four sizes: small (sm), medium (md), large (lg), and extra large (xl). Choose the size that best fits your interface and action importance.
-
-<ComponentPreview name="button" example="button-sizes" />
 
 <Divider />

@@ -2,8 +2,7 @@
 
 import { cva, type VariantProps } from "class-variance-authority";
 import { ark } from "@ark-ui/react/factory";
-import { Loader2 } from "lucide-react";
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -40,81 +39,21 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends ComponentProps<typeof ark.button>,
-    VariantProps<typeof buttonVariants> {
-  /**
-   * Icon or element to display before the button text
-   */
-  iconLeading?: ReactNode;
-  /**
-   * Icon or element to display after the button text
-   */
-  iconTrailing?: ReactNode;
-  /**
-   * Show loading spinner and disable button
-   * @default false
-   */
-  loading?: boolean;
-  /**
-   * The text to show while loading
-   */
-  loadingText?: ReactNode;
-  /**
-   * Keep text visible during loading state
-   * @default false
-   */
-  showTextWhileLoading?: boolean;
-}
+    VariantProps<typeof buttonVariants> {}
 
 function Button({
   variant,
   size,
   className,
-  children,
-  iconLeading,
-  iconTrailing,
-  loading = false,
-  loadingText,
-  showTextWhileLoading = false,
-  disabled,
   ...props
 }: ButtonProps) {
-  const isDisabled = disabled || loading;
-  const isIconOnly = (iconLeading || iconTrailing) && !children;
-
   return (
     <ark.button
       type="button"
-      className={cn(
-        buttonVariants({ variant, size }),
-        loading && !showTextWhileLoading && "relative",
-        isIconOnly && size === "sm" && "p-2",
-        isIconOnly && size === "md" && "p-2.5",
-        isIconOnly && size === "lg" && "p-3",
-        isIconOnly && size === "xl" && "p-3.5",
-        className
-      )}
-      disabled={isDisabled}
-      aria-busy={loading}
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    >
-      {loading && (
-        <Loader2
-          className={cn(
-            "animate-spin",
-            !showTextWhileLoading &&
-              "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          )}
-          aria-hidden="true"
-        />
-      )}
-      {iconLeading && !loading && iconLeading}
-      {children && (
-        <span className={loading && !showTextWhileLoading ? "invisible" : ""}>
-          {loading && loadingText ? loadingText : children}
-        </span>
-      )}
-      {iconTrailing && !loading && iconTrailing}
-    </ark.button>
+    />
   );
 }
 

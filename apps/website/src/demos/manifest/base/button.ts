@@ -35,16 +35,28 @@ const manifest: ComponentManifest = {
       title: "Link",
     },
     {
-      name: "button-with-icons",
-      title: "With Icons",
-    },
-    {
       name: "button-loading",
       title: "Loading",
     },
     {
-      name: "button-sizes",
-      title: "Sizes",
+      name: "button-icon-leading",
+      title: "Icon Leading",
+    },
+    {
+      name: "button-icon-trailing",
+      title: "Icon Trailing",
+    },
+    {
+      name: "button-icon-only",
+      title: "Icon Only",
+    },
+    {
+      name: "button-disabled",
+      title: "Disabled",
+    },
+    {
+      name: "button-shapes",
+      title: "Shapes",
     },
   ],
 };

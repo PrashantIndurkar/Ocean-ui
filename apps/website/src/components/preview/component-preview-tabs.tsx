@@ -93,14 +93,18 @@ export function ComponentPreviewTabs({
             constrainHeight ? "max-h-[400px]" : "py-10"
           )}
         >
-          <div
-            className={cn(
-              "lg:w-2/3 lg:px-0 mx-auto md:w-full md:px-12",
-              constrainHeight && !center && "pt-4"
-            )}
-          >
+          {center ? (
             <Component />
-          </div>
+          ) : (
+            <div
+              className={cn(
+                "lg:w-2/3 lg:px-0 mx-auto md:w-full md:px-12",
+                constrainHeight && "pt-4"
+              )}
+            >
+              <Component />
+            </div>
+          )}
         </div>
       ),
     },
