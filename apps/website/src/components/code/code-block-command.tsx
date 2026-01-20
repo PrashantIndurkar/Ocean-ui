@@ -128,7 +128,7 @@ export async function CodeBlockCommand({ component }: { component: string }) {
       </StepItem>
 
       {/* Step 2: Create file and paste code */}
-      {availableFrameworkCodeBlocks.length > 0 && (
+      {componentCode && (
         <StepItem
           stepNumber={2}
           title={
@@ -145,14 +145,32 @@ export async function CodeBlockCommand({ component }: { component: string }) {
           <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
             <div className="[&_figure]:mt-0">
               <Tabs
-                items={availableFrameworkCodeBlocks.map(
-                  ({ value, icon: Icon, codeBlock }) => ({
-                    value,
-                    label: value,
+                items={frameworks.map((framework) => {
+                  const codeBlockData = availableFrameworkCodeBlocks.find(
+                    (block) => block.value === framework.value
+                  );
+                  const isDisabled =
+                    framework.value === "vue" || framework.value === "svelte";
+                  const Icon = framework.icon;
+
+                  return {
+                    value: framework.value,
+                    label: framework.value,
                     icon: Icon ? <Icon className="size-4" /> : undefined,
-                    content: <div className="overflow-x-auto">{codeBlock}</div>,
-                  })
-                )}
+                    disabled: isDisabled,
+                    content: codeBlockData ? (
+                      <div className="overflow-x-auto">{codeBlockData.codeBlock}</div>
+                    ) : (
+                      <div className="overflow-x-auto">
+                        <div className="text-sm text-muted-foreground">
+                          {isDisabled
+                            ? `${framework.value.charAt(0).toUpperCase() + framework.value.slice(1)} support is coming soon`
+                            : "No code available"}
+                        </div>
+                      </div>
+                    ),
+                  };
+                })}
                 defaultValue="react"
                 variant="bordered"
                 className="[&_figure]:mt-0"

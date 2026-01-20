@@ -11,6 +11,10 @@ export interface TabItem {
   icon?: ReactNode;
   content: ReactNode;
   /**
+   * Whether this tab is disabled
+   */
+  disabled?: boolean;
+  /**
    * Optional className for this specific trigger
    */
   triggerClassName?: string;
@@ -68,7 +72,7 @@ const defaultListClasses = {
 };
 
 const defaultTriggerClasses =
-  "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-brand-300 dark:data-selected:border-gray-700";
+  "inline-flex h-[calc(100%-2px)] items-center justify-center gap-1.5 px-2.5 text-sm font-normal w-fit border border-transparent transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-selected:bg-background data-selected:text-foreground data-selected:border-gray-300 dark:data-selected:border-gray-700";
 
 export function Tabs({
   items,
@@ -107,6 +111,7 @@ export function Tabs({
           <ArkTabs.Trigger
             key={item.value}
             value={item.value}
+            disabled={item.disabled}
             className={cn(
               defaultTriggerClasses,
               variant === "default" &&
