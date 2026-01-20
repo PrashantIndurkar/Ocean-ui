@@ -38,6 +38,8 @@ export async function getComponentSource(
 
     // For SolidJS, check package path first
     if (framework === "solid") {
+      // Resolve path relative to the workspace root
+      // process.cwd() in Next.js is apps/website, so we go up two levels to Ocean-ui root
       const packagePath = join(
         process.cwd(),
         "..",
@@ -55,8 +57,14 @@ export async function getComponentSource(
         await access(packagePath);
         const sourceCode = await readFile(packagePath, "utf-8");
         return sourceCode;
-      } catch {
-        // Fall through to check docs registry path
+      } catch (error) {
+        // Log error for debugging
+        console.warn(
+          `Failed to read SolidJS source from package path ${packagePath}:`,
+          error instanceof Error ? error.message : String(error)
+        );
+        // Return null instead of falling through to docs path (which won't exist for SolidJS)
+        return null;
       }
     }
 

@@ -104,6 +104,15 @@ export function transformImportsForDisplay(
   // Then transform relative utils imports
   transformed = transformRelativeUtilsImports(transformed);
 
+  // Transform @ocean-ui/solid imports to @/components/ui/{componentSlug}
+  // Pattern to match: from "@ocean-ui/solid" or from '@ocean-ui/solid'
+  // Handles both single and double quotes
+  const solidImportPattern = /from\s+["']@ocean-ui\/solid["']/g;
+  transformed = transformed.replace(
+    solidImportPattern,
+    `from "@/components/ui/${componentSlug}"`
+  );
+
   // Finally transform @ocean-ui/react imports
   // Pattern to match: from "@ocean-ui/react" or from '@ocean-ui/react'
   // Handles both single and double quotes

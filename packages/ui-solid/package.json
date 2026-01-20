@@ -22,6 +22,7 @@
   "dependencies": {
     "@ark-ui/solid": "^5.28.0",
     "@ocean-ui/tokens": "workspace:*",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-solid": "^0.553.0",
     "solid-js": "^1.9.10",

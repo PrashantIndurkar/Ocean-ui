@@ -17,3 +17,4 @@
 // export * from "./components/ui/button";
 
 export * from "./components/base/accordion";
+export * from "./components/base/button";

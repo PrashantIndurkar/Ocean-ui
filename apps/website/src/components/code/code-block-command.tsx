@@ -2,7 +2,6 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import Link from "next/link";
 import { BookOpenIcon, ExternalLinkIcon } from "lucide-react";
-import { Tabs } from "../ui/tabs";
 import { CodeBlockWithFile } from "./code-block-with-file";
 import { ReactJsIcon } from "../icons/react-icon";
 import { SolidJsIcon } from "../icons/solidjs-icon";
@@ -12,6 +11,7 @@ import { components } from "@/lib/components";
 import { CodeBlockWrapper } from "./code-block-wrapper";
 import { StepItem } from "../mdx/step-item";
 import { cn } from "@/lib/utils";
+import { FrameworkCodeTabs } from "./framework-code-tabs";
 
 const frameworks = [
   { value: "react", icon: ReactJsIcon },
@@ -20,24 +20,49 @@ const frameworks = [
   { value: "svelte", icon: SvelteJSIcon },
 ] as const;
 
-async function getComponentCode(componentSlug: string): Promise<string | null> {
+async function getComponentCode(
+  componentSlug: string,
+  framework: string
+): Promise<string | null> {
   const componentMeta = components.find((c) => c.slug === componentSlug);
   if (!componentMeta) return null;
 
-  const componentPath = join(
-    process.cwd(),
-    "src",
-    "components",
-    "library",
-    "react",
-    componentMeta.category,
-    `${componentSlug}.tsx`
-  );
+  let componentPath: string;
+
+  // For SolidJS, load from package
+  if (framework === "solid") {
+    componentPath = join(
+      process.cwd(),
+      "..",
+      "..",
+      "packages",
+      "ui-solid",
+      "src",
+      "components",
+      componentMeta.category,
+      `${componentSlug}.tsx`
+    );
+  } else {
+    // For React and other frameworks, load from library
+    componentPath = join(
+      process.cwd(),
+      "src",
+      "components",
+      "library",
+      "react",
+      componentMeta.category,
+      `${componentSlug}.tsx`
+    );
+  }
 
   try {
     const code = await readFile(componentPath, "utf-8");
     return code;
-  } catch {
+  } catch (error) {
+    console.warn(
+      `Failed to read ${framework} component code from ${componentPath}:`,
+      error instanceof Error ? error.message : String(error)
+    );
     return null;
   }
 }
@@ -50,32 +75,68 @@ function getComponentFilePath(componentSlug: string): string {
 }
 
 export async function CodeBlockCommand({ component }: { component: string }) {
-  const componentCode = await getComponentCode(component);
   const filePath = getComponentFilePath(component);
 
-  // Pre-render component code blocks for each framework
-  const frameworkCodeBlocks = componentCode
-    ? await Promise.all(
-        frameworks.map(async (framework) => {
-          const codeBlock = await CodeBlockWithFile({
-            lang:
-              framework.value === "vue"
-                ? "vue"
-                : framework.value === "svelte"
-                  ? "svelte"
-                  : "tsx",
-            code: componentCode,
-            filename: filePath,
-            showLineNumbers: true,
-          });
-          return {
-            value: framework.value,
-            icon: framework.icon,
-            codeBlock,
-          };
-        })
-      )
-    : [];
+  // Pre-render component code blocks for each framework with framework-specific code
+  const frameworkCodeBlocks = await Promise.all(
+    frameworks.map(async (framework) => {
+      const componentCode = await getComponentCode(component, framework.value);
+      
+      if (!componentCode) {
+        return null;
+      }
+
+      // Remove "use client" directive for display
+      let code = componentCode.replace(/^"use client";\n?/gm, "");
+
+      // Transform imports for display (similar to component-preview.tsx)
+      // For SolidJS, transform relative imports to @/components/ui/{component}
+      if (framework.value === "solid") {
+        // Transform relative component imports
+        code = code.replace(
+          /from\s+["']\.\.\/.*?components\/base\/[\w-]+["']/g,
+          `from "@/components/ui/${component}"`
+        );
+        // Transform relative utils imports
+        code = code.replace(
+          /from\s+["']\.\.\/.*?lib\/utils["']/g,
+          'from "@/lib/utils"'
+        );
+        // Transform @ocean-ui/solid imports
+        code = code.replace(
+          /from\s+["']@ocean-ui\/solid["']/g,
+          `from "@/components/ui/${component}"`
+        );
+      } else {
+        // For React, transform @/components/library/react/base/ imports
+        code = code.replace(
+          /from\s+["']@\/components\/library\/react\/base\/[\w-]+["']/g,
+          `from "@/components/ui/${component}"`
+        );
+        // Transform @ocean-ui/react imports
+        code = code.replace(
+          /from\s+["']@ocean-ui\/react["']/g,
+          `from "@/components/ui/${component}"`
+        );
+      }
+
+      const codeBlock = await CodeBlockWithFile({
+        lang:
+          framework.value === "vue"
+            ? "vue"
+            : framework.value === "svelte"
+              ? "svelte"
+              : "tsx",
+        code,
+        filename: filePath,
+        showLineNumbers: true,
+      });
+      return {
+        value: framework.value,
+        codeBlock,
+      };
+    })
+  );
 
   // Filter out null entries (frameworks without source code)
   const availableFrameworkCodeBlocks = frameworkCodeBlocks.filter(
@@ -128,7 +189,7 @@ export async function CodeBlockCommand({ component }: { component: string }) {
       </StepItem>
 
       {/* Step 2: Create file and paste code */}
-      {componentCode && (
+      {availableFrameworkCodeBlocks.length > 0 && (
         <StepItem
           stepNumber={2}
           title={
@@ -144,37 +205,7 @@ export async function CodeBlockCommand({ component }: { component: string }) {
         >
           <CodeBlockWrapper className="px-2 pt-3 my-2 pb-1">
             <div className="[&_figure]:mt-0">
-              <Tabs
-                items={frameworks.map((framework) => {
-                  const codeBlockData = availableFrameworkCodeBlocks.find(
-                    (block) => block.value === framework.value
-                  );
-                  const isDisabled =
-                    framework.value === "vue" || framework.value === "svelte";
-                  const Icon = framework.icon;
-
-                  return {
-                    value: framework.value,
-                    label: framework.value,
-                    icon: Icon ? <Icon className="size-4" /> : undefined,
-                    disabled: isDisabled,
-                    content: codeBlockData ? (
-                      <div className="overflow-x-auto">{codeBlockData.codeBlock}</div>
-                    ) : (
-                      <div className="overflow-x-auto">
-                        <div className="text-sm text-muted-foreground">
-                          {isDisabled
-                            ? `${framework.value.charAt(0).toUpperCase() + framework.value.slice(1)} support is coming soon`
-                            : "No code available"}
-                        </div>
-                      </div>
-                    ),
-                  };
-                })}
-                defaultValue="react"
-                variant="bordered"
-                className="[&_figure]:mt-0"
-              />
+              <FrameworkCodeTabs frameworkCodeBlocks={availableFrameworkCodeBlocks} />
             </div>
           </CodeBlockWrapper>
         </StepItem>

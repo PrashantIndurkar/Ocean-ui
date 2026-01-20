@@ -44,17 +44,18 @@ pnpm dev
 ### Step 2: Install Utility Dependencies
 
 <DocText>
-  Ocean UI components use utility functions for merging Tailwind CSS classes.
-  Install the required dependencies:
+  Ocean UI components use utility functions for merging Tailwind CSS classes and
+  managing component variants. Install the required dependencies:
 </DocText>
 
 ```bash
-pnpm i tailwind-merge clsx
+pnpm i tailwind-merge clsx class-variance-authority
 ```
 
 <DocText>
   These packages help merge and resolve Tailwind CSS class names, preventing
-  conflicts and ensuring proper styling.
+  conflicts and ensuring proper styling. The `class-variance-authority` package
+  is used for managing component variants (like button sizes and styles).
 </DocText>
 
 <Divider className="my-10" />
