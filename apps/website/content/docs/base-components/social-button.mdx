@@ -1,0 +1,124 @@
+---
+title: Social Button
+description: A specialized button component for social login providers with brand-specific styling and icons.
+---
+
+# Social Button
+
+<Description>
+  A simple and flexible social login button component that wraps the Button
+  component, providing clean styling for social authentication flows. Pass any
+  icon as children for maximum flexibility. Built with Ark UI factory for
+  accessibility and styled using Ocean UI design tokens.
+</Description>
+
+<BadgeLink
+  name="@ark-ui/react/factory"
+  href="https://ark-ui.com/docs/overview/introduction"
+/>
+
+<Divider />
+
+### Example
+
+<ComponentPreview name="social-button" />
+
+## How to install and use
+
+<CodeBlockCommand component="social-button" registry="@ocean-ui" />
+
+<Note>
+  The SocialButton component wraps the Button component and uses Ark UI's
+  factory function (`ark.button`) for built-in accessibility. It's styled with
+  Tailwind CSS using Ocean UI design tokens from `tokens.css`.
+</Note>
+
+<Divider />
+
+## Overview
+
+A flexible button component for social login flows. Pass any icon and text as children for maximum customization. Built with Ark UI for accessibility.
+
+## Variants
+
+The SocialButton component supports four visual variants:
+
+- **default**: Light background with border (default style) - `variant="default"` or no variant prop
+- **filled**: Solid background with primary color, no border - `variant="filled"`
+- **dark**: Black background with white text, perfect for Apple-style buttons - `variant="dark"`
+- **icon-only**: Square button with only an icon - `variant="icon-only"`
+
+## Sizes
+
+The SocialButton component supports multiple sizes:
+
+**Text Button Sizes:**
+
+- **sm**: Small button (`size="sm"`) - min-height: 32px
+- **md**: Medium button (`size="md"`) - min-height: 36px - default
+- **lg**: Large button (`size="lg"`) - min-height: 40px
+- **xl**: Extra large button (`size="xl"`) - min-height: 44px
+
+**Icon-Only Button Sizes:**
+
+- **icon-sm**: Small square (`size="icon-sm"`) - 32x32px
+- **icon-md**: Medium square (`size="icon-md"`) - 40x40px
+- **icon-lg**: Large square (`size="icon-lg"`) - 48x48px
+
+## Features
+
+- **Simple API**: Just pass icon and text as children - no complex props needed
+- **Flexible Icons**: Use any icon component (SVG, Lucide React, custom components)
+- **Multiple Variants**: Default, filled, dark, and icon-only styles
+- **Size Control**: Use `size` prop to control button height and icon size
+- **Full Width**: Use `fullWidth={true}` for buttons that span the container width
+- **Disabled State**: Use `disabled` prop for non-interactive buttons
+- **Accessibility**: Full keyboard navigation and ARIA support via Ark UI
+- **Icon-Only Accessibility**: Icon-only buttons require `aria-label` prop for screen reader support
+- **Customizable**: All styles can be overridden via `className` prop
+
+<Divider />
+
+## Select Examples
+
+### Filled Variant
+
+Filled variant buttons use `variant="filled"` to display a solid background with primary color and no border. Perfect for prominent social login actions that need to stand out.
+
+**Props used:** `variant="filled"`
+
+<ComponentPreview name="social-button" example="social-button-filled" />
+
+<Divider className="my-12" />
+
+### Icon Only Variant
+
+Icon-only buttons use `variant="icon-only"` with `size="icon-md"` to create square buttons containing only an icon. Perfect for compact interfaces or when space is limited.
+
+**Important:** Since icon-only buttons have no visible text, you **must** provide an `aria-label` prop so screen readers can announce what the button does. Buttons with text content don't need `aria-label` as the text serves as the accessible name.
+
+**Props used:** `variant="icon-only"`, `size="icon-md"`,
+
+<ComponentPreview name="social-button" example="social-button-icon-only" />
+
+<Divider className="my-12" />
+
+### Full Width Buttons
+
+Full width buttons use `fullWidth={true}` to span the entire width of their container. Ideal for mobile interfaces or when you want maximum button prominence. Can be combined with any variant.
+
+**Props used:** `fullWidth={true}`, `variant="filled"` (optional)
+
+<ComponentPreview name="social-button" example="social-button-full-width" />
+
+<Divider className="my-12" />
+
+### Disabled State
+
+Disabled social buttons use the `disabled` prop to make them non-interactive. They maintain their visual style but appear faded and cannot be clicked. Useful when authentication is temporarily unavailable.
+
+**Props used:** `disabled`
+
+<ComponentPreview name="social-button" example="social-button-disabled" />
+
+<Divider />

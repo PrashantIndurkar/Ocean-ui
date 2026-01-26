@@ -35,6 +35,12 @@ export const components: Component[] = [
     subcategory: "Form",
   },
   {
+    name: "Social Button",
+    slug: "social-button",
+    category: "base",
+    subcategory: "Form",
+  },
+  {
     name: "Input",
     slug: "input",
     category: "base",
