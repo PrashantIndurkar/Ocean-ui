@@ -1,0 +1,122 @@
+---
+title: App Store Button
+description: A flexible button component for mobile app store download links with customizable icons and text.
+---
+
+# App Store Button
+
+<Description>
+  A flexible and reusable app store button component that accepts any icon (SVG/ReactNode) and custom text content. Perfect for linking to Google Play, App Store, Galaxy Store, or any other app marketplace. Built with accessibility in mind and styled using Ocean UI design tokens.
+</Description>
+
+<BadgeLink
+  name="class-variance-authority"
+  href="https://cva.style/docs"
+/>
+
+<Divider />
+
+### Example
+
+<ComponentPreview name="app-store-button" />
+
+## How to install and use
+
+<CodeBlockCommand component="app-store-button" registry="@ocean-ui" />
+
+<Note>
+  The AppStoreButton component is designed as a flexible link component (`<a>` tag) for app store downloads. It accepts any icon as a ReactNode, allowing you to use custom SVG icons, icon libraries, or any React component. The component automatically generates an accessible `aria-label` from the text content if not provided.
+</Note>
+
+<Divider />
+
+## Overview
+
+A flexible button component for app store download links. Pass any icon and customize the two-line text layout for maximum flexibility. Perfect for Google Play, App Store, Galaxy Store, or any custom app marketplace.
+
+## Variants
+
+The AppStoreButton component supports two visual variants:
+
+- **default**: Black background with white text (default style) - `variant="default"` or no variant prop
+- **outline**: Transparent background with border, adapts to theme - `variant="outline"`
+
+## Sizes
+
+The AppStoreButton component supports two sizes:
+
+- **md**: Medium button (`size="md"`) - height: 40px, min-width: 135px - default
+- **lg**: Large button (`size="lg"`) - height: 44px, min-width: 149px
+
+## Features
+
+- **Flexible Icons**: Accept any ReactNode as icon (SVG components, images, custom components)
+- **Two-Line Text**: Separate `topText` and `bottomText` props for clear layout
+- **Multiple Variants**: Default (black) and outline styles
+- **Size Control**: Use `size` prop to control button dimensions
+- **Accessibility**: Auto-generates `aria-label` from text content
+- **Link Component**: Uses `<a>` tag for proper link semantics
+- **Theme Support**: Outline variant adapts to light/dark theme
+- **Customizable**: All styles can be overridden via `className` prop
+
+<Divider />
+
+## Select Examples
+
+### Outline Variant
+
+Outline variant buttons use `variant="outline"` to display a transparent background with border. Perfect for light backgrounds or when you want a more subtle appearance.
+
+**Props used:** `variant="outline"`
+
+<ComponentPreview name="app-store-button" example="app-store-button-outline" />
+
+<Divider className="my-12" />
+
+### Large Size
+
+Large buttons use `size="lg"` for more prominent display. Ideal for hero sections or when you want maximum visibility.
+
+**Props used:** `size="lg"`
+
+<ComponentPreview name="app-store-button" example="app-store-button-large" />
+
+<Divider />
+
+## Props
+
+| Prop        | Type                    | Default     | Description                                    |
+| ----------- | ----------------------- | ----------- | ---------------------------------------------- |
+| `icon`      | `ReactNode`             | **required** | The icon to display (any ReactNode)           |
+| `topText`   | `string`                | **required** | Smaller text displayed on top                  |
+| `bottomText`| `string`                | **required** | Larger, bolder text displayed on bottom        |
+| `variant`   | `"default" \| "outline"`| `"default"` | Visual style variant                           |
+| `size`      | `"md" \| "lg"`          | `"md"`      | Button size                                    |
+| `href`      | `string`                | -           | Link URL (standard anchor prop)                |
+| `aria-label`| `string`                | Auto-generated | Accessible label (auto-generated from text)   |
+| `className` | `string`                | -           | Additional CSS classes                         |
+
+## Usage with Custom Icons
+
+The component accepts any ReactNode as an icon, making it extremely flexible:
+
+```tsx
+import { AppStoreButton } from "@/components/library/react";
+import { CustomIcon } from "@/components/icons/custom-icon";
+
+<AppStoreButton
+  icon={<CustomIcon />}
+  topText="Available on"
+  bottomText="Custom Store"
+  href="https://example.com"
+/>
+```
+
+## Built-in Icons
+
+Ocean UI provides icon components for common app stores:
+
+- `GooglePlayIcon` - Colorful Google Play icon
+- `AppStoreIcon` - Apple App Store icon
+
+These can be imported from `@/components/icons/google-play-icon` and `@/components/icons/app-store-icon`.

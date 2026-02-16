@@ -41,6 +41,12 @@ export const components: Component[] = [
     subcategory: "Form",
   },
   {
+    name: "App Store Button",
+    slug: "app-store-button",
+    category: "base",
+    subcategory: "Form",
+  },
+  {
     name: "Input",
     slug: "input",
     category: "base",
