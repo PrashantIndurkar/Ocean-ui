@@ -15,6 +15,11 @@ const EXAMPLE_NAME_MAP: Record<string, string> = {
   "accordion-with-icons": "AccordionWithIcons",
   "accordion-faq": "AccordionFAQ",
   "button-demo": "ButtonDemo",
+  "badge-demo": "BadgeDemo",
+  "badge-variants": "BadgeVariants",
+  "badge-status": "BadgeStatus",
+  "badge-image": "BadgeImage",
+  "badge-indicator": "BadgeIndicator",
 };
 
 /**

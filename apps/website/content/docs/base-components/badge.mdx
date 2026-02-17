@@ -1,0 +1,99 @@
+---
+title: Badge
+description: A small status indicator or label component for displaying information, status, or counts.
+---
+
+# Badge
+
+<Description>
+  A versatile badge component for displaying labels, status indicators, counts,
+  or metadata. Built with Tailwind CSS and styled using Ocean UI design tokens
+  for consistent theming.
+</Description>
+
+<Divider />
+
+### Example
+
+<ComponentPreview name="badge" />
+
+## How to install and use
+
+<CodeBlockCommand component="badge" registry="@ocean-ui" />
+
+<Note>
+  The Badge component is a simple, semantic component built with Tailwind CSS
+  using Ocean UI design tokens. It uses a pill-shaped design by default and
+  supports multiple visual variants.
+</Note>
+
+<Divider />
+
+## Overview
+
+The Badge component is a small UI element used to display labels, status
+indicators, counts, or metadata. It features a pill-shaped design with
+consistent padding and typography, making it ideal for tags, status badges,
+notification counts, and more.
+
+## Variants
+
+The Badge component supports four visual variants:
+
+- **default**: Primary badge with brand color background
+- **secondary**: Secondary badge with subtle background
+- **outline**: Outlined badge with transparent background and border
+- **destructive**: Badge for destructive or error states
+
+## Features
+
+- **Pill Shape**: Rounded-full design by default for a modern look
+- **Icons**: Support for leading and trailing icons via children
+- **Flexible Content**: Can display text, numbers, icons, or images
+- **Accessibility**: Semantic HTML with proper focus states
+- **Customizable**: All styles can be overridden via `className` prop
+- **Design Tokens**: Uses Ocean UI design tokens for consistent theming
+
+<Divider />
+
+## Select Examples
+
+### Basic Badge
+
+The basic badge demo shows all available variants along with examples of badges with icons and numeric counts.
+
+<ComponentPreview name="badge" example="badge-demo" />
+
+<Divider className="my-12" />
+
+### Variants
+
+All four badge variants: default, secondary, destructive, and outline. Each variant uses Ocean UI design tokens for consistent theming.
+
+<ComponentPreview name="badge" example="badge-variants" />
+
+<Divider className="my-12" />
+
+### Status
+
+Status badges with icons to indicate different states like Todo, In Progress, Done, and Cancelled. Uses design tokens for colors instead of hardcoded values.
+
+<ComponentPreview name="badge" example="badge-status" />
+
+<Divider className="my-12" />
+
+### With Image
+
+Badges can include images, such as avatars or profile pictures. Images are displayed as rounded circles and can be positioned before or after the label text.
+
+<ComponentPreview name="badge" example="badge-image" />
+
+<Divider className="my-12" />
+
+### Indicator on Buttons
+
+Badges can be used as notification indicators on buttons. Position them absolutely to show counts, dots, or icons. Empty badges automatically shrink to a small dot.
+
+<ComponentPreview name="badge" example="badge-indicator" />
+
+<Divider />
