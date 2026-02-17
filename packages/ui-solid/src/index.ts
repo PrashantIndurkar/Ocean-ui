@@ -18,5 +18,6 @@
 
 export * from "./components/base/accordion";
 export * from "./components/base/app-store-button";
+export * from "./components/base/badge";
 export * from "./components/base/button";
 export * from "./components/base/social-button";

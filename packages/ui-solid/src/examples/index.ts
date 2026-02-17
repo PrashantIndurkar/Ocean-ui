@@ -11,6 +11,12 @@ export { default as AccordionWithLoader } from "./base/accordion/accordion-with-
 export { default as AccordionWithIcons } from "./base/accordion/accordion-with-icons";
 export { default as AccordionFAQ } from "./base/accordion/accordion-faq";
 
+export { default as BadgeDemo } from "./base/badge/badge-demo";
+export { default as BadgeVariants } from "./base/badge/badge-variants";
+export { default as BadgeStatus } from "./base/badge/badge-status";
+export { default as BadgeImage } from "./base/badge/badge-image";
+export { default as BadgeIndicator } from "./base/badge/badge-indicator";
+
 export { default as ButtonDemo } from "./base/button/button-demo";
 export { default as ButtonPrimary } from "./base/button/button-primary";
 export { default as ButtonSecondary } from "./base/button/button-secondary";
