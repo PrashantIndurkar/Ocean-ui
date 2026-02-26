@@ -1,5 +1,12 @@
 {
   "title": "Base components",
   "defaultOpen": true,
-  "pages": ["accordion", "button", "social-button", "app-store-button", "badge"]
+  "pages": [
+    "accordion",
+    "alert-dialog",
+    "button",
+    "social-button",
+    "app-store-button",
+    "badge"
+  ]
 }

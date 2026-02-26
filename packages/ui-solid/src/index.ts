@@ -17,6 +17,7 @@
 // export * from "./components/ui/button";
 
 export * from "./components/base/accordion";
+export * from "./components/base/alert-dialog";
 export * from "./components/base/app-store-button";
 export * from "./components/base/badge";
 export * from "./components/base/button";

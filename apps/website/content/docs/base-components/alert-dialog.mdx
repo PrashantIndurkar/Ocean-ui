@@ -1,0 +1,61 @@
+---
+title: Alert Dialog
+description: A dialog that requires user response to proceed.
+---
+
+# Alert Dialog
+
+<Description>
+  A modal dialog for critical confirmations or destructive actions. Requires
+  explicit dismissal (button or Escape); cannot be closed by clicking outside.
+  Built with Ark UI Dialog (role="alertdialog") and Ocean UI design tokens.
+</Description>
+
+<BadgeLink
+  name="@ark-ui/react/dialog"
+  href="https://ark-ui.com/react/docs/components/dialog"
+/>
+
+<Divider />
+
+### Example
+
+<ComponentPreview name="alert-dialog" />
+
+## How to install and use
+
+<CodeBlockCommand component="alert-dialog" />
+
+<Note>
+  The Alert Dialog uses Ark UI's Dialog with `role="alertdialog"` and
+  `closeOnInteractOutside={false}` for alert semantics. It is styled with
+  Tailwind CSS and Ocean UI design tokens.
+</Note>
+
+<Divider />
+
+## Examples
+
+### With Icon
+
+<ComponentPreview name="alert-dialog" example="alert-dialog-with-icon" />
+
+<Divider className="my-12" />
+
+### Destructive
+
+<ComponentPreview name="alert-dialog" example="alert-dialog-destructive" />
+
+<Divider className="my-12" />
+
+### With Header
+
+<ComponentPreview name="alert-dialog" example="alert-dialog-header" />
+
+<Divider className="my-12" />
+
+### With Close Button
+
+<ComponentPreview name="alert-dialog" example="alert-dialog-with-close-button" />
+
+<Divider />

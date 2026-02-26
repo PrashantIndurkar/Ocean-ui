@@ -91,6 +91,12 @@ export const components: Component[] = [
     subcategory: "Overlay",
   },
   {
+    name: "Alert Dialog",
+    slug: "alert-dialog",
+    category: "base",
+    subcategory: "Overlay",
+  },
+  {
     name: "Popover",
     slug: "popover",
     category: "base",

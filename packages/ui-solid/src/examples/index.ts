@@ -4,6 +4,12 @@
  * This file exports all SolidJS component examples for use in documentation and testing.
  */
 
+export { default as AlertDialogDemo } from "./base/alert-dialog/alert-dialog-demo";
+export { default as AlertDialogWithIcon } from "./base/alert-dialog/alert-dialog-with-icon";
+export { default as AlertDialogDestructive } from "./base/alert-dialog/alert-dialog-destructive";
+export { default as AlertDialogHeader } from "./base/alert-dialog/alert-dialog-header";
+export { default as AlertDialogWithCloseButton } from "./base/alert-dialog/alert-dialog-with-close-button";
+
 export { default as AccordionDemo } from "./base/accordion/accordion-demo";
 export { default as AccordionMultiple } from "./base/accordion/accordion-multiple";
 export { default as AccordionCollapsible } from "./base/accordion/accordion-collapsible";
